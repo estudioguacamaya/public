@@ -1,0 +1,476 @@
+/* =========== GOOGLE FONTS ========= */
+
+:root {
+  --black-letters-color: #2b303a;
+  --blue-primary-color: #ff470d;
+  --white-color: #ffffff;
+  --body-color: #f4f4f9;
+  --blue-secondary-color: #34495e;
+}
+
+/* Sections Header
+--------------------------------*/
+
+.section-header h3 {
+  font-size: 36px;
+
+  text-align: center;
+  font-weight: 700;
+  position: relative;
+  padding-top: 30px;
+}
+
+.section-header p {
+  text-align: center;
+  padding-top: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  padding-bottom: 30px;
+
+}
+.section-header2 p {
+  text-align: left;
+  margin: auto;
+  font-size: 15px;
+  padding: 2.5rem;
+  color: var(--white-color);
+  background-color: var(--blue-primary-color);
+  border-radius: 10px;
+}
+/* Acordion Styles */
+
+.accordion-item h5 {
+  background-color: #eee;
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  margin: 0.5px;
+}
+
+.accordion-item:first-child h5 {
+  border-radius: 10px 10px 0 0;
+  border-top: none;
+}
+
+.accordion-item:last-child h5 {
+  border-radius: 0 0 10px 10px;
+  border-bottom: none;
+}
+
+.accordion-item.open:last-child h5 {
+  border-radius: 0;
+}
+.accordion-item h5::after {
+  content: "+";
+  float: right;
+}
+
+.accordion-item p {
+  margin: 0;
+  display: block;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s;
+}
+
+.accordion-item.open p {
+  padding: 15px;
+}
+.accordion-item.open:last-child p {
+  border-radius: 0 0 10px 10px;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.accordion-item.open h5::after {
+  content: "-";
+}
+
+/* Frequently Asked Questions Section
+  --------------------------------*/
+
+#faq {
+  padding-top: 5rem;
+  overflow: hidden;
+}
+
+#faq #faq-list {
+  padding: 2rem 0rem;
+  list-style: none;
+  border-radius: 10px;
+  margin-bottom: 3rem;
+}
+
+#faq #faq-list a {
+  padding: 25px 10px;
+  display: block;
+  position: relative;
+  font-size: 1.1rem;
+  padding-right: 10px;
+  color: var(--black-letters-color);
+}
+
+.punto {
+  color: var(--white-color);
+}
+
+#faq #faq-list i {
+  font-size: 24px;
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+#faq #faq-list p {
+  margin-bottom: 20px;
+  background-color: var(--blue-primary-color);
+}
+.parteproyecto {
+  color: #0081e1;
+  font-weight: 700;
+}
+/* ==========================================================================
+   Pricing Table Style
+   ========================================================================== */
+#pricing {
+  text-align: center;
+}
+
+#pricing .title {
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#pricing .title h3 {
+  text-transform: uppercase;
+  color: var(--blue-secondary-color);
+  font-size: 15px;
+  margin-bottom: 0px;
+}
+@media (min-width: 468px) {
+  #pricing .table {
+    padding-bottom: 3rem;
+  }
+}
+#pricing .table {
+  margin-top: 30px;
+  padding-bottom: 1rem;
+  border-radius: 10px;
+  background-color: #f4f4f9;
+  box-shadow: 0px 2px 18px 0px rgba(198, 198, 198, 0.3);
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -ms-transition: all 0.3s linear;
+  -o-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  box-shadow: rgb(125 123 123 / 26%) 5px 5px 5px 0px;
+}
+
+#pricing .table .icon {
+  padding-top: 30px;
+}
+
+#pricing .table .icon i {
+  color: var(--black-letters-color);
+  font-size: 42px;
+}
+
+#pricing .table .pricing-header {
+  position: relative;
+  padding-bottom: 20px;
+  text-align: center;
+}
+
+#pricing .table .pricing-header .price-value {
+  font-size: 24px;
+  color: var(--black-letters-color);
+  position: relative;
+  text-align: center;
+  font-weight: 700;
+  line-height: 62px;
+}
+
+#pricing .table .pricing-header .price-value sup {
+  font-size: 18px;
+  font-weight: 500;
+  top: -18px;
+}
+
+#pricing .table .pricing-header .price-value span {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#pricing .table .description {
+  text-align: left;
+  padding: 0px 50px;
+  margin-bottom: 14rem;
+  height: 200px;
+  list-style: unset;
+}
+
+@media (min-width: 368px) {
+  #pricing .table .description {
+    margin-bottom: 18rem;
+  }
+}
+
+#pricing .table .description li {
+  font-size: 14px;
+  font-weight: 700;
+  color: #202d4a;
+  padding-bottom: 15px;
+  list-style: none;
+}
+
+#pricing .table:hover {
+  transform: scale(0.95);
+  background: #ffffff;
+  -webkit-box-shadow: 0px 10px 15px 0px rgb(157 106 106 / 15%);
+  -moz-box-shadow: 0px 10px 15px 0px rgba(157, 106, 106, 0.15);
+  box-shadow: rgb(125 123 123 / 26%) 5px 5px 5px 0px;
+}
+
+#pricing #active-tb {
+  background: #f8f9fb;
+  box-shadow: 0px 2px 18px 0px rgba(198, 198, 198, 0.3);
+}
+
+#pricing .active {
+  z-index: 99999;
+}
+article {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  border: solid 2px rgb(179, 176, 176);
+  border-radius: 10px;
+}
+.ul2 {
+  display: flex;
+  top: 0px;
+  z-index: 10;
+
+}
+.noflex{
+ flex:0;
+}
+
+
+.button2 {
+  width: 100% !important;
+  border: 1px solid #ddd;
+  border-right: 0;
+  border-top: 0;
+  padding: 10px;
+  background: #ef28ac;
+  font-size: 14px;
+  font-weight: bold;
+  height: 60px;
+  color: #ffffff;
+}
+
+li.active .button2 {
+  background: #ffce20;
+  color: #09141d;
+}
+table {
+  border-collapse: collapse;
+  table-layout: fixed;
+  width: 100%;
+}
+th {
+  background: #ef28ac display none;
+}
+td,
+th {
+  height: 53px;
+}
+
+td,
+th {
+  border: 1px solid #ddd;
+  padding: 10px;
+  empty-cells: show;
+}
+td,
+th {
+  text-align: left;
+}
+td + td,
+th + th {
+  text-align: center;
+  display: none;
+}
+td.default {
+  display: table-cell;
+}
+.bg-grey {
+  background-color: #ef28ac;
+}
+
+.bg-ltpurple {
+  background-color: #ffce20;
+}
+.bg-purple {
+  background-color: #0081e1;
+  border-radius: 0 8px 0 0;
+}
+.bg-membership {
+  height: 10px !important;
+  border-top: 3px solid #0097cf;
+}
+td,
+span {
+  color: #0b2027;
+}
+.sep {
+  background: #0b2027;
+  font-weight: bold;
+  color: white;
+  font-size: 16px;
+  border-top: 1px solid #0081e1;
+}
+td.short {
+  height: 20px !important;
+  border-bottom: 1px solid #ef28ac;
+  background-color: #ef28ac;
+}
+td.shortltpurple {
+  height: 20px !important;
+  border-bottom: 1px solid #000000;
+  background-color: #ffce20;
+}
+td.shortpurple {
+  height: 20px !important;
+  border-bottom: 1px solid #000000;
+  background-color: #e2cee3;
+  display: table-cell;
+}
+td.price {
+  color: #0b2027;
+  height: 20px !important;
+  border-top: 0px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  background-color: rgb(239, 40, 172);
+}
+td.priceltpurple {
+  height: 20px !important;
+  border-top: 0px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  background-color: #ffce20;
+}
+td.pricepurple {
+  height: 20px !important;
+  border-top: 0px;
+  border-bottom: 1px solid #fff;
+  text-align: center;
+  background-color: #0081e1;
+  display: table-cell;
+}
+td.priceheader {
+  height: 20px !important;
+  border: 0;
+  font-size: 25px;
+  font-weight: bold;
+}
+td.description {
+  background-color: #ef28ac;
+  height: 20px !important;
+  border-top: 0px;
+  text-align: center;
+  border-bottom: 0px;
+}
+td.descriptionltpurple {
+  height: 20px !important;
+  border-top: 0px;
+  text-align: center;
+  background-color: #ffce20;
+  border-bottom: 0px;
+}
+td.descriptionpurple {
+  height: 20px !important;
+  border-top: 0px;
+  text-align: center;
+  background-color: #0081e1;
+  border-bottom: 0px;
+  display: table-cell;
+}
+
+td.grey {
+  background-color: #ef28ac;
+  color: #ffffff;
+}
+td.ltpurple {
+  background-color: #ffce20;
+  display: table-cell;
+  color: #8e258d;
+}
+td.purple {
+  background-color: #0081e1;
+  color: #8e258d;
+}
+td.purple2 {
+  background-color: #0081e1;
+  color: #8e258d;
+  border-radius: 0 0 10px 0;
+}
+.txt-l {
+  font-size: 28px;
+  font-weight: bold;
+  color: #fff;
+}
+/*--.txt-top { position:relative; top:-9px; left:-15px; }--*/
+.txt-top {
+  position: relative;
+  top: 15px;
+}
+.tick {
+  font-size: 18px;
+  color: #0081e1;
+}
+.tickltpurple {
+  font-size: 18px;
+  color: #bf1363;
+}
+.tickltpurplesmallfont {
+  font-size: 16px;
+  color: #0081e1;
+}
+.tickpurple {
+  font-size: 18px;
+  color: #8e258d;
+}
+.donotshow {
+  border: 0;
+  background: none;
+}
+
+.hidetop {
+  border-top: 1px solid #ddd;
+  border-bottom: 0px;
+  background: none;
+}
+
+@media (min-width: 640px) {
+
+
+  td,
+  th {
+    display: table-cell !important;
+  }
+  td,
+  th {
+    width: 280px;
+  }
+  td + td,
+  th + th {
+    width: auto;
+    background-color: #ef28ac;
+  }
+}
