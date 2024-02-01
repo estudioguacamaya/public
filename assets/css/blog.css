@@ -1,0 +1,74 @@
+.coli {
+  width: 33.3333333%;
+  overflow: hidden;
+  padding: 15px;
+}
+
+
+.coli .cardi {
+  width: 100%;
+
+  transition: transform 0.3s ease;
+  box-shadow: inset 0em 0em 2em 0em rgb(129 122 122 / 28%);
+  border-radius: 30px;
+  background: #f4f4f9;
+}
+
+.coli img {
+  width: 100%;
+  height: auto;
+  border: 0;
+  border-radius: 20px;
+  padding: 15px;
+}
+
+.coli .cardi-body {
+    height: 510px;
+  padding: 5px 20px 20px 20px;
+  background-color: #f4f4f9;
+border-radius: 10px;
+}
+
+.cardi-body h5 {
+  font-size:1.1em;
+  margin: 7px 0;
+}
+
+.cardi:hover {
+  transform: translateY(-10px);
+  transition: transform 0.3s ease;
+}
+.cardi-text {
+    font-size: .8em;
+  }
+.cardi p {
+  color: #6c757d;
+}
+
+  .meta-comments{
+    color:#6c757d;
+  }
+.cardi-body h5 a {
+  color: #222;
+}
+.textspanblog{
+  font-size: 1.7ch;
+  font-weight: 700;
+  
+}
+.colorspanblog{
+  color: #F44E3F;
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .coli {
+      width: 50%;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .coli {
+      width: 100%;
+    }
+  }
+  
