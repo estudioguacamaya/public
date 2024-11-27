@@ -1,0 +1,15 @@
+{
+    "name": "estudio-guacamaya",
+    "version": "1.0.0",
+    "description": "Formulario de contacto con envío de correo en Netlify",
+    "main": "index.js",
+    "dependencies": {
+      "nodemailer": "^6.7.0"
+    },
+    "scripts": {
+      "start": "netlify dev"
+    },
+    "author": "",
+    "license": "ISC"
+  }
+  
