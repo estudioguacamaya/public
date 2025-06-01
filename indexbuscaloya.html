@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BuscaLoYa - Tu Plataforma Integrada</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden; /* Evita el desplazamiento horizontal debido a las animaciones */
+        }
+        /* Estilos personalizados para animaciones y transiciones */
+        .transition-all {
+            transition-property: all;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-in-right {
+            animation: slideInRight 0.5s ease-out;
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        /* Oculta la barra de desplazamiento para los carruseles pero permite el desplazamiento */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;  /* IE y Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        /* Animación de deslizamiento del menú móvil */
+        #mobile-menu.slide-down-menu {
+            animation: slideDownMenu 0.3s ease-out forwards;
+        }
+        #mobile-menu.slide-up-menu {
+            animation: slideUpMenu 0.3s ease-out forwards;
+        }
+        @keyframes slideDownMenu {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes slideUpMenu {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100%); opacity: 0; }
+        }
+        /* Estilos de la caja de mensajes */
+        .message-box {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-xl */
+            z-index: 1000;
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .message-box.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .message-box-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+        .message-box-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        /* Animación de la sección de contenido */
+        .content-section {
+            display: none; /* Oculto por defecto */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .content-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <header class="bg-yellow-400 text-gray-900 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+            <div class="flex flex-col sm:flex-row items-center justify-between h-auto sm:h-14 space-y-2 sm:space-y-0">
+                <div class="flex items-center space-x-2 sm:space-x-4">
+                    <img alt="Logo de BuscaLoYa, mano azul sosteniendo un círculo amarillo" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/dc99515c-f140-468c-7bbe-d6aa9ff1ff22.jpg" width="32"/>
+                    <span class="font-bold text-sm sm:text-base">BuscaLoYa</span>
+                </div>
+                <div class="flex-1 w-full sm:w-auto mx-0 sm:mx-4 max-w-xl">
+                    <form class="relative" id="main-search-form">
+                        <input class="w-full rounded-full border border-gray-300 h-9 pl-4 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 shadow-sm" placeholder="Buscar productos, marcas y más..." type="text" id="main-search-input"/>
+                        <button aria-label="Buscar" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition-colors" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="flex items-center space-x-3 text-xs font-semibold whitespace-nowrap">
+                    <button class="bg-white text-yellow-600 rounded-full px-3 py-1 border border-yellow-600 hover:bg-yellow-50 transition-colors shadow-sm">
+                        OFERTAS TOP
+                        <span class="text-[8px] font-normal ml-1 hidden sm:inline">DEL DÍA</span>
+                    </button>
+                    <div class="bg-white rounded-full px-3 py-1 border border-gray-300 shadow-sm">
+                        <span>40%</span>
+                        <span class="text-[10px] ml-1">OFF</span>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex flex-wrap items-center justify-center text-sm font-semibold mt-4 space-x-4">
+                <button id="tab-marketplace" class="tab-main-button px-4 py-2 rounded-full bg-yellow-600 text-white shadow-md hover:bg-yellow-700 transition-colors">
+                    Compra y Venta
+                </button>
+                <button id="tab-financiamiento" class="tab-main-button px-4 py-2 rounded-full bg-white text-gray-800 shadow-md hover:bg-gray-100 transition-colors">
+                    Financiamiento BuscaLoYa
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <button class="md:hidden fixed top-4 right-4 bg-yellow-400 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center shadow-lg z-50" aria-label="Alternar menú principal" id="main-mobile-menu-button">
+        <i class="fas fa-bars" id="main-mobile-menu-icon"></i>
+    </button>
+
+    <div id="main-mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 absolute w-full -translate-y-full z-40">
+        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100" href="#" id="mobile-nav-marketplace">Compra y Venta</a>
+        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100" href="#" id="mobile-nav-financiamiento">Financiamiento BuscaLoYa</a>
+        <hr class="my-2 border-gray-200">
+        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Crea tu cuenta</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Ingresa</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Mis compras</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Vender</a>
+        <a class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" href="#">Ayuda</a>
+    </div>
+
+    <div id="content-marketplace" class="content-section active">
+        <section aria-label="Banner promocional" class="relative max-w-7xl mx-auto mt-4 px-4 sm:px-6 lg:px-8 overflow-hidden rounded-lg shadow-md">
+            <div id="banner-carousel" class="relative w-full h-48 sm:h-64 lg:h-72">
+                <img alt="Banner promocional de ofertas y envíos gratis" class="w-full h-full object-cover rounded-lg absolute top-0 left-0 transition-opacity duration-500 ease-in-out" src="https://storage.googleapis.com/a1aa/image/d55301e2-60d2-48f5-b329-69804673cd26.jpg" width="1200" data-banner-index="0"/>
+                <img alt="Banner de ofertas exclusivas" class="w-full h-full object-cover rounded-lg absolute top-0 left-0 opacity-0 transition-opacity duration-500 ease-in-out" src="https://placehold.co/1200x280/FFD700/000000?text=Ofertas+Exclusivas" width="1200" data-banner-index="1"/>
+                <img alt="Banner de envíos gratis" class="w-full h-full object-cover rounded-lg absolute top-0 left-0 opacity-0 transition-opacity duration-500 ease-in-out" src="https://placehold.co/1200x280/8A2BE2/FFFFFF?text=Env%C3%ADos+Gratis" width="1200" data-banner-index="2"/>
+            </div>
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-2 text-white text-xs" id="banner-dots">
+                <span class="w-2 h-2 rounded-full bg-white opacity-100 cursor-pointer" data-dot-index="0"></span>
+                <span class="w-2 h-2 rounded-full bg-white opacity-50 cursor-pointer" data-dot-index="1"></span>
+                <span class="w-2 h-2 rounded-full bg-white opacity-50 cursor-pointer" data-dot-index="2"></span>
+            </div>
+        </section>
+
+        <section aria-label="Tarjetas de acceso rápido" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+            <article aria-label="Ingresa a tu cuenta" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-yellow-400 p-3 rounded-full mb-2">
+                    <img alt="Icono de una persona dentro de un cuadrado amarillo" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/67e20e3a-4472-4325-7129-202c6310ea87.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Ingresa a tu cuenta</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Disfruta de ofertas y compra sin límites.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Ingresar a tu cuenta</a>
+            </article>
+            <article aria-label="Tiendas oficiales" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-white border border-gray-300 p-3 rounded-full mb-2">
+                    <img alt="Icono de una tienda con toldo" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/6f4a86bb-0dc5-4127-218e-b4cf51181a30.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Tiendas oficiales</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Encuentra tus marcas preferidas.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Mostrar tiendas</a>
+            </article>
+            <article aria-label="Zapatos" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-white border border-gray-300 p-3 rounded-full mb-2">
+                    <img alt="Icono de una zapatilla deportiva" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/f5bc1f39-3f7d-4f4a-2db3-c100a9655986.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Zapatos</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Encuentra el estilo que se adapta a ti.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Buscar Zapatos</a>
+            </article>
+            <article aria-label="Celulares y teléfonos" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-white border border-gray-300 p-3 rounded-full mb-2">
+                    <img alt="Icono de un smartphone" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/3f5c2dd3-bdd8-4333-95bf-7fa4e9c1f2e3.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Celulares y teléfonos</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Descubre celulares que son tendencia.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Ir a Celulares</a>
+            </article>
+            <article aria-label="Nuestras categorías" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-white border border-gray-300 p-3 rounded-full mb-2">
+                    <img alt="Icono de cuatro cuadrados en una cuadrícula" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/1bee6f74-68ab-4cd7-5995-c05ab1c6a3b4.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Nuestras categorías</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Encuentra celulares, ropa, productos y más.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Ir a Categorías</a>
+            </article>
+            <article aria-label="Recibe tus compras" class="bg-white rounded-lg p-3 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all card-hover-effect">
+                <div class="bg-white border border-gray-300 p-3 rounded-full mb-2 relative">
+                    <img alt="Icono de una caja con un checkmark" class="mx-auto w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/f9e7dcbe-c940-46eb-4bbe-795ca22c7e8c.jpg" width="40"/>
+                </div>
+                <h3 class="text-xs font-semibold mb-1">Recibe tus compras</h3>
+                <p class="text-[9px] text-gray-600 mb-2 leading-tight">Puedes recibirlas en tu casa o retirarlas.</p>
+                <a class="text-[9px] text-blue-600 hover:underline font-semibold" href="#">Cómo recibir o retirar</a>
+            </article>
+        </section>
+
+        <section aria-label="Categorías de productos destacadas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <article aria-label="Artículos de papelería para tu casa y oficina" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                    <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                    <h3 class="font-bold text-sm sm:text-base mb-2">ARTÍCULOS DE PAPELERÍA PARA TU CASA Y OFICINA</h3>
+                    <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#">Ver más</a>
+                </div>
+                <img alt="Caja de marcadores de colores sobre un fondo degradado azul y rosa" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/88fe343c-bc62-4d91-7383-d0d4f974b8bb.jpg" width="300"/>
+            </article>
+            <article aria-label="Encuentra tu nuevo smartphone" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                    <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                    <h3 class="font-bold text-sm sm:text-base mb-2">ENCUENTRA TU NUEVO SMARTPHONE</h3>
+                    <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#">Ver más</a>
+                </div>
+                <img alt="Smartphone sobre fondo azul con efectos de luz" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/01a83626-20c6-4408-638d-c5ab3567c3d4.jpg" width="300"/>
+            </article>
+            <article aria-label="¡Lo mejor en iluminación!" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                    <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                    <h3 class="font-bold text-sm sm:text-base mb-2">¡LO MEJOR EN ILUMINACIÓN!</h3>
+                    <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#">Ver más</a>
+                </div>
+                <img alt="Tira de luz de neón azul sobre fondo oscuro" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/af810ea3-28b3-45a2-babe-2b1bb65fbb03.jpg" width="300"/>
+            </article>
+            <article aria-label="Impresoras, tóners y mucho más" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                    <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                    <h3 class="font-bold text-sm sm:text-base mb-2">IMPRESORAS, TÓNERS Y MUCHO MÁS</h3>
+                    <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#">Ver más</a>
+                </div>
+                <img alt="Impresora con cartucho de tóner sobre fondo blanco" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/74d8b59a-35ca-4aef-2b09-00b82efc5a4f.jpg" width="300"/>
+            </article>
+        </section>
+
+        <section aria-label="Categorías de productos con miniaturas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                <h4 class="font-semibold text-sm mb-2">Cuidado solar</h4>
+                <img alt="Botella y tubo de productos para el cuidado solar sobre fondo rosa" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/0765bd2b-a343-4364-7099-948fad18aaa8.jpg" width="400"/>
+                <div class="flex space-x-2 justify-center">
+                    <img alt="Miniatura de producto de cuidado solar 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/fda04952-224a-4812-f682-77d563de9a11.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/fda04952-224a-4812-f682-77d563de9a11.jpg" width="40"/>
+                    <img alt="Miniatura de producto de cuidado solar 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/86981076-fa22-418e-bfb7-3ee90947dffe.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/86981076-fa22-418e-bfb7-3ee90947dffe.jpg" width="40"/>
+                    <img alt="Miniatura de producto de cuidado solar 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/18a25f91-b838-45a5-fadb-fd755c6d149b.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/18a25f91-b838-45a5-fadb-fd755c6d149b.jpg" width="40"/>
+                    <img alt="Miniatura de producto de cuidado solar 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/8f9d7573-b1ad-4f80-4f1f-31658fabac36.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/8f9d7573-b1ad-4f80-4f1f-31658fabac36.jpg" width="40"/>
+                </div>
+            </article>
+            <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                <h4 class="font-semibold text-sm mb-2">Sillas y sillones</h4>
+                <img alt="Silla roja y sillón gris sobre fondo claro" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/77681193-1371-4ffb-bf5a-2d10bea785b8.jpg" width="400"/>
+                <div class="flex space-x-2 justify-center">
+                    <img alt="Miniatura de silla 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/ef18eccf-ccc3-4e8a-9db7-3e3c1b274ddf.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/ef18eccf-ccc3-4e8a-9db7-3e3c1b274ddf.jpg" width="40"/>
+                    <img alt="Miniatura de silla 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/c6bb9b8f-45b5-4e75-7acd-c8167dad2c15.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/c6bb9b8f-45b5-4e75-7acd-c8167dad2c15.jpg" width="40"/>
+                    <img alt="Miniatura de silla 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/e45456da-a602-4bfb-a735-5e9ef0d20fbf.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/e45456da-a602-4bfb-a735-5e9ef0d20fbf.jpg" width="40"/>
+                    <img alt="Miniatura de silla 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/14e8ea10-d9aa-4bf0-a85f-f87988fa7b40.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/14e8ea10-d9aa-4bf0-a85f-f87988fa7b40.jpg" width="40"/>
+                </div>
+            </article>
+            <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                <h4 class="font-semibold text-sm mb-2">Zapatos Deportivos</h4>
+                <img alt="Dos zapatillas deportivas sobre fondo naranja" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/c31e83a1-6488-4a31-69e6-f71dab106a97.jpg" width="400"/>
+                <div class="flex space-x-2 justify-center">
+                    <img alt="Miniatura de zapatilla deportiva 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/4a180357-e5d5-4b6a-93f0-f9a02402708d.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/4a180357-e5d5-4b6a-93f0-f9a02402708d.jpg" width="40"/>
+                    <img alt="Miniatura de zapatilla deportiva 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/fe5e3903-3e5a-46b7-3cc6-b1d7a4286757.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/fe5e3903-3e5a-46b7-3cc6-b1d7a4286757.jpg" width="40"/>
+                    <img alt="Miniatura de zapatilla deportiva 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/06a01b04-0d72-4b92-9bc7-9e2d1aa25e48.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/06a01b04-0d72-4b92-9bc7-9e2d1aa25e48.jpg" width="40"/>
+                    <img alt="Miniatura de zapatilla deportiva 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/56c7d60e-69f6-450b-9241-c62f2bd2efa9.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/56c7d60e-69f6-450b-9241-c62f2bd2efa9.jpg" width="40"/>
+                </div>
+            </article>
+        </section>
+
+        <section aria-label="Productos Destacados" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
+            <h3 class="text-xl sm:text-2xl font-bold mb-4">
+                Productos <span class="font-normal">que te podrían interesar...</span>
+            </h3>
+            <div id="inmuebles-carousel" class="overflow-x-auto hide-scrollbar pb-4">
+                <div class="flex space-x-4">
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Casa con reja gris en exterior con vegetación" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/d33fe517-0ec8-43b9-c315-521c6107df71.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$400.000</p>
+                            <p class="text-gray-600">Maracaibo, Zulia</p>
+                            <p class="font-semibold mt-1">Casa en Alquiler Urb. El Paraíso 2H 1B</p>
+                            <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bed"></i>
+                                    <span>2</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bath"></i>
+                                    <span>1</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-car"></i>
+                                    <span>1</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Casa con reja de madera en exterior" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/22d6efc7-243f-4a4e-0986-deb55009127b.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$63.000.000 <span class="text-green-600 font-semibold text-sm">-3%</span></p>
+                            <p class="text-gray-600">Valencia, Carabobo</p>
+                            <p class="font-semibold mt-1">Casa en Venta Urb. El Trigal</p>
+                            <div class="flex justify-end mt-2">
+                                <img alt="Logo inmobiliaria" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/5da88364-73dd-4540-1bff-09458e984d5e.jpg" width="40"/>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Edificios altos de departamentos" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/9d3a4324-ce48-466b-c5fe-89c1fe243b51.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">UF4.272 <span class="text-green-600 font-semibold text-sm">-19%</span></p>
+                            <p class="text-gray-600">Puerto La Cruz, Anzoátegui</p>
+                            <p class="font-semibold mt-1">Apartamento Vista al Mar, Torre 4</p>
+                            <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>54 m²</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bed"></i>
+                                    <span>3</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bath"></i>
+                                    <span>2</span>
+                                </div>
+                            </div>
+                            <div class="flex justify-end mt-2">
+                                <img alt="Logo DCIGSA" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/6a6c123e-3e95-43fb-2223-5e64c80ec56a.jpg" width="40"/>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Jardín con edificios de departamentos al fondo" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/8d51dc69-5f89-4637-17a8-4f8621016c31.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$147.000.000 <span class="text-green-600 font-semibold text-sm">-2%</span></p>
+                            <p class="text-gray-600">Mérida, Mérida</p>
+                            <p class="font-semibold mt-1">Amplio Apartamento en Venta Cerca de Av. Las Américas 2H +2B+1E</p>
+                            <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-ruler-combined"></i>
+                                    <span>90 m²</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bed"></i>
+                                    <span>2</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-bath"></i>
+                                    <span>1</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                            <div class="absolute top-3 right-20 bg-[#ff6a00] text-white text-xs rounded-full px-2 py-0.5 font-semibold select-none cursor-default">
+                                ¿Quieres tu anuncio aquí?
+                            </div>
+                            <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                GO
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button aria-label="Anterior" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button aria-label="Siguiente" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+
+        <section aria-label="Productos Destacados de Vehículos" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
+            <h4 class="text-xl sm:text-2xl font-bold mb-4">Productos Destacados de Vehículos</h4>
+            <div id="autos-carousel" class="overflow-x-auto hide-scrollbar pb-4">
+                <div class="flex space-x-4">
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Auto blanco vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/697b42dc-8a60-458f-ffd3-e02503cf2a40.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$10.900.000</p>
+                            <p class="text-gray-600">Barquisimeto, Lara</p>
+                            <p class="font-semibold mt-1">Peugeot Partner</p>
+                            <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>2307 km</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Manual</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-road"></i>
+                                    <span>121681 km</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                            <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                T
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$29.990.000</p>
+                            <p class="text-gray-600">San Cristóbal, Táchira</p>
+                            <p class="font-semibold mt-1">Ford F-150</p>
+                            <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>23000 km</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Bencina</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Automático</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                            <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                EA
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$9.590.000</p>
+                            <p class="text-gray-600">Ciudad Bolívar, Bolívar</p>
+                            <p class="font-semibold mt-1">Skoda YETI</p>
+                            <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>20485 km</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Diesel</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Manual</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-road"></i>
+                                    <span>155000 km</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                            <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                N
+                            </div>
+                        </div>
+                    </article>
+                    <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect">
+                        <div class="relative">
+                            <img alt="Auto gris vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/7a3a73f5-20a2-4dab-236c-b5c8b413e1c0.jpg" width="288"/>
+                            <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                <i class="far fa-heart"></i>
+                            </button>
+                            <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                <i class="fas fa-ellipsis-h"></i>
+                            </button>
+                        </div>
+                        <div class="p-4 text-sm">
+                            <p class="font-bold text-gray-900 text-lg">$15.990.000</p>
+                            <p class="text-gray-600">Porlamar, Nueva Esparta</p>
+                            <p class="font-semibold mt-1">Hyundai ACCENT</p>
+                            <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Gas</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-gas-pump"></i>
+                                    <span>Bencina</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-cogs"></i>
+                                    <span>Manual</span>
+                                </div>
+                                <div class="flex items-center space-x-1">
+                                    <i class="fas fa-road"></i>
+                                    <span>200000 km</span>
+                                </div>
+                            </div>
+                            <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button">
+                                Contactar ahora
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            <button aria-label="Anterior" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="autos-carousel">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button aria-label="Siguiente" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="autos-carousel">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <div class="absolute top-10 right-4 bg-[#ff6a00] text-white text-xs rounded-full px-2 py-0.5 font-semibold select-none cursor-default hidden sm:block">
+                ¿Quieres tu anuncio aquí?
+            </div>
+        </section>
+
+        <section aria-label="Categorías principales" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 bg-white rounded-lg p-4 shadow-sm">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="font-semibold text-sm">Explora por Categorías</h2>
+                <a class="text-blue-600 text-[9px] sm:text-xs font-semibold hover:underline hover:text-blue-700 transition-colors" href="#">Mostrar todas las categorías</a>
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 text-[9px] sm:text-xs text-gray-700" id="category-grid">
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de coche rojo" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/aa4b2305-59db-4a79-8376-dbb6ded18def.jpg" width="40"/>
+                    <span class="font-semibold">Vehículos</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de smartphone" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/0199840c-54cf-4a30-4034-171462046760.jpg" width="40"/>
+                    <span class="font-semibold">Celulares y Teléfonos</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de lavadora" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/70f8d3bb-a65c-40e0-5bc7-f97ee1f2f383.jpg" width="40"/>
+                    <span class="font-semibold">Electrodomésticos</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de herramientas" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/6f1bd166-bfdc-43fa-f3a6-0e41330e0760.jpg" width="40"/>
+                    <span class="font-semibold">Herramientas</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de rueda de coche" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/4316a772-c9a5-4eeb-3170-f30c925b55a2.jpg" width="40"/>
+                    <span class="font-semibold">Accesorios para Vehículos</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de chaqueta azul" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/9f9989d4-78c9-4520-3149-a913d43988e8.jpg" width="40"/>
+                    <span class="font-semibold">Ropa, Zapatos y Accesorios</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de mancuerna" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/b4f95501-62ae-48d9-d59c-30c1b1607e39.jpg" width="40"/>
+                    <span class="font-semibold">Deportes y Fitness</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de botella de perfume" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/027dce5c-7b2a-48aa-8874-c8f9bc55b973.jpg" width="40"/>
+                    <span class="font-semibold">Estética y Belleza</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de sofá" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/fcfc18dd-7ca8-428b-2b03-14e9974410af.jpg" width="40"/>
+                    <span class="font-semibold">Hogar y Muebles</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de portátil" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/cf77d637-d251-43da-0c98-f80408a7fc65.jpg" width="40"/>
+                    <span class="font-semibold">Computación</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de casa" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/4f9d4fe8-5954-4f59-e05d-f159d8aebb0b.jpg" width="40"/>
+                    <span class="font-semibold">Inmuebles</span>
+                </a>
+                <a class="flex items-center space-x-2 p-2 border border-gray-200 rounded-md hover:shadow-md transition-all category-item" href="#">
+                    <img alt="Icono de auriculares" class="w-10 h-10 rounded-full object-cover" height="40" src="https://storage.googleapis.com/a1aa/image/483bdac5-4101-4c12-573d-07be6703a71c.jpg" width="40"/>
+                    <span class="font-semibold">Electrónica, Audio y Video</span>
+                </a>
+            </div>
+            <div class="flex justify-center mt-4 space-x-1 text-gray-400 text-xs" id="category-pagination-dots">
+                <span class="w-2 h-2 rounded-full bg-gray-400 cursor-pointer" data-page="0"></span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-page="1"></span>
+                <span class="w-2 h-2 rounded-full bg-gray-300 cursor-pointer" data-page="2"></span>
+            </div>
+        </section>
+
+        <section aria-label="Cómo funciona la compra y venta" class="max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between text-center sm:text-left text-gray-600 text-[9px] sm:text-xs">
+            <div class="sm:w-1/3 px-4 mb-6 sm:mb-0 flex flex-col items-center sm:items-start">
+                <i class="far fa-heart text-blue-600 text-3xl mb-3"></i>
+                <h4 class="font-semibold text-sm mb-1">Compra sin moverte</h4>
+                <p class="mb-2 leading-tight">Encuentra lo que necesitas, y coordina el pago y la entrega con el vendedor. Es fácil y rápido. ¡Todos podemos hacerlo!</p>
+                <a class="text-blue-600 hover:underline hover:text-blue-700 transition-colors" href="#">Cómo comprar en BuscaLoYa</a>
+            </div>
+            <div class="sm:w-1/3 px-4 mb-6 sm:mb-0 flex flex-col items-center sm:items-start">
+                <i class="fas fa-box-open text-gray-900 text-3xl mb-3"></i>
+                <h4 class="font-semibold text-sm mb-1">Recibe tu producto</h4>
+                <p class="mb-2 leading-tight">Acuerda la entrega de tu compra con el vendedor. Puedes recibirlo en tu casa, en la oficina o retirarlo. ¡Tú decides qué prefieres!</p>
+                <a class="text-blue-600 hover:underline hover:text-blue-700 transition-colors" href="#">Cómo coordino la entrega</a>
+            </div>
+            <div class="sm:w-1/3 px-4 flex flex-col items-center sm:items-start">
+                <i class="fas fa-handshake text-blue-600 text-3xl mb-3"></i>
+                <h4 class="font-semibold text-sm mb-1">Vende fácilmente</h4>
+                <p class="mb-2 leading-tight">Miles de personas quieren lo que ofreces. Publica y verás qué pronto llegan las compras. ¡Tú no pagas nada!</p>
+                <a class="text-blue-600 hover:underline hover:text-blue-700 transition-colors" href="#">Cómo vender en BuscaLoYa</a>
+            </div>
+        </section>
+
+        <section aria-label="Anuncios locales y populares" class="max-w-7xl mx-auto mt-16 px-4 sm:px-0 select-none">
+            <p class="text-center text-gray-600 text-sm sm:text-base mb-4">Anuncios populares en tu región</p>
+            <div class="flex flex-wrap justify-center gap-2">
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Vendo apartamento grande sector Altamira, Caracas</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Alquilo local comercial centro Valencia</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Vehículo usado económico Maracaibo</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Empleo part-time Barquisimeto</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Muebles de segunda mano Mérida</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Mascotas en adopción Puerto La Cruz</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Clases de música San Cristóbal</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Servicio de limpieza a domicilio Ciudad Bolívar</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Bicicleta de montaña usada Margarita</span>
+                <span class="bg-gray-800 text-gray-200 text-xs px-3 py-1 rounded-full cursor-default hover:bg-gray-700 transition-colors">Computador gaming en oferta Caracas</span>
+            </div>
+        </section>
+    </div>
+
+    <div id="content-financiamiento" class="content-section">
+        <div class="bg-black text-yellow-400 text-center text-xs py-1 px-2 shadow-sm">
+            <span>
+                ⚠️ Estamos en la temporada de Black Friday con hasta 70% de descuento.
+                <a class="underline font-semibold hover:text-yellow-300 transition-colors" href="#">Precios</a>
+            </span>
+        </div>
+        <section class="bg-black relative max-w-7xl mx-auto mt-6 rounded-xl overflow-hidden shadow-lg py-8">
+            <div class="text-white text-center font-bold text-2xl mb-4">club BuscaLoYa más.</div>
+            <div id="club-buscaloya-carousel" class="relative flex justify-center items-center h-24">
+                <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+                    <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
+                        <div class="w-16 h-16 rounded-full bg-[#7ED6F0] flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo azul con icono abstracto negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/2433e24e-1bbc-4a09-c93a-b1dba777e6b7.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#E9A9F7] flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo rosa con icono abstracto negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/660a2ed7-b643-4d74-7385-330f8593997c.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#A3D55B] flex items-center justify-center shadow-[0_0_15px_#A3D55B] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo verde con icono de hoja negra dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/5f71c50f-3d8e-49d5-b86b-aa9ba148c50c.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#F9A14B] flex items-center justify-center shadow-[0_0_15px_#F9A14B] hover:scale-105 transition-transform cursor-pointer hidden sm:flex">
+                            <img alt="Círculo naranja con icono de línea vertical negra dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/7684377a-7ca1-452b-239e-311b6a192563.jpg" width="24"/>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
+                        <div class="w-16 h-16 rounded-full bg-[#3B3B3B] flex items-center justify-center shadow-[0_0_15px_#3B3B3B] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo negro con icono de club negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/0dd681a0-f97b-44c1-89df-7c88cd27dac0.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#FFED00] flex items-center justify-center shadow-[0_0_15px_#FFED00] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo amarillo con icono de árbol negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/6b2b15d2-1c16-416f-d71d-711938beaa0c.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#7ED6F0] flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer">
+                            <img alt="Círculo azul con icono abstracto negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/2433e24e-1bbc-4a09-c93a-b1dba777e6b7.jpg" width="24"/>
+                        </div>
+                        <div class="w-16 h-16 rounded-full bg-[#E9A9F7] flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer hidden sm:flex">
+                            <img alt="Círculo rosa con icono abstracto negro dentro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/660a2ed7-b643-4d74-7385-330f8593997c.jpg" width="24"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-white text-center text-sm pb-4">El club que crece contigo</div>
+            <div class="flex justify-center space-x-2 pb-6" id="buscaloya-carousel-dots">
+                <span class="w-2 h-2 rounded-full bg-white cursor-pointer" data-slide-index="0"></span>
+                <span class="w-2 h-2 rounded-full bg-gray-600 cursor-pointer" data-slide-index="1"></span>
+            </div>
+            <button aria-label="Anterior" class="buscaloya-carousel-prev-btn absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl p-2 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-all">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button aria-label="Siguiente" class="buscaloya-carousel-next-btn absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl p-2 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-all">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 mt-12 text-center">
+            <p class="text-sm text-gray-600 mb-2">¿Por qué financiar con BuscaLoYa?</p>
+            <h2 class="font-bold text-2xl leading-tight max-w-md mx-auto mb-8">
+                Es una alternativa de compra accesible para que te lleves lo que necesitas hoy
+            </h2>
+            <div class="mt-8 flex flex-col sm:flex-row justify-center gap-6">
+                <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                    <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                        <i class="fas fa-credit-card text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-base mb-2">Pago en cuotas</h3>
+                    <p class="text-sm text-gray-600">El pago lo divides en cuotas y pagas solo el producto</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                    <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                        <i class="fas fa-percent text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-base mb-2">Sin intereses</h3>
+                    <p class="text-sm text-gray-600">Compra sin intereses en más de 2.000 comercios</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                    <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                        <i class="fas fa-shield-alt text-2xl"></i>
+                    </div>
+                    <h3 class="font-semibold text-base mb-2">Conveniente y seguro</h3>
+                    <p class="text-sm text-gray-600">Compra seguro y paga hoy, paga con tu tiempo</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12">
+            <p class="text-sm text-center text-gray-600 mb-2">Con más de 300 aliados y 3500 comercios en Venezuela</p>
+            <h3 class="font-bold text-2xl text-center mb-6">Con BuscaLoYa obtén al instante eso que necesitas</h3>
+            <div class="flex justify-center mb-6">
+                <button id="buscaloya-view-all-stores-button" class="bg-black text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button">Ver todas las tiendas</button>
+            </div>
+            <div class="relative">
+                <div id="buscaloya-products-carousel" class="flex overflow-x-auto hide-scrollbar space-x-4 pb-6 px-2 sm:px-0">
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#C9E9FF">
+                        <img alt="Smartphone negro vista lateral sobre fondo azul claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/93036a75-b2f5-432e-d951-f9551191687f.jpg" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Tecnología</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Smartphones de última generación</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#D6F0E4">
+                        <img alt="Suéter naranja sobre fondo verde claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/2bd03bff-6428-409f-2ab0-656dfc09a77d.jpg" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Moda</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Tendencias en ropa y accesorios</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#C9B9E6">
+                        <img alt="Zapatilla roja sobre fondo morado claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/418470e8-fa60-459b-5a7f-c3692f37501c.jpg" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Zapatos</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Calzado para cada ocasión</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#FFFB9E">
+                        <img alt="Lavadora blanca sobre fondo amarillo pálido" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/34026907-735e-4969-aa4c-754e2ea40e56.jpg" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Departamental</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Artículos para el hogar y más</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#D9D9D9">
+                        <img alt="Sillón azul sobre fondo gris claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/b074b007-3b96-436a-1b6a-20f228061b4f.jpg" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Hogar</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Muebles y decoración</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                    <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#F0E68C">
+                        <img alt="Consola de videojuegos sobre fondo amarillo" class="w-full h-40 object-cover" height="144" src="https://placehold.co/144x144/F0E68C/000000?text=Gaming" width="144"/>
+                        <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Gaming</div>
+                        <div class="p-3">
+                            <p class="text-sm font-semibold text-black">Consolas y videojuegos</p>
+                            <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#">Ver todos</a>
+                        </div>
+                    </div>
+                </div>
+                <button aria-label="Producto anterior" class="buscaloya-product-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-black rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button aria-label="Siguiente producto" class="buscaloya-product-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-black rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto w-full flex flex-col items-center">
+                <div class="flex items-center space-x-4 mb-4">
+                    <button class="buscaloya-tab-button bg-black text-white text-sm rounded-full px-4 py-1 shadow-md hover:bg-gray-800 transition-colors" type="button" data-tab="principal">Principal</button>
+                    <button class="buscaloya-tab-button text-sm text-gray-400 border border-gray-300 rounded-full px-4 py-1 hover:border-black hover:text-black transition-colors" type="button" data-tab="credito">Crédito</button>
+                </div>
+                <div id="buscaloya-tab-content-principal" class="buscaloya-tab-content text-center slide-in-right">
+                    <div class="text-4xl font-bold mb-1">$135.00</div>
+                    <div class="text-sm text-gray-400 line-through mb-2">De $180.00</div>
+                    <p class="text-sm text-gray-600">Para tus compras en 3 cuotas online y escaneando el QR</p>
+                    <div class="mt-6">
+                        <button class="border border-black rounded-full px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors shadow-md" type="button">Explora</button>
+                    </div>
+                </div>
+                <div id="buscaloya-tab-content-credito" class="buscaloya-tab-content text-center hidden slide-in-right">
+                    <div class="text-4xl font-bold mb-1">$500.00</div>
+                    <div class="text-sm text-gray-400 line-through mb-2">De $750.00</div>
+                    <p class="text-sm text-gray-600">Obtén un cupo de crédito mayor para compras más grandes</p>
+                    <div class="mt-6">
+                        <button class="border border-black rounded-full px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors shadow-md" type="button">Solicitar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto w-full flex flex-col justify-center items-center">
+                <div class="grid grid-cols-4 gap-4 opacity-70">
+                    <img alt="Logo de la marca Crocs" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/c537f144-cfb4-4cd7-b432-37b0fb58866d.jpg" width="64"/>
+                    <img alt="Logo de la marca EPA" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/77740bab-508c-4168-4353-8a98fe4a83a9.jpg" width="64"/>
+                    <img alt="Logo de la marca Aldo" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/73f4fb7c-3283-400d-de15-bcb1dd760e7b.jpg" width="64"/>
+                    <img alt="Logo de la marca Cubitt" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/22644bb5-b2e2-480f-01c0-e03deadc23dd.jpg" width="64"/>
+                    <img alt="Logo de la marca Gama" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/fe89b4d4-8733-4336-a584-392fa3ff668c.jpg" width="64"/>
+                    <img alt="Logo de la marca Lili Pink" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/dbbf2e8c-dc60-43f9-b25d-3eaffeee4fc5.jpg" width="64"/>
+                    <img alt="Logo de la marca Casio" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/a0208351-eba6-494f-31ed-26485fce79b2.jpg" width="64"/>
+                    <img alt="Logo de la marca Balu" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/5128aa9f-5a2e-4b2a-9523-41de8eabf18f.jpg" width="64"/>
+                </div>
+                <p class="text-sm text-gray-600 mt-6 text-center">Compra online o en tienda, tú eliges</p>
+                <p class="text-sm text-gray-600 text-center mt-1">Compra online o en tus tiendas, y paga en +3500 comercios a nivel nacional y adquiere tu comodidad</p>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                <img alt="Pescado, huevos, smartphone con app BuscaLoYa, cepillo de dientes y papel higiénico flotando sobre fondo blanco" class="mb-4 w-40 h-40 object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/ee50218d-c2a4-4fb7-0f27-ab4e13c38f8a.jpg" width="144"/>
+                <h4 class="font-semibold text-lg mb-2">Línea Cotidiana para el día a día</h4>
+                <p class="text-sm text-gray-600 max-w-xs">Compra en supermercados y farmacias con facilidad + cuotas sin intereses en 14 días</p>
+            </div>
+            <div class="bg-black rounded-xl shadow-lg p-6 flex flex-col items-center text-center text-white relative overflow-hidden hover:shadow-xl transition-all card-hover-effect">
+                <img alt="Tarjetas de crédito con detalles de cuotas sobre fondo negro con líneas curvas moradas y amarillas" class="mb-4 w-full max-w-xs object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/141e66b0-4a85-4849-fd29-843b5cd8c484.jpg" width="240"/>
+                <h4 class="font-semibold text-lg mb-2">Más cuotas para metas más grandes</h4>
+                <p class="text-sm max-w-xs">Ahora con 6, 9, 12 y hasta 15 cuotas sin intereses en comercios online o en la tienda de tu cupo.</p>
+                <button class="border border-white rounded-full px-6 py-2 text-sm font-semibold mt-6 hover:bg-white hover:text-black transition-colors shadow-md" type="button">Explora</button>
+            </div>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12 text-center">
+            <p class="text-sm text-gray-600 mb-4">Estas tiendas ya forman parte de nuestros aliados</p>
+            <div class="flex flex-wrap justify-center gap-6 mb-6">
+                <img alt="Logo de la marca Gina rosa sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/bf345a51-6c55-4143-5971-1906566d71e3.jpg" width="96"/>
+                <img alt="Logo de la marca Jafra negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/3471eb15-a893-4232-6ed8-e0946f46a695.jpg" width="96"/>
+                <img alt="Logo de la marca Opera negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/d7063e74-b1ab-4295-6133-71888b96ed0b.jpg" width="96"/>
+                <img alt="Logo de la marca Dad Foto negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/8c1f7551-e5ca-4515-aea0-b9f9baf39591.jpg" width="96"/>
+                <img alt="Logo de la marca Gift rojo sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/7d4c8a69-22a0-48a3-0cd7-cf2efe75d2c7.jpg" width="96"/>
+                <img alt="Logo de la marca Push&amp;Co negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/1186f303-4a6a-442f-214b-b45d009fbac6.jpg" width="96"/>
+                <img alt="Logo de la marca Ecom World negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/422b6014-87f0-4609-8d5b-a82a6b4769cc.jpg" width="96"/>
+            </div>
+            <button class="bg-black text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button">Ver todas las tiendas</button>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12">
+            <div class="bg-yellow-400 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+                <div class="font-bold text-black text-xl sm:text-2xl max-w-lg leading-tight text-center sm:text-left">
+                    Descarga nuestra app, activa tu cuenta y comienza a usar BuscaLoYa
+                </div>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                    <a aria-label="Descargar en la App Store" href="#" class="hover:scale-105 transition-transform">
+                        <img alt="Botón de descarga de App Store" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/e277ffbc-b8d2-4f4d-0b25-475c03f4a780.jpg" width="96"/>
+                    </a>
+                    <a aria-label="Descargar en Google Play" href="#" class="hover:scale-105 transition-transform">
+                        <img alt="Botón de descarga de Google Play" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/fee6b263-eacb-493d-efc4-a6d0eb0c3c20.jpg" width="96"/>
+                    </a>
+                </div>
+                <img alt="Forma de ráfaga de sol negra sobre fondo amarillo" class="hidden sm:block w-20 h-20" height="64" src="https://storage.googleapis.com/a1aa/image/1e39728c-5c8f-4c72-6c6b-e8ad19bca4b8.jpg" width="64"/>
+            </div>
+        </section>
+
+        <section class="max-w-4xl mx-auto px-4 mt-12 text-center bg-white rounded-xl shadow-lg p-6">
+            <h3 class="font-bold text-xl mb-4">Mantente al día con BuscaLoYa</h3>
+            <p class="text-sm text-gray-600 mb-6">Suscríbete a nuestro boletín para recibir las últimas noticias y ofertas.</p>
+            <form id="buscaloya-newsletter-form" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <input type="email" placeholder="Tu correo electrónico" class="w-full sm:w-2/3 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm" required>
+                <button type="submit" class="bg-black text-white text-sm rounded-full px-6 py-3 hover:bg-gray-800 transition-colors shadow-md w-full sm:w-auto">Suscribirse</button>
+            </form>
+        </section>
+
+        <section class="max-w-6xl mx-auto px-4 mt-12 text-center">
+            <h3 class="font-bold text-2xl mb-6">BuscaLoYa en los medios</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-4xl mx-auto text-sm text-gray-400">
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">Bloomberg</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">EL MUNDO</span>
+                <span class="text-purple-600 font-semibold hover:text-purple-800 transition-colors cursor-pointer">yahoo! finance</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">PYMNTS</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">EN BANCOS</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">-el estímulo-</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">EL UNIVERSAL</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">eldiario.</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">Hispano Post</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">Últimas Noticias</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">TalCual</span>
+                <span class="hover:text-gray-600 transition-colors cursor-pointer">CONTRAPUNTO</span>
+            </div>
+            <a class="text-sm text-blue-600 mt-4 inline-block hover:underline hover:text-blue-700 transition-colors" href="#">sistemas en línea</a>
+        </section>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 text-xs sm:text-sm mt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+            <div>
+                <h6 class="text-white font-semibold mb-3">Centro de ayuda</h6>
+                <ul class="space-y-2">
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Sobre nosotros</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Ayuda</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Soporte</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Contáctanos</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-white font-semibold mb-3">Legal</h6>
+                <ul class="space-y-2">
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Términos y condiciones</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Política de privacidad</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Consulta de seguridad</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Cookies</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-white font-semibold mb-3">Productos y Servicios</h6>
+                <ul class="space-y-2">
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Compra online y en tienda</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Comercios aliados</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Nuestras tiendas</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Cuotas flexibles</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Marketplace</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-white font-semibold mb-3">Ciudades</h6>
+                <ul class="space-y-2">
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Caracas</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Valencia</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Maracaibo</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Barquisimeto</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Mérida</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Puerto La Cruz</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">San Cristóbal</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-white font-semibold mb-3">Dispositivos</h6>
+                <ul class="space-y-2">
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Todos</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">Smart TV</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">4K y 8K UHD</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">5G y 4G/LTE</a></li>
+                    <li><a class="hover:underline hover:text-white transition-colors" href="#">6K y 8K/UHD</a></li>
+                </ul>
+            </div>
+            <div>
+                <h6 class="text-white font-semibold mb-3">Síguenos</h6>
+                <div class="flex justify-start space-x-4 text-gray-400 text-xl">
+                    <a aria-label="Facebook" class="hover:text-white transition-colors" href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a aria-label="Instagram" class="hover:text-white transition-colors" href="#"><i class="fab fa-instagram"></i></a>
+                    <a aria-label="Twitter" class="hover:text-white transition-colors" href="#"><i class="fab fa-twitter"></i></a>
+                    <a aria-label="LinkedIn" class="hover:text-white transition-colors" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a aria-label="YouTube" class="hover:text-white transition-colors" href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+                <p class="mt-4 text-gray-500 text-xs">© 2024 BuscaLoYa. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button aria-label="Soporte de chat" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50">
+        <i class="fas fa-comment-alt text-xl"></i>
+    </button>
+
+    <button id="scroll-to-top-btn" aria-label="Volver arriba" class="fixed bottom-24 right-6 bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50 hidden">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <div id="message-box-overlay" class="message-box-overlay"></div>
+    <div id="message-box" class="message-box">
+        <p id="message-box-text" class="text-lg font-semibold mb-4"></p>
+        <button id="message-box-close" class="bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-colors">Cerrar</button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Utilidad de Caja de Mensajes ---
+            const messageBox = document.getElementById('message-box');
+            const messageBoxText = document.getElementById('message-box-text');
+            const messageBoxClose = document.getElementById('message-box-close');
+            const messageBoxOverlay = document.getElementById('message-box-overlay');
+
+            const showMessageBox = (message) => {
+                messageBoxText.textContent = message;
+                messageBox.classList.add('show');
+                messageBoxOverlay.classList.add('show');
+            };
+
+            const hideMessageBox = () => {
+                messageBox.classList.remove('show');
+                messageBoxOverlay.classList.remove('show');
+            };
+
+            messageBoxClose.addEventListener('click', hideMessageBox);
+            messageBoxOverlay.addEventListener('click', hideMessageBox); // Cerrar al hacer clic en el overlay
+
+            // --- Navegación Principal por Pestañas ---
+            const tabMarketplace = document.getElementById('tab-marketplace');
+            const tabFinanciamiento = document.getElementById('tab-financiamiento');
+            const contentMarketplace = document.getElementById('content-marketplace');
+            const contentFinanciamiento = document.getElementById('content-financiamiento');
+
+            const activateTab = (tabId) => {
+                // Desactivar todas las pestañas
+                tabMarketplace.classList.remove('bg-yellow-600', 'text-white');
+                tabMarketplace.classList.add('bg-white', 'text-gray-800');
+                tabFinanciamiento.classList.remove('bg-yellow-600', 'text-white');
+                tabFinanciamiento.classList.add('bg-white', 'text-gray-800');
+
+                // Ocultar todas las secciones de contenido
+                contentMarketplace.classList.remove('active');
+                contentFinanciamiento.classList.remove('active');
+
+                // Activar la pestaña seleccionada y mostrar el contenido
+                if (tabId === 'marketplace') {
+                    tabMarketplace.classList.remove('bg-white', 'text-gray-800');
+                    tabMarketplace.classList.add('bg-yellow-600', 'text-white');
+                    contentMarketplace.classList.add('active');
+                } else if (tabId === 'financiamiento') {
+                    tabFinanciamiento.classList.remove('bg-white', 'text-gray-800');
+                    tabFinanciamiento.classList.add('bg-yellow-600', 'text-white');
+                    contentFinanciamiento.classList.add('active');
+                }
+            };
+
+            tabMarketplace.addEventListener('click', () => activateTab('marketplace'));
+            tabFinanciamiento.addEventListener('click', () => activateTab('financiamiento'));
+
+            // Navegación del menú móvil para pestañas
+            const mobileNavMarketplace = document.getElementById('mobile-nav-marketplace');
+            const mobileNavFinanciamiento = document.getElementById('mobile-nav-financiamiento');
+
+            mobileNavMarketplace.addEventListener('click', (e) => {
+                e.preventDefault();
+                activateTab('marketplace');
+                mainMobileMenuButton.click(); // Cerrar menú móvil
+            });
+            mobileNavFinanciamiento.addEventListener('click', (e) => {
+                e.preventDefault();
+                activateTab('financiamiento');
+                mainMobileMenuButton.click(); // Cerrar menú móvil
+            });
+
+
+            // --- Alternar Menú Móvil Principal ---
+            const mainMobileMenuButton = document.getElementById('main-mobile-menu-button');
+            const mainMobileMenu = document.getElementById('main-mobile-menu');
+            const mainMobileMenuIcon = document.getElementById('main-mobile-menu-icon');
+            let isMainMobileMenuOpen = false;
+
+            mainMobileMenuButton.addEventListener('click', () => {
+                if (isMainMobileMenuOpen) {
+                    mainMobileMenu.classList.remove('slide-down-menu');
+                    mainMobileMenu.classList.add('slide-up-menu');
+                    mainMobileMenu.addEventListener('animationend', () => {
+                        mainMobileMenu.classList.add('hidden');
+                        mainMobileMenu.classList.remove('slide-up-menu');
+                    }, { once: true });
+                    mainMobileMenuIcon.classList.remove('fa-times');
+                    mainMobileMenuIcon.classList.add('fa-bars');
+                } else {
+                    mainMobileMenu.classList.remove('hidden');
+                    mainMobileMenu.classList.add('slide-down-menu');
+                    mainMobileMenuIcon.classList.remove('fa-bars');
+                    mainMobileMenuIcon.classList.add('fa-times');
+                }
+                isMainMobileMenuOpen = !isMainMobileMenuOpen;
+            });
+
+
+            // --- JS de la Sección de Compra y Venta ---
+
+            // --- Carrusel de Banners ---
+            const bannerImages = document.querySelectorAll('#banner-carousel img');
+            const bannerDots = document.querySelectorAll('#banner-dots span');
+            let currentBannerIndex = 0;
+
+            const showBanner = (index) => {
+                bannerImages.forEach((img, i) => {
+                    img.classList.remove('opacity-100');
+                    img.classList.add('opacity-0');
+                    bannerDots[i].classList.remove('opacity-100', 'bg-white');
+                    bannerDots[i].classList.add('opacity-50', 'bg-white');
+                });
+                bannerImages[index].classList.remove('opacity-0');
+                bannerImages[index].classList.add('opacity-100');
+                bannerDots[index].classList.remove('opacity-50');
+                bannerDots[index].classList.add('opacity-100');
+            };
+
+            const nextBanner = () => {
+                currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
+                showBanner(currentBannerIndex);
+            };
+
+            bannerDots.forEach(dot => {
+                dot.addEventListener('click', (event) => {
+                    const index = parseInt(event.target.dataset.dotIndex);
+                    currentBannerIndex = index;
+                    showBanner(currentBannerIndex);
+                });
+            });
+
+            setInterval(nextBanner, 5000); // Cambiar banner cada 5 segundos
+            showBanner(currentBannerIndex); // Mostrar banner inicial
+
+            // --- Funcionalidad de Búsqueda Principal Simulada ---
+            const mainSearchInput = document.getElementById('main-search-input');
+            const mainSearchForm = document.getElementById('main-search-form');
+
+            mainSearchForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevenir el envío del formulario por defecto
+                const searchTerm = mainSearchInput.value.trim();
+                if (searchTerm) {
+                    showMessageBox(`Buscando: "${searchTerm}" en toda la plataforma BuscaLoYa.`);
+                    const originalPlaceholder = mainSearchInput.placeholder;
+                    mainSearchInput.placeholder = `Buscando "${searchTerm}"...`;
+                    setTimeout(() => {
+                        mainSearchInput.value = '';
+                        mainSearchInput.placeholder = originalPlaceholder;
+                    }, 1500);
+                }
+            });
+
+            // --- Cambiador de Imagen en Miniatura (Estilo Mercado Libre) ---
+            document.querySelectorAll('.thumbnail-image').forEach(thumbnail => {
+                thumbnail.addEventListener('mouseover', (event) => {
+                    const mainImage = event.target.closest('article').querySelector('.main-category-image');
+                    const newSrc = event.target.dataset.mainImage;
+                    if (mainImage && newSrc) {
+                        mainImage.src = newSrc;
+                        mainImage.classList.add('fade-in'); // Añadir animación de fade-in
+                        mainImage.addEventListener('animationend', () => {
+                            mainImage.classList.remove('fade-in');
+                        }, { once: true });
+                    }
+                });
+            });
+
+            // --- Paginación de Categorías (Estilo Mercado Libre) ---
+            const categoryItems = document.querySelectorAll('#category-grid .category-item');
+            const categoryPaginationDots = document.querySelectorAll('#category-pagination-dots span');
+            const itemsPerPage = 6; // Número de elementos a mostrar por página
+
+            const showCategoryPage = (pageIndex) => {
+                categoryItems.forEach((item, i) => {
+                    const startIndex = pageIndex * itemsPerPage;
+                    const endIndex = startIndex + itemsPerPage;
+                    if (i >= startIndex && i < endIndex) {
+                        item.classList.remove('hidden');
+                        item.classList.add('fade-in'); // Añadir animación de fade-in
+                    } else {
+                        item.classList.add('hidden');
+                        item.classList.remove('fade-in');
+                    }
+                });
+
+                categoryPaginationDots.forEach((dot, i) => {
+                    dot.classList.remove('bg-gray-400');
+                    dot.classList.add('bg-gray-300');
+                    if (i === pageIndex) {
+                        dot.classList.remove('bg-gray-300');
+                        dot.classList.add('bg-gray-400');
+                    }
+                });
+            };
+
+            categoryPaginationDots.forEach(dot => {
+                dot.addEventListener('click', (event) => {
+                    const page = parseInt(event.target.dataset.page);
+                    showCategoryPage(page);
+                });
+            });
+
+            // Inicializar con la primera página de categorías
+            showCategoryPage(0);
+
+            // --- Funcionalidad de Carruseles Horizontales (Estilo Yapo) ---
+            document.querySelectorAll('.carousel-prev-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const targetId = event.currentTarget.dataset.target;
+                    const carousel = document.getElementById(targetId);
+                    if (carousel) {
+                        carousel.scrollBy({
+                            left: -carousel.offsetWidth / 1.5, // Desplazarse aproximadamente 2/3 del ancho visible
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            document.querySelectorAll('.carousel-next-btn').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const targetId = event.currentTarget.dataset.target;
+                    const carousel = document.getElementById(targetId);
+                    if (carousel) {
+                        carousel.scrollBy({
+                            left: carousel.offsetWidth / 1.5, // Desplazarse aproximadamente 2/3 del ancho visible
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // --- Interacciones de Botones de Tarjeta (Estilo Yapo) ---
+            document.querySelectorAll('.favorite-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const icon = button.querySelector('i');
+                    if (icon.classList.contains('far')) { // Si es el corazón delineado
+                        icon.classList.remove('far');
+                        icon.classList.add('fas', 'text-red-600'); // Cambiar a sólido y rojo
+                        showMessageBox('¡Añadido a favoritos!');
+                    } else { // Si es el corazón sólido
+                        icon.classList.remove('fas', 'text-red-600');
+                        icon.classList.add('far'); // Cambiar de nuevo a delineado
+                        showMessageBox('Eliminado de favoritos.');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.more-options-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    showMessageBox('Opciones adicionales disponibles.');
+                });
+            });
+
+            document.querySelectorAll('.contact-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    showMessageBox('¡Mensaje enviado al vendedor!');
+                });
+            });
+
+            // --- JS de la Sección de Financiamiento BuscaLoYa ---
+
+            // --- Carrusel del Club BuscaLoYa ---
+            const buscaloyaCarouselTrack = document.getElementById('carousel-track');
+            const buscaloyaSlides = buscaloyaCarouselTrack.children;
+            const buscaloyaPrevSlideButton = document.querySelector('.buscaloya-carousel-prev-btn');
+            const buscaloyaNextSlideButton = document.querySelector('.buscaloya-carousel-next-btn');
+            const buscaloyaCarouselDots = document.querySelectorAll('#buscaloya-carousel-dots span');
+            let currentBuscaLoYaSlideIndex = 0;
+
+            const updateBuscaLoYaCarousel = () => {
+                const slideWidth = buscaloyaSlides[0].offsetWidth; // Obtener el ancho de un solo slide
+                buscaloyaCarouselTrack.style.transform = `translateX(-${currentBuscaLoYaSlideIndex * slideWidth}px)`;
+
+                buscaloyaCarouselDots.forEach((dot, index) => {
+                    dot.classList.remove('bg-white');
+                    dot.classList.add('bg-gray-600');
+                    if (index === currentBuscaLoYaSlideIndex) {
+                        dot.classList.remove('bg-gray-600');
+                        dot.classList.add('bg-white');
+                    }
+                });
+            };
+
+            buscaloyaPrevSlideButton.addEventListener('click', () => {
+                currentBuscaLoYaSlideIndex = (currentBuscaLoYaSlideIndex - 1 + buscaloyaSlides.length) % buscaloyaSlides.length;
+                updateBuscaLoYaCarousel();
+            });
+
+            buscaloyaNextSlideButton.addEventListener('click', () => {
+                currentBuscaLoYaSlideIndex = (currentBuscaLoYaSlideIndex + 1) % buscaloyaSlides.length;
+                updateBuscaLoYaCarousel();
+            });
+
+            buscaloyaCarouselDots.forEach(dot => {
+                dot.addEventListener('click', (event) => {
+                    currentBuscaLoYaSlideIndex = parseInt(event.target.dataset.slideIndex);
+                    updateBuscaLoYaCarousel();
+                });
+            });
+
+            // Auto-avance del carrusel
+            setInterval(() => {
+                buscaloyaNextSlideButton.click();
+            }, 5000); // Cambiar slide cada 5 segundos
+
+            // Actualización inicial
+            updateBuscaLoYaCarousel();
+
+            // --- Carrusel de Productos (Estilo BuscaLoYa) ---
+            const buscaloyaProductsCarousel = document.getElementById('buscaloya-products-carousel');
+            const buscaloyaPrevProductButton = document.querySelector('.buscaloya-product-prev-btn');
+            const buscaloyaNextProductButton = document.querySelector('.buscaloya-product-next-btn');
+
+            buscaloyaPrevProductButton.addEventListener('click', () => {
+                buscaloyaProductsCarousel.scrollBy({
+                    left: -buscaloyaProductsCarousel.offsetWidth / 2, // Desplazarse la mitad del ancho visible
+                    behavior: 'smooth'
+                });
+            });
+
+            buscaloyaNextProductButton.addEventListener('click', () => {
+                buscaloyaProductsCarousel.scrollBy({
+                    left: buscaloyaProductsCarousel.offsetWidth / 2, // Desplazarse la mitad del ancho visible
+                    behavior: 'smooth'
+                });
+            });
+
+            // --- Funcionalidad de Pestañas (Principal/Crédito - Estilo BuscaLoYa) ---
+            const buscaloyaTabButtons = document.querySelectorAll('.buscaloya-tab-button');
+            const buscaloyaTabContents = document.querySelectorAll('.buscaloya-tab-content');
+
+            buscaloyaTabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Desactivar todos los botones y ocultar todo el contenido
+                    buscaloyaTabButtons.forEach(btn => {
+                        btn.classList.remove('bg-black', 'text-white', 'shadow-md');
+                        btn.classList.add('text-gray-400', 'border', 'border-gray-300');
+                    });
+                    buscaloyaTabContents.forEach(content => {
+                        content.classList.add('hidden');
+                        content.classList.remove('slide-in-right');
+                    });
+
+                    // Activar el botón clicado
+                    button.classList.remove('text-gray-400', 'border', 'border-gray-300');
+                    button.classList.add('bg-black', 'text-white', 'shadow-md');
+
+                    // Mostrar el contenido correspondiente
+                    const targetTab = button.dataset.tab;
+                    const targetContent = document.getElementById(`buscaloya-tab-content-${targetTab}`);
+                    if (targetContent) {
+                        targetContent.classList.remove('hidden');
+                        targetContent.classList.add('slide-in-right');
+                    }
+                });
+            });
+
+            // --- Acción del Botón "Ver todas las tiendas" (Estilo BuscaLoYa) ---
+            const buscaloyaViewAllStoresButton = document.getElementById('buscaloya-view-all-stores-button');
+            buscaloyaViewAllStoresButton.addEventListener('click', () => {
+                showMessageBox('¡Pronto tendremos una página dedicada con todas nuestras tiendas aliadas de BuscaLoYa!');
+            });
+
+            // --- Formulario de Suscripción al Boletín (Estilo BuscaLoYa) ---
+            const buscaloyaNewsletterForm = document.getElementById('buscaloya-newsletter-form');
+            buscaloyaNewsletterForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevenir el envío del formulario por defecto
+                const emailInput = buscaloyaNewsletterForm.querySelector('input[type="email"]');
+                const email = emailInput.value.trim();
+                if (email) {
+                    showMessageBox(`¡Gracias por suscribirte con ${email} a las noticias de BuscaLoYa!`);
+                    emailInput.value = ''; // Limpiar el campo de entrada
+                } else {
+                    showMessageBox('Por favor, introduce un correo electrónico válido para suscribirte.');
+                }
+            });
+
+            // --- Botón de Volver Arriba (Global) ---
+            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Mostrar botón después de desplazar 300px
+                    scrollToTopBtn.classList.remove('hidden');
+                } else {
+                    scrollToTopBtn.classList.add('hidden');
+                }
+            });
+
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Desplazamiento suave hacia arriba
+                });
+            });
+        });
+    </script>
+</body>
+</html>
