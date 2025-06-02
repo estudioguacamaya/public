@@ -1315,8 +1315,8 @@
                     </div>
                 </section>
 
-                <section class="max-w-6xl mx-auto px-4 mt-12 text-center">
-                    <p class="text-sm text-gray-600 mb-4">Estas tiendas ya forman parte de nuestros aliados</p>
+                <section class="max-w-6xl mx-auto px-4 mt-12">
+                    <p class="text-sm text-center text-gray-600 mb-4">Estas tiendas ya forman parte de nuestros aliados</p>
                     <div class="flex flex-wrap justify-center gap-6 mb-6">
                         <img alt="Logo de la marca Gina rosa sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/bf345a51-6c55-4143-5971-1906566d71e3.jpg" width="96"/>
                         <img alt="Logo de la marca Jafra negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/3471eb15-a893-4232-6ed8-e0946f46a695.jpg" width="96"/>
@@ -1597,7 +1597,7 @@
             </section>
 
             <section class="max-w-[1200px] mx-auto px-4 py-16 bg-gray-100">
-                <img alt="Concepto de activos digitales y blockchain" class="w-full rounded-xl mb-10 shadow-lg" height="300" src="assets/img/logo/logoup.svg" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3';"/>
+                <img alt="Concepto de activos digitales y blockchain" class="w-full rounded-xl mb-10 shadow-lg" height="300" src="https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3';"/>
                 <h3 class="text-center text-3xl font-extrabold mb-4 text-gray-900">
                     Mira lo que dicen nuestros clientes
                 </h3>
@@ -1606,14 +1606,14 @@
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-4 text-center">
-                        <img alt="Foto de perfil de Ana G." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="./assets/img/logo/logoup.svg" width="100"/>
+                        <img alt="Foto de perfil de Ana G." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://storage.googleapis.com/a1aa/image/cb8bdae0-dacc-43d6-01f5-cab03a778e9e.jpg" width="100"/>
                         <p class="text-gray-600 text-base leading-relaxed">
                             "Worldocoin hizo que comprar Worldcoin fuera muy fácil y rápido. ¡Muy recomendable!"
                         </p>
                         <span class="font-semibold text-gray-900 text-sm">Ana G.</span>
                     </div>
                     <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-4 text-center">
-                        <img alt="Foto de perfil de Carlos M." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="./assets/img/logo/logoup.svg" width="100"/>
+                        <img alt="Foto de perfil de Carlos M." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://storage.googleapis.com/a1aa/image/94c8f0db-9a39-4273-a4bb-c926d6558cfd.jpg" width="100"/>
                         <p class="text-gray-600 text-base leading-relaxed">
                             "La plataforma es segura y el soporte siempre está disponible. Me encanta usar Worldocoin."
                         </p>
@@ -1710,7 +1710,7 @@
                 </div>
             </section>
 
-            <section id="contact" class="cta-section bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-16 rounded-xl my-12 shadow-2xl">
+            <section class="cta-section bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-16 rounded-xl my-12 shadow-2xl">
                 <div class="max-w-[1200px] mx-auto px-4 text-center">
                     <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
                         Ofrecemos tipos de cambio muy atractivos, libres de impuestos en todas las transacciones.
@@ -1836,6 +1836,12 @@
             messageBoxClose.addEventListener('click', hideMessageBox);
             messageBoxOverlay.addEventListener('click', hideMessageBox);
 
+            // --- Mobile Menu Toggle ---
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
+            let isMobileMenuOpen = false;
+
             // --- Main Tab Navigation Logic (Marketplace vs. Financiamiento vs. Worldocoin) ---
             const tabMarketplace = document.getElementById('tab-marketplace');
             const tabFinanciamiento = document.getElementById('tab-financiamiento');
@@ -1906,11 +1912,6 @@
             showTab('marketplace');
 
             // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-            let isMobileMenuOpen = false;
-
             if (mobileMenuButton) {
                 mobileMenuButton.addEventListener('click', () => {
                     if (isMobileMenuOpen) {
