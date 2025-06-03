@@ -1,322 +1,51 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>BuscaLoYa - Tu Plataforma Integrada</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts for Montserrat and Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
-    <style>
-        /* Base font for the entire body (Montserrat from casiopt.html) */
-        body {
-            font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll due to animations or minor layout shifts */
-            background-color: #f3f4f6; /* bg-gray-100 from casiopt.html */
-            color: #1f2937; /* text-gray-900 from casiopt.html */
-        }
-
-        /* Common transition and hover effects (from casiopt.html) */
-        .transition-all {
-            transition-property: all;
-            transition-duration: 300ms;
-            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .card-hover-effect:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-        .scale-up-hover:hover {
-            transform: scale(1.03);
-        }
-
-        /* Fade-in animation for elements appearing on scroll or load (from casiopt.html) */
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        /* Slide down animation for elements (from original bitrefil+rapi+mlire.html, kept for general use) */
-        .slide-down {
-            animation: slideDown 0.3s ease-out;
-        }
-        @keyframes slideDown {
-            from { transform: translateY(-10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        /* Slide up animation for elements (from original bitrefil+rapi+mlire.html, kept for general use) */
-        .slide-up {
-            animation: slideUp 0.3s ease-out;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        /* Slide in from right for tab content (from original bitrefil+rapi+mlire.html, kept for consistency) */
-        .slide-in-right {
-            animation: slideInRight 0.5s ease-out forwards;
-        }
-        @keyframes slideInRight {
-            from { transform: translateX(20px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* Mobile menu slide animations (from casiopt.html) */
-        #mobile-menu.slide-down-menu {
-            animation: slideDownMenu 0.3s ease-out forwards;
-        }
-        #mobile-menu.slide-up-menu {
-            animation: slideUpMenu 0.3s ease-in forwards; /* Changed to ease-in for smoother hide */
-        }
-        @keyframes slideDownMenu {
-            from { transform: translateY(-100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes slideUpMenu {
-            from { transform: translateY(0); opacity: 1; }
-            to { transform: translateY(-100%); opacity: 0; }
-        }
-
-        /* Hide scrollbar for horizontal scroll containers (e.g., carousels) */
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none; /* IE and Edge */
-            scrollbar-width: none; /* Firefox */
-        }
-
-        /* Custom message box styles (from casiopt.html) */
-        .message-box {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.75rem; /* rounded-xl */
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* shadow-xl */
-            z-index: 1000;
-            text-align: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-            min-width: 280px; /* Ensure it's not too small on mobile */
-            max-width: 90%; /* Prevent overflow on very small screens */
-        }
-        .message-box.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        .message-box-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-        }
-        .message-box-overlay.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* Bounce animation for main title (from casiopt.html) */
-        .animate-bounce-custom {
-            animation: bounce-custom 1s infinite;
-        }
-        @keyframes bounce-custom {
-            0%, 100% {
-                transform: translateY(-5%);
-                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-            }
-            50% {
-                transform: translateY(0);
-                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-            }
-        }
-
-        /* Loader styles (from casiopt.html) */
-        #loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            transition: opacity 0.5s ease-out;
-        }
-        .loader {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #FFD700; /* Yellow */
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 2s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Worldocoin Section Specific Styles (adapted to casiopt.html palette) */
-        .worldocoin-section {
-            font-family: 'Inter', sans-serif; /* Keep Inter font for Worldocoin sections */
-            background-color: #f3f4f6; /* bg-gray-100 */
-            color: #1f2937; /* text-gray-900 */
-        }
-        .worldocoin-section .main-btn {
-            background-image: linear-gradient(to right, #f59e0b, #d97706); /* Yellow-orange gradient */
-            color: white;
-            font-weight: 600;
-            padding: 1rem 2rem;
-            border-radius: 9999px;
-            transition: all 0.3s ease;
-        }
-        .worldocoin-section .main-btn:hover {
-            transform: scale(1.05);
-            background-image: linear-gradient(to right, #d97706, #b45309); /* Darker yellow-orange gradient on hover */
-        }
-        .worldocoin-section .crypto-logo {
-            filter: none; /* No grayscale needed for light theme */
-            opacity: 1;
-            transition: all 0.3s ease;
-        }
-        .worldocoin-section .crypto-logo:hover {
-            transform: scale(1.05);
-        }
-        .worldocoin-section .how-to-buy-card,
-        .worldocoin-section .country-card,
-        .worldocoin-section .testimonial-card,
-        .worldocoin-section .help-card {
-            background-color: #ffffff; /* White background for cards */
-            border: 1px solid #e5e7eb; /* Light gray border */
-            color: #4b5563; /* text-gray-600 */
-        }
-        .worldocoin-section .how-to-buy-card h3,
-        .worldocoin-section .country-card span,
-        .worldocoin-section .testimonial-card span,
-        .worldocoin-section .help-card h4 {
-            color: #1f2937; /* text-gray-900 */
-        }
-        .worldocoin-section .why-best-icon-bg {
-            background-color: #e5e7eb; /* bg-gray-200 */
-            color: #f59e0b; /* yellow-500 */
-        }
-        .worldocoin-section .why-best-text {
-            color: #1f2937; /* text-gray-900 */
-        }
-        .worldocoin-section .why-best-label {
-            color: #4b5563; /* text-gray-600 */
-        }
-        .worldocoin-section .faq-item {
-            background-color: #ffffff; /* White background for FAQ */
-            border: 1px solid #e5e7eb; /* Light border */
-            color: #1f2937; /* text-gray-900 for summary */
-        }
-        .worldocoin-section .faq-item p {
-            color: #4b5563; /* text-gray-600 for answer */
-        }
-        .worldocoin-section .faq-item .fa-chevron-down {
-            color: #4b5563; /* text-gray-600 */
-        }
-        .worldocoin-section .cta-section {
-            background-image: linear-gradient(to right, #f59e0b, #d97706); /* Yellow-orange gradient */
-        }
-        .worldocoin-section .cta-section a {
-            color: #f59e0b; /* yellow-500 for button text */
-        }
-        .worldocoin-section .cta-section a:hover {
-            background-color: #f3f4f6; /* bg-gray-100 on hover */
-        }
-        .worldocoin-section footer {
-            background-color: #1f2937; /* bg-gray-900 */
-            border-top: 1px solid #374151; /* Darker gray border */
-            color: #9ca3af; /* text-gray-400 */
-        }
-        .worldocoin-section footer h5 {
-            color: #ffffff; /* White headings */
-        }
-        .worldocoin-section footer a {
-            color: #9ca3af; /* text-gray-400 */
-        }
-        .worldocoin-section footer a:hover {
-            color: #f59e0b; /* yellow-500 on hover */
-        }
-        .worldocoin-section .footer-logo {
-            filter: none; /* No filter for logo on light background */
-        }
-        /* Custom styles for the map iframe to ensure responsiveness */
-        .map-container {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-            height: 0;
-            overflow: hidden;
-            border-radius: 0.5rem; /* rounded-lg */
-        }
-        .map-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        /* Cookie banner specific styles (from casiopt.html) */
-        #cookie-banner {
-            background-color: #ffffff;
-            border: 1px solid #e5e7eb;
-            color: #1f2937;
-        }
-        #cookie-banner button {
-            transition: background-color 0.3s ease;
-        }
-        #cookie-banner #view-cookies-btn {
-            border: 1px solid #e5e7eb;
-            color: #4b5563;
-        }
-        #cookie-banner #view-cookies-btn:hover {
-            background-color: #f3f4f6;
-        }
-        #cookie-banner #accept-cookies-btn {
-            background-color: #f59e0b; /* yellow-500 */
-            color: white;
-        }
-        #cookie-banner #accept-cookies-btn:hover {
-            background-color: #d97706; /* yellow-600 */
-        }
-    </style>
+    <!-- Custom Stylesheet -->
+    <link href="style.css" rel="stylesheet"/>
 </head>
 <body class="bg-gray-100 text-gray-900">
 
-    <div id="loader-overlay">
+    <!-- Loader Overlay -->
+    <div id="loader-overlay" class="hidden">
         <div class="loader"></div>
     </div>
 
+    <!-- Message Box and Overlay -->
+    <div id="message-box-overlay" class="message-box-overlay"></div>
+    <div id="message-box" class="message-box">
+        <p id="message-box-text" class="text-gray-800 text-lg mb-4"></p>
+        <button id="message-box-close" class="bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md hover:bg-yellow-600 transition-colors">
+            Cerrar
+        </button>
+    </div>
+
+    <!-- Top Banner -->
     <div class="bg-yellow-400 text-gray-900 text-center text-xs sm:text-sm py-1 px-2 rounded-b-lg shadow-sm">
         <span>
             🌟 ¡Descubre nuestras últimas ofertas y promociones exclusivas!
-            <a class="underline font-semibold hover:text-white transition-colors" href="#" onclick="showMessageBox('Redirigiendo a promociones...')">Ver más</a>
+            <a class="underline font-semibold hover:text-white transition-colors" href="#" id="promo-link">Ver más</a>
         </span>
     </div>
 
-    <header class="bg-white shadow-md py-3 px-4 rounded-b-xl max-w-7xl mx-auto border-b border-gray-200">
+    <!-- Header / Main Navigation -->
+    <header class="bg-white shadow-md py-3 px-4 rounded-b-xl max-w-7xl mx-auto border-b border-gray-200 relative z-50">
         <div class="flex items-center justify-between">
-            <a class="flex items-center space-x-2 transition-opacity hover:opacity-80" href="#" onclick="showMessageBox('Volviendo al inicio de BuscaLoYa...')">
+            <a class="flex items-center space-x-2 transition-opacity hover:opacity-80" href="#" id="logo-home-link">
                 <img alt="Logo de BuscaLoYa, mano azul sosteniendo un círculo amarillo" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/dc99515c-f140-468c-7bbe-d6aa9ff1ff22.jpg" width="32"/>
                 <span class="text-2xl font-bold text-gray-800">BuscaLoYa</span>
             </a>
+            <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-2 bg-gray-100 rounded-full p-1 shadow-inner">
                 <button id="tab-marketplace" class="tab-main-button bg-yellow-600 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-700 transition-colors">
                     <i class="fas fa-shopping-bag mr-2"></i> Compra y Venta
@@ -324,51 +53,72 @@
                 <button id="tab-financiamiento" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
                     <i class="fas fa-wallet mr-2"></i> Financiamiento
                 </button>
-                <button id="tab-worldocoin" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                <button id="tab-worldcoin" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
                     <i class="fas fa-globe mr-2"></i> Worldcoin
+                </button>
+                <button id="tab-prepaid-services" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-gift mr-2"></i> Prepagos
                 </button>
             </nav>
             <div class="hidden md:flex items-center space-x-4">
-                <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors" onclick="showMessageBox('¡Preparando tu anuncio para publicar!')">
+                <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors" id="publish-ad-desktop-btn">
                     <i class="fas fa-plus mr-1"></i> Publicar anuncio
                 </button>
-                <button class="text-gray-700 hover:text-yellow-600 focus:outline-none transition-colors rounded-full p-2" onclick="showMessageBox('Accediendo a tu cuenta...')">
+                <button class="text-gray-700 hover:text-yellow-600 focus:outline-none transition-colors rounded-full p-2" id="my-account-desktop-btn">
                     <i class="far fa-user fa-lg"></i>
                 </button>
             </div>
+            <!-- Mobile Menu Button (Hamburger) -->
             <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="md:hidden text-gray-700 hover:text-gray-900 transition-colors rounded-full p-2">
                 <i class="fas fa-bars text-xl" id="mobile-menu-icon"></i>
             </button>
         </div>
     </header>
 
-    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 absolute w-full -translate-y-full z-40 rounded-b-xl">
-        <div class="flex justify-center space-x-2 mb-4">
-            <button id="mobile-nav-marketplace" class="tab-main-button bg-yellow-600 text-white px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-700 transition-colors">
-                <i class="fas fa-shopping-bag mr-2"></i> Compra y Venta
-            </button>
-            <button id="mobile-nav-financiamiento" class="tab-main-button bg-white text-gray-800 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
-                <i class="fas fa-wallet mr-2"></i> Financiamiento
-            </button>
-            <button id="mobile-nav-worldocoin" class="tab-main-button bg-white text-gray-800 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
-                <i class="fas fa-globe mr-2"></i> Worldcoin
-            </button>
-        </div>
-        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md mx-2" href="#" onclick="showMessageBox('Navegando a Inicio...')">Inicio</a>
-        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md mx-2" href="#buscaloya-section" onclick="showMessageBox('Navegando a BuscaLoYa...')">BuscaLoYa</a>
-        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md mx-2" href="#" onclick="showMessageBox('Preparando para vender...')">Vender</a>
-        <a class="block px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md mx-2" href="#" onclick="showMessageBox('Cargando centro de ayuda...')">Ayuda</a>
-        <hr class="my-2 border-gray-200 mx-2">
-        <button class="block w-full text-left bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors mx-auto mt-2" onclick="showMessageBox('¡Preparando tu anuncio para publicar!')">
-            <i class="fas fa-plus mr-1"></i> Publicar anuncio
+    <!-- Mobile-only main navigation buttons (visible outside menu) -->
+    <div class="md:hidden relative flex justify-start items-center space-x-2 sm:space-x-4 px-4 py-3 bg-gray-100 rounded-b-xl shadow-sm overflow-x-auto hide-scrollbar scroll-hint-right z-30">
+        <button id="mobile-main-nav-marketplace" class="tab-main-button flex-shrink-0 bg-yellow-600 text-white text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-700 transition-colors">
+            <i class="fas fa-shopping-bag mr-1"></i> Compra y Venta
         </button>
-        <button class="block w-full text-left text-gray-700 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors mt-2" onclick="showMessageBox('Accediendo a tu cuenta...')">
-            <i class="far fa-user mr-2"></i> Mi cuenta
+        <button id="mobile-main-nav-financiamiento" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-wallet mr-1"></i> Financiamiento
         </button>
+        <button id="mobile-main-nav-worldcoin" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-globe mr-1"></i> Worldcoin
+        </button>
+        <button id="mobile-main-nav-prepaid-services" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-gift mr-1"></i> Prepagos
+        </button>
+        <!-- Scroll indicator for mobile -->
+        <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-gray-100 to-transparent pointer-events-none"></div>
     </div>
 
+    <!-- Mobile menu (hidden by default, toggled by button) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 fixed w-full top-0 left-0 h-full overflow-y-auto -translate-y-full z-40 rounded-b-xl">
+        <div class="flex justify-end px-4 pt-2">
+            <button id="close-mobile-menu-button" aria-label="Close mobile menu" class="text-gray-700 hover:text-gray-900 transition-colors rounded-full p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-start px-4 space-y-2 mt-4">
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-home-link">Inicio</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#buscaloya-section" id="mobile-buscaloya-link">BuscaLoYa</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-sell-link">Vender</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-help-link">Ayuda</a>
+            <hr class="my-2 border-gray-200 w-full">
+            <button class="block w-full text-left bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors" id="mobile-publish-ad-btn">
+                <i class="fas fa-plus mr-1"></i> Publicar anuncio
+            </button>
+            <button class="block w-full text-left text-gray-700 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors" id="mobile-my-account-btn">
+                <i class="far fa-user mr-2"></i> Mi cuenta
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area (Tabs) -->
     <main class="max-w-7xl mx-auto px-4 py-8">
 
+        <!-- Marketplace Section -->
         <div id="content-marketplace" class="content-section active fade-in">
             <section class="text-center py-12 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg mb-12">
                 <h1 class="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 animate-bounce-custom">
@@ -378,10 +128,10 @@
                     Tu plataforma todo en uno para compras, ventas y más.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
-                    <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" onclick="showMessageBox('Redirigiendo a la sección de compras...')">
+                    <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="buy-now-btn">
                         <i class="fas fa-shopping-cart mr-2"></i> Comprar ahora
                     </a>
-                    <a href="#" class="bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-900 transition-all scale-up-hover" onclick="showMessageBox('Iniciando proceso para publicar gratis...')">
+                    <a href="#" class="bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-900 transition-all scale-up-hover" id="publish-free-btn">
                         <i class="fas fa-plus mr-2"></i> Publicar gratis
                     </a>
                 </div>
@@ -457,37 +207,37 @@
             <section class="mb-12">
                 <h2 class="text-2xl font-bold text-center mb-6">Explora por Categorías</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Vehículos...')">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Vehículos...">
                         <div class="bg-blue-100 rounded-full p-3 mb-3">
                             <i class="fas fa-car text-blue-600 text-2xl"></i>
                         </div>
                         <span class="font-semibold text-gray-700">Vehículos</span>
                     </a>
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Inmuebles...')">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Inmuebles...">
                         <div class="bg-green-100 rounded-full p-3 mb-3">
                             <i class="fas fa-home text-green-600 text-2xl"></i>
                         </div>
                         <span class="font-semibold text-gray-700">Inmuebles</span>
                     </a>
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Empleo...')">
+                    <a href="#" class="bg-purple-100 p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Empleo...">
                         <div class="bg-purple-100 rounded-full p-3 mb-3">
                             <i class="fas fa-briefcase text-purple-600 text-2xl"></i>
                         </div>
                         <span class="font-semibold text-gray-700">Empleo</span>
                     </a>
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Electrónica...')">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Electrónica...">
                         <div class="bg-red-100 rounded-full p-3 mb-3">
                             <i class="fas fa-laptop text-red-600 text-2xl"></i>
                         </div>
                         <span class="font-semibold text-gray-700">Electrónica</span>
                     </a>
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Moda...')">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Moda...">
                         <div class="bg-yellow-100 rounded-full p-3 mb-3">
                             <i class="fas fa-tshirt text-yellow-600 text-2xl"></i>
                         </div>
                         <span class="font-semibold text-gray-700">Moda</span>
                     </a>
-                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect" onclick="showMessageBox('Navegando a la categoría de Hogar & Jardín...')">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Hogar & Jardín...">
                         <div class="bg-indigo-100 rounded-full p-3 mb-3">
                             <i class="fas fa-seedling text-indigo-600 text-2xl"></i>
                         </div>
@@ -501,7 +251,7 @@
                     <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
                         <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
                         <h3 class="font-bold text-sm sm:text-base mb-2">ARTÍCULOS DE PAPELERÍA PARA TU CASA Y OFICINA</h3>
-                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#" onclick="showMessageBox('Redirigiendo a artículos de papelería...')">Ver más</a>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a artículos de papelería..." href="#">Ver más</a>
                     </div>
                     <img alt="Caja de marcadores de colores sobre un fondo degradado azul y rosa" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/88fe343c-bc62-4d91-7383-d0d4f974b8bb.jpg" width="300"/>
                 </article>
@@ -509,7 +259,7 @@
                     <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
                         <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
                         <h3 class="font-bold text-sm sm:text-base mb-2">ENCUENTRA TU NUEVO SMARTPHONE</h3>
-                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#" onclick="showMessageBox('Redirigiendo a smartphones...')">Ver más</a>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a smartphones..." href="#">Ver más</a>
                     </div>
                     <img alt="Smartphone sobre fondo azul con efectos de luz" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/01a83626-20c6-4408-638d-c5ab3567c3d4.jpg" width="300"/>
                 </article>
@@ -517,7 +267,7 @@
                     <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
                         <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
                         <h3 class="font-bold text-sm sm:text-base mb-2">¡LO MEJOR EN ILUMINACIÓN!</h3>
-                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#" onclick="showMessageBox('Redirigiendo a iluminación...')">Ver más</a>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a iluminación..." href="#">Ver más</a>
                     </div>
                     <img alt="Tira de luz de neón azul sobre fondo oscuro" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/af810ea3-28b3-45a2-babe-2b1bb65fbb03.jpg" width="300"/>
                 </article>
@@ -525,7 +275,7 @@
                     <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
                         <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
                         <h3 class="font-bold text-sm sm:text-base mb-2">IMPRESORAS, TÓNERS Y MUCHO MÁS</h3>
-                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors" href="#" onclick="showMessageBox('Redirigiendo a impresoras...')">Ver más</a>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a impresoras..." href="#">Ver más</a>
                     </div>
                     <img alt="Impresora con cartucho de tóner sobre fondo blanco" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/74d8b59a-35ca-4aef-2b09-00b82efc5a4f.jpg" width="300"/>
                 </article>
@@ -579,7 +329,7 @@
                         <img alt="Miniatura de oso de peluche" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Oso" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Oso" width="40"/>
                         <img alt="Miniatura de bloques de construcción" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Bloques" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Bloques" width="40"/>
                         <img alt="Miniatura de muñeca" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Mu%C3%B1eca" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Mu%C3%B1eca" width="40"/>
-                        <img alt="Miniatura de juego de mesa" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Juego" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Juego" width="40"/>
+                        <img alt="Miniatura de cómic" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" width="40"/>
                     </div>
                 </article>
                 <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
@@ -600,7 +350,7 @@
                 </h3>
                 <div id="inmuebles-carousel" class="overflow-x-auto hide-scrollbar pb-4">
                     <div class="flex space-x-4">
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Zulia" data-search-term="Casa en Alquiler Urb. El Paraíso 2H 1B Maracaibo">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Zulia" data-search-term="Casa en Alquiler Urb. El Paraíso 2H 1B Maracaibo">
                             <div class="relative">
                                 <img alt="Casa con reja gris en exterior con vegetación" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/d33fe517-0ec8-43b9-c315-521c6107df71.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -628,12 +378,12 @@
                                         <span>1</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Casa en Alquiler Urb. El Paraíso...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Casa en Alquiler Urb. El Paraíso...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Carabobo" data-search-term="Casa en Venta Urb. El Trigal Valencia">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Carabobo" data-search-term="Casa en Venta Urb. El Trigal Valencia">
                             <div class="relative">
                                 <img alt="Casa con reja de madera en exterior" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/22d6efc7-243f-4a4e-0986-deb55009127b.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -650,12 +400,12 @@
                                 <div class="flex justify-end mt-2">
                                     <img alt="Logo inmobiliaria" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/5da88364-73dd-4540-1bff-09458e984d5e.jpg" width="40"/>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Casa en Venta Urb. El Trigal...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Casa en Venta Urb. El Trigal...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento Vista al Mar, Torre 4 Puerto La Cruz">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento Vista al Mar, Torre 4 Puerto La Cruz">
                             <div class="relative">
                                 <img alt="Edificios altos de departamentos" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/9d3a4324-ce48-466b-c5fe-89c1fe243b51.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -686,12 +436,12 @@
                                 <div class="flex justify-end mt-2">
                                     <img alt="Logo DCIGSA" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/6a6c123e-3e95-43fb-2223-5e64c80ec56a.jpg" width="40"/>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Apartamento Vista al Mar...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Apartamento Vista al Mar...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Mérida" data-search-term="Amplio Apartamento en Venta Cerca de Av. Las Américas 2H +2B+1E Mérida">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Mérida" data-search-term="Amplio Apartamento en Venta Cerca de Av. Las Américas 2H +2B+1E Mérida">
                             <div class="relative">
                                 <img alt="Jardín con edificios de departamentos al fondo" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/8d51dc69-5f89-4637-17a8-4f8621016c31.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -719,7 +469,7 @@
                                         <span>1</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Amplio Apartamento en Venta...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Amplio Apartamento en Venta...">
                                     Contactar ahora
                                 </button>
                                 <div class="absolute top-3 right-20 bg-[#ff6a00] text-white text-xs rounded-full px-2 py-0.5 font-semibold select-none cursor-default">
@@ -730,7 +480,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento de Lujo en Residencias Palm Beach Lechería">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento de Lujo en Residencias Palm Beach Lechería">
                             <div class="relative">
                                 <img alt="Apartamento moderno con vista a la ciudad" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/A0D9B1/000000?text=Apartamento+Moderno" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -758,12 +508,12 @@
                                         <span>3</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Apartamento de Lujo...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Apartamento de Lujo...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Inmuebles" data-location="Falcón" data-search-term="Gran Terreno Urbano en Venta Sector Las Calderas Coro">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Falcón" data-search-term="Gran Terreno Urbano en Venta Sector Las Calderas Coro">
                             <div class="relative">
                                 <img alt="Terreno para desarrollo urbano" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/B0E0E6/000000?text=Terreno+Urbano" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -783,7 +533,7 @@
                                         <span>500 m²</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Gran Terreno Urbano...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Gran Terreno Urbano...">
                                     Contactar ahora
                                 </button>
                             </div>
@@ -802,7 +552,7 @@
                 <h4 class="text-xl sm:text-2xl font-bold mb-4">Productos Destacados de Vehículos</h4>
                 <div id="autos-carousel" class="overflow-x-auto hide-scrollbar pb-4">
                     <div class="flex space-x-4">
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Lara" data-search-term="Peugeot Partner Barquisimeto">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Lara" data-search-term="Peugeot Partner Barquisimeto">
                             <div class="relative">
                                 <img alt="Auto blanco vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/697b42dc-8a60-458f-ffd3-e02503cf2a40.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -834,7 +584,7 @@
                                         <span>121681 km</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Peugeot Partner...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Peugeot Partner...">
                                     Contactar ahora
                                 </button>
                                 <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
@@ -842,7 +592,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Táchira" data-search-term="Ford F-150 San Cristóbal">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Táchira" data-search-term="Ford F-150 San Cristóbal">
                             <div class="relative">
                                 <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -870,7 +620,7 @@
                                         <span>Automático</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Ford F-150...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Ford F-150...">
                                     Contactar ahora
                                 </button>
                                 <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
@@ -878,7 +628,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Bolívar" data-search-term="Skoda YETI Ciudad Bolívar">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Bolívar" data-search-term="Skoda YETI Ciudad Bolívar">
                             <div class="relative">
                                 <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -910,7 +660,7 @@
                                         <span>155000 km</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Skoda YETI...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Skoda YETI...">
                                     Contactar ahora
                                 </button>
                                 <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
@@ -918,7 +668,7 @@
                                 </div>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Nueva Esparta" data-search-term="Hyundai ACCENT Porlamar">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Nueva Esparta" data-search-term="Hyundai ACCENT Porlamar">
                             <div class="relative">
                                 <img alt="Auto gris vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/7a3a73f5-20a2-4dab-236c-b5c8b413e1c0.jpg" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -950,12 +700,12 @@
                                         <span>200000 km</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Hyundai ACCENT...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Hyundai ACCENT...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Bolívar" data-search-term="Toyota Hilux 4x4 Puerto Ordaz">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Bolívar" data-search-term="Toyota Hilux 4x4 Puerto Ordaz">
                             <div class="relative">
                                 <img alt="Camioneta 4x4 robusta" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/6C7A89/FFFFFF?text=Camioneta+4x4" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -983,12 +733,12 @@
                                         <span>Automático</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Toyota Hilux 4x4...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Toyota Hilux 4x4...">
                                     Contactar ahora
                                 </button>
                             </div>
                         </article>
-                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect" data-category="Vehículos" data-location="Falcón" data-search-term="Kawasaki Ninja 400 Punto Fijo">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Falcón" data-search-term="Kawasaki Ninja 400 Punto Fijo">
                             <div class="relative">
                                 <img alt="Moto deportiva roja" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/FF0000/FFFFFF?text=Moto+Deportiva" width="288"/>
                                 <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
@@ -1016,7 +766,7 @@
                                         <span>Manual</span>
                                     </div>
                                 </div>
-                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" onclick="showMessageBox('Contactando por Kawasaki Ninja 400...')">
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Kawasaki Ninja 400...">
                                     Contactar ahora
                                 </button>
                             </div>
@@ -1039,7 +789,7 @@
                 <p class="text-lg mb-8">
                     Publica tus anuncios de forma rápida y gratuita. ¡Miles de compradores te esperan!
                 </p>
-                <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" onclick="showMessageBox('Iniciando proceso para publicar tu anuncio...')">
+                <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="sell-now-btn">
                     <i class="fas fa-bullhorn mr-2"></i> Publicar anuncio ahora
                 </a>
             </section>
@@ -1113,42 +863,43 @@
             </section>
         </div>
 
+        <!-- Financing Section -->
         <div id="content-financiamiento" class="content-section hidden">
             <section id="financiamiento-section" class="max-w-7xl mx-auto px-4 py-6 bg-gray-50 rounded-xl shadow-lg mb-12">
                 <h2 class="text-center font-bold text-xl md:text-2xl mb-6 text-blue-700">
                     Financiamiento BuscaLoYa: Compra Hoy, Paga Después
                 </h2>
 
-                <section class="bg-black relative max-w-7xl mx-auto mt-6 rounded-xl overflow-hidden shadow-lg py-8">
+                <section class="bg-gray-900 relative max-w-7xl mx-auto mt-6 rounded-xl overflow-hidden shadow-lg py-8">
                     <div class="text-white text-center font-bold text-2xl mb-4">Únete al club BuscaLoYa y obtén más.</div>
                     <div id="club-buscaloya-carousel" class="relative flex justify-center items-center h-24">
                         <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
                             <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
-                                <div class="w-16 h-16 rounded-full bg-[#7ED6F0] flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Acceso a ofertas exclusivas.')">
-                                    <img alt="Icono abstracto azul" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/2433e24e-1bbc-4a09-c93a-b1dba777e6b7.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-blue-300 flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Acceso a ofertas exclusivas.">
+                                    <i class="fas fa-tags text-blue-800 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#E9A9F7] flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Pagos flexibles y sin intereses.')">
-                                    <img alt="Icono abstracto rosa" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/660a2ed7-b643-4d74-7385-330f8593997c.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-purple-300 flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Pagos flexibles y sin intereses.">
+                                    <i class="fas fa-hand-holding-usd text-purple-800 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#A3D55B] flex items-center justify-center shadow-[0_0_15px_#A3D55B] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Soporte prioritario 24/7.')">
-                                    <img alt="Icono de hoja verde" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/5f71c50f-3d8e-49d5-b86b-aa9ba148c50c.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-green-300 flex items-center justify-center shadow-[0_0_15px_#A3D55B] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Soporte prioritario 24/7.">
+                                    <i class="fas fa-headset text-green-800 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#F9A14B] flex items-center justify-center shadow-[0_0_15px_#F9A14B] hover:scale-105 transition-transform cursor-pointer hidden sm:flex" onclick="showMessageBox('Beneficio: Recompensas exclusivas para miembros.')">
-                                    <img alt="Icono de línea naranja" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/7684377a-7ca1-452b-239e-311b6a192563.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-orange-300 flex items-center justify-center shadow-[0_0_15px_#F9A14B] hover:scale-105 transition-transform cursor-pointer hidden sm:flex club-benefit-icon" data-message="Beneficio: Recompensas exclusivas para miembros.">
+                                    <i class="fas fa-trophy text-orange-800 text-2xl"></i>
                                 </div>
                             </div>
                             <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
-                                <div class="w-16 h-16 rounded-full bg-[#3B3B3B] flex items-center justify-center shadow-[0_0_15px_#3B3B3B] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Acceso anticipado a ventas.')">
-                                    <img alt="Icono de club negro" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/0dd681a0-f97b-44c1-89df-7c88cd27dac0.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-gray-600 flex items-center justify-center shadow-[0_0_15px_#3B3B3B] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Acceso anticipado a ventas.">
+                                    <i class="fas fa-calendar-alt text-gray-200 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#FFED00] flex items-center justify-center shadow-[0_0_15px_#FFED00] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Puntos dobles en tus compras.')">
-                                    <img alt="Icono de árbol amarillo" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/6b2b15d2-1c16-416f-d71d-711938beaa0c.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center shadow-[0_0_15px_#FFED00] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Puntos dobles en tus compras.">
+                                    <i class="fas fa-coins text-yellow-800 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#7ED6F0] flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer" onclick="showMessageBox('Beneficio: Envío express gratuito.')">
-                                    <img alt="Icono abstracto azul" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/2433e24e-1bbc-4a09-c93a-b1dba777e6b7.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-blue-300 flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Envío express gratuito.">
+                                    <i class="fas fa-truck text-blue-800 text-2xl"></i>
                                 </div>
-                                <div class="w-16 h-16 rounded-full bg-[#E9A9F7] flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer hidden sm:flex" onclick="showMessageBox('Beneficio: Acceso a eventos exclusivos.')">
-                                    <img alt="Icono abstracto rosa" class="w-8 h-8" height="24" src="https://storage.googleapis.com/a1aa/image/660a2ed7-b643-4d74-7385-330f8593997c.jpg" width="24"/>
+                                <div class="w-16 h-16 rounded-full bg-purple-300 flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer hidden sm:flex club-benefit-icon" data-message="Beneficio: Acceso a eventos exclusivos.">
+                                    <i class="fas fa-ticket-alt text-purple-800 text-2xl"></i>
                                 </div>
                             </div>
                         </div>
@@ -1172,21 +923,21 @@
                         Es una alternativa de compra accesible para que te lleves lo que necesitas hoy
                     </h2>
                     <div class="mt-8 flex flex-col sm:flex-row justify-center gap-6">
-                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: El pago lo divides en cuotas y pagas solo el producto">
                             <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
                                 <i class="fas fa-credit-card text-2xl"></i>
                             </div>
                             <h3 class="font-semibold text-base mb-2">Pago en cuotas</h3>
                             <p class="text-sm text-gray-600">El pago lo divides en cuotas y pagas solo el producto</p>
                         </div>
-                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: Compra sin intereses en más de 2.000 comercios">
                             <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
                                 <i class="fas fa-percent text-2xl"></i>
                             </div>
                             <h3 class="font-semibold text-base mb-2">Sin intereses</h3>
                             <p class="text-sm text-gray-600">Compra sin intereses en más de 2.000 comercios</p>
                         </div>
-                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect">
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: Compra seguro y paga hoy, paga con tu tiempo">
                             <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
                                 <i class="fas fa-shield-alt text-2xl"></i>
                             </div>
@@ -1200,63 +951,63 @@
                     <p class="text-sm text-center text-gray-600 mb-2">Con más de 300 aliados y 3500 comercios en Venezuela</p>
                     <h3 class="font-bold text-2xl text-center mb-6">Con BuscaLoYa obtén al instante eso que necesitas</h3>
                     <div class="flex justify-center mb-6">
-                        <button id="buscaloya-view-all-stores-button" class="bg-black text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button" onclick="showMessageBox('Cargando todas las tiendas aliadas...')">Ver todas las tiendas</button>
+                        <button id="buscaloya-view-all-stores-button" class="bg-gray-900 text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button">Ver todas las tiendas</button>
                     </div>
                     <div class="relative">
                         <div id="buscaloya-products-carousel" class="flex overflow-x-auto hide-scrollbar space-x-4 pb-6 px-2 sm:px-0">
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#C9E9FF" onclick="showMessageBox('Navegando a productos de Tecnología...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Tecnología...">
                                 <img alt="Smartphone negro sobre fondo azul claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/93036a75-b2f5-432e-d951-f9551191687f.jpg" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Tecnología</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Tecnología</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Smartphones de última generación</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos de Tecnología...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Smartphones de última generación</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Tecnología..." href="#">Ver todos</a>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#D6F0E4" onclick="showMessageBox('Navegando a productos de Moda...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Moda...">
                                 <img alt="Suéter naranja sobre fondo verde claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/2bd03bff-6428-409f-2ab0-656dfc09a77d.jpg" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Moda</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Moda</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Tendencias en ropa y accesorios</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos de Moda...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Tendencias en ropa y accesorios</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Moda..." href="#">Ver todos</a>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#C9B9E6" onclick="showMessageBox('Navegando a productos de Zapatos...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Zapatos...">
                                 <img alt="Zapatilla roja sobre fondo morado claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/418470e8-fa60-459b-5a7f-c3692f37501c.jpg" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Zapatos</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Zapatos</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Calzado para cada ocasión</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos de Zapatos...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Calzado para cada ocasión</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Zapatos..." href="#">Ver todos</a>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#FFFB9E" onclick="showMessageBox('Navegando a productos Departamentales...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos Departamentales...">
                                 <img alt="Lavadora blanca sobre fondo amarillo pálido" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/34026907-735e-4969-aa4c-754e2ea40e56.jpg" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Departamental</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Departamental</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Artículos para el hogar y más</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos Departamentales...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Artículos para el hogar y más</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos Departamentales..." href="#">Ver todos</a>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#D9D9D9" onclick="showMessageBox('Navegando a productos de Hogar...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Hogar...">
                                 <img alt="Sillón azul sobre fondo gris claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/b074b007-3b96-436a-1b6a-20f228061b4f.jpg" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Hogar</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Hogar</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Muebles y decoración</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos de Hogar...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Muebles y decoración</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Hogar..." href="#">Ver todos</a>
                                 </div>
                             </div>
-                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all" style="background-color:#F0E68C" onclick="showMessageBox('Navegando a productos de Gaming...')">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Gaming...">
                                 <img alt="Consola de videojuegos sobre fondo amarillo" class="w-full h-40 object-cover" height="144" src="https://placehold.co/144x144/F0E68C/000000?text=Gaming" width="144"/>
-                                <div class="text-xs font-semibold text-black bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Gaming</div>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Gaming</div>
                                 <div class="p-3">
-                                    <p class="text-sm font-semibold text-black">Consolas y videojuegos</p>
-                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block" href="#" onclick="showMessageBox('Ver todos los productos de Gaming...')">Ver todos</a>
+                                    <p class="text-sm font-semibold text-gray-900">Consolas y videojuegos</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Gaming..." href="#">Ver todos</a>
                                 </div>
                             </div>
                         </div>
-                        <button aria-label="Producto anterior" data-target="buscaloya-products-carousel" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-black rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                        <button aria-label="Producto anterior" data-target="buscaloya-products-carousel" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
                             <i class="fas fa-chevron-left"></i>
                         </button>
-                        <button aria-label="Siguiente producto" data-target="buscaloya-products-carousel" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-black rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                        <button aria-label="Siguiente producto" data-target="buscaloya-products-carousel" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
                             <i class="fas fa-chevron-right"></i>
                         </button>
                     </div>
@@ -1265,15 +1016,15 @@
                 <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto w-full flex flex-col items-center">
                         <div class="flex items-center space-x-4 mb-4">
-                            <button class="buscaloya-tab-button bg-black text-white text-sm rounded-full px-4 py-1 shadow-md hover:bg-gray-800 transition-colors" type="button" data-tab="principal" onclick="showMessageBox('Cambiando a la vista principal de crédito...')">Principal</button>
-                            <button class="buscaloya-tab-button text-sm text-gray-400 border border-gray-300 rounded-full px-4 py-1 hover:border-black hover:text-black transition-colors" type="button" data-tab="credito" onclick="showMessageBox('Cambiando a la vista de crédito extendido...')">Crédito</button>
+                            <button class="buscaloya-tab-button bg-gray-900 text-white text-sm rounded-full px-4 py-1 shadow-md hover:bg-gray-800 transition-colors" type="button" data-tab="principal">Principal</button>
+                            <button class="buscaloya-tab-button text-sm text-gray-400 border border-gray-300 rounded-full px-4 py-1 hover:border-gray-900 hover:text-gray-900 transition-colors" type="button" data-tab="credito">Crédito</button>
                         </div>
                         <div id="buscaloya-tab-content-principal" class="buscaloya-tab-content text-center slide-in-right">
                             <div class="text-4xl font-bold mb-1">$135.00</div>
                             <div class="text-sm text-gray-400 line-through mb-2">De $180.00</div>
                             <p class="text-sm text-gray-600">Para tus compras en 3 cuotas online y escaneando el QR</p>
                             <div class="mt-6">
-                                <button class="border border-black rounded-full px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors shadow-md" type="button" onclick="showMessageBox('Explorando opciones de pago principal...')">Explora</button>
+                                <button class="border border-gray-900 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-900 hover:text-white transition-colors shadow-md financing-tab-button" type="button" data-message="Explorando opciones de pago principal...">Explora</button>
                             </div>
                         </div>
                         <div id="buscaloya-tab-content-credito" class="buscaloya-tab-content text-center hidden slide-in-right">
@@ -1281,7 +1032,7 @@
                             <div class="text-sm text-gray-400 line-through mb-2">De $750.00</div>
                             <p class="text-sm text-gray-600">Obtén un cupo de crédito mayor para compras más grandes</p>
                             <div class="mt-6">
-                                <button class="border border-black rounded-full px-6 py-2 text-sm font-semibold hover:bg-black hover:text-white transition-colors shadow-md" type="button" onclick="showMessageBox('Solicitando cupo de crédito...')">Solicitar</button>
+                                <button class="border border-gray-900 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-900 hover:text-white transition-colors shadow-md financing-tab-button" type="button" data-message="Solicitando cupo de crédito...">Solicitar</button>
                             </div>
                         </div>
                     </div>
@@ -1302,43 +1053,43 @@
                 </section>
 
                 <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect" onclick="showMessageBox('Explorando línea de crédito para el día a día...')">
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-card-link" data-message="Explorando línea de crédito para el día a día...">
                         <img alt="Pescado, huevos, smartphone con app BuscaLoYa, cepillo de dientes y papel higiénico flotando sobre fondo blanco" class="mb-4 w-40 h-40 object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/ee50218d-c2a4-4fb7-0f27-ab4e13c38f8a.jpg" width="144"/>
                         <h4 class="font-semibold text-lg mb-2">Línea Cotidiana para el día a día</h4>
                         <p class="text-sm text-gray-600 max-w-xs">Compra en supermercados y farmacias con facilidad + cuotas sin intereses en 14 días</p>
                     </div>
-                    <div class="bg-black rounded-xl shadow-lg p-6 flex flex-col items-center text-center text-white relative overflow-hidden hover:shadow-xl transition-all card-hover-effect" onclick="showMessageBox('Explorando opciones de cuotas extendidas...')">
+                    <div class="bg-gray-900 rounded-xl shadow-lg p-6 flex flex-col items-center text-center text-white relative overflow-hidden hover:shadow-xl transition-all card-hover-effect">
                         <img alt="Tarjetas de crédito con detalles de cuotas sobre fondo negro con líneas curvas moradas y amarillas" class="mb-4 w-full max-w-xs object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/141e66b0-4a85-4849-fd29-843b5cd8c484.jpg" width="240"/>
                         <h4 class="font-semibold text-lg mb-2">Más cuotas para metas más grandes</h4>
                         <p class="text-sm max-w-xs">Ahora con 6, 9, 12 y hasta 15 cuotas sin intereses en comercios online o en la tienda de tu cupo.</p>
-                        <button class="border border-white rounded-full px-6 py-2 text-sm font-semibold mt-6 hover:bg-white hover:text-black transition-colors shadow-md" type="button" onclick="showMessageBox('Explorando más cuotas...')">Explora</button>
+                        <button class="border border-white rounded-full px-6 py-2 text-sm font-semibold mt-6 hover:bg-white hover:text-gray-900 transition-colors shadow-md financing-more-installments-btn" type="button">Explora</button>
                     </div>
                 </section>
 
                 <section class="max-w-6xl mx-auto px-4 mt-12">
                     <p class="text-sm text-center text-gray-600 mb-4">Estas tiendas ya forman parte de nuestros aliados</p>
                     <div class="flex flex-wrap justify-center gap-6 mb-6">
-                        <img alt="Logo de la marca Gina rosa sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/bf345a51-6c55-4143-5971-1906566d71e3.jpg" width="96"/>
-                        <img alt="Logo de la marca Jafra negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/3471eb15-a893-4232-6ed8-e0946f46a695.jpg" width="96"/>
-                        <img alt="Logo de la marca Opera negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/d7063e74-b1ab-4295-6133-71888b96ed0b.jpg" width="96"/>
-                        <img alt="Logo de la marca Dad Foto negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/8c1f7551-e5ca-4515-aea0-b9f9baf39591.jpg" width="96"/>
-                        <img alt="Logo de la marca Gift rojo sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/7d4c8a69-22a0-48a3-0cd7-cf2efe75d2c7.jpg" width="96"/>
-                        <img alt="Logo de la marca Push&Co negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/1186f303-4a6a-442f-214b-b45d009fbac6.jpg" width="96"/>
-                        <img alt="Logo de la marca Ecom World negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform" height="48" src="https://storage.googleapis.com/a1aa/image/422b6014-87f0-4609-8d5b-a82a6b4769cc.jpg" width="96"/>
+                        <img alt="Logo de la marca Gina rosa sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Gina..." height="48" src="https://storage.googleapis.com/a1aa/image/bf345a51-6c55-4143-5971-1906566d71e3.jpg" width="96"/>
+                        <img alt="Logo de la marca Jafra negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Jafra..." height="48" src="https://storage.googleapis.com/a1aa/image/3471eb15-a893-4232-6ed8-e0946f46a695.jpg" width="96"/>
+                        <img alt="Logo de la marca Opera negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Opera..." height="48" src="https://storage.googleapis.com/a1aa/image/d7063e74-b1ab-4295-6133-71888b96ed0b.jpg" width="96"/>
+                        <img alt="Logo de la marca Dad Foto negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Dad Foto..." height="48" src="https://storage.googleapis.com/a1aa/image/8c1f7551-e5ca-4515-aea0-b9f9baf39591.jpg" width="96"/>
+                        <img alt="Logo de la marca Gift rojo sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Gift..." height="48" src="https://storage.googleapis.com/a1aa/image/7d4c8a69-22a0-48a3-0cd7-cf2efe75d2c7.jpg" width="96"/>
+                        <img alt="Logo de la marca Push&Co negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Push&Co..." height="48" src="https://storage.googleapis.com/a1aa/image/1186f303-4a6a-442f-214b-b45d009fbac6.jpg" width="96"/>
+                        <img alt="Logo de la marca Ecom World negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Ecom World..." height="48" src="https://storage.googleapis.com/a1aa/image/422b6014-87f0-4609-8d5b-a82a6b4769cc.jpg" width="96"/>
                     </div>
-                    <button class="bg-black text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button" onclick="showMessageBox('Cargando todas las tiendas aliadas...')">Ver todas las tiendas</button>
+                    <button class="bg-gray-900 text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" id="view-all-financing-stores-btn" type="button">Ver todas las tiendas</button>
                 </section>
 
                 <section class="max-w-6xl mx-auto px-4 mt-12">
                     <div class="bg-yellow-400 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
-                        <div class="font-bold text-black text-xl sm:text-2xl max-w-lg leading-tight text-center sm:text-left">
+                        <div class="font-bold text-gray-900 text-xl sm:text-2xl max-w-lg leading-tight text-center sm:text-left">
                             Descarga nuestra app, activa tu cuenta y comienza a usar BuscaLoYa
                         </div>
                         <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
-                            <a aria-label="Descargar en la App Store" href="#" class="hover:scale-105 transition-transform" onclick="showMessageBox('Descargando la app desde App Store...')">
+                            <a aria-label="Descargar en la App Store" href="#" class="hover:scale-105 transition-transform app-download-link" data-message="Descargando la app desde App Store...">
                                 <img alt="Botón de descarga de App Store" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/e277ffbc-b8d2-4f4d-0b25-475c03f4a780.jpg" width="96"/>
                             </a>
-                            <a aria-label="Descargar en Google Play" href="#" class="hover:scale-105 transition-transform" onclick="showMessageBox('Descargando la app desde Google Play...')">
+                            <a aria-label="Descargar en Google Play" href="#" class="hover:scale-105 transition-transform app-download-link" data-message="Descargando la app desde Google Play...">
                                 <img alt="Botón de descarga de Google Play" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/fee6b263-eacb-493d-efc4-a6d0eb0c3c20.jpg" width="96"/>
                             </a>
                         </div>
@@ -1351,33 +1102,33 @@
                     <p class="text-sm text-gray-600 mb-6">Suscríbete a nuestro boletín para recibir las últimas noticias y ofertas.</p>
                     <form id="buscaloya-newsletter-form-financiamiento" class="flex flex-col sm:flex-row justify-center items-center gap-4">
                         <input type="email" placeholder="Tu correo electrónico" class="w-full sm:w-2/3 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm" required>
-                        <button type="submit" class="bg-black text-white text-sm rounded-full px-6 py-3 hover:bg-gray-800 transition-colors shadow-md w-full sm:w-auto">Suscribirse</button>
+                        <button type="submit" class="bg-gray-900 text-white text-sm rounded-full px-6 py-3 hover:bg-gray-800 transition-colors shadow-md w-full sm:w-auto">Suscribirse</button>
                     </form>
                 </section>
 
                 <section class="max-w-6xl mx-auto px-4 mt-12 text-center">
                     <h3 class="font-bold text-2xl mb-6">BuscaLoYa en los medios</h3>
                     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-4xl mx-auto text-sm text-gray-400">
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de Bloomberg...')">Bloomberg</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de EL MUNDO...')">EL MUNDO</span>
-                        <span class="text-purple-600 font-semibold hover:text-purple-800 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de Yahoo! Finance...')">yahoo! finance</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de PYMNTS...')">PYMNTS</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de EN BANCOS...')">EN BANCOS</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de El Estímulo...')">-el estímulo-</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de EL UNIVERSAL...')">EL UNIVERSAL</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de eldiario.es...')">eldiario.</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de Hispano Post...')">Hispano Post</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de Últimas Noticias...')">Últimas Noticias</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de TalCual...')">TalCual</span>
-                        <span class="hover:text-gray-600 transition-colors cursor-pointer" onclick="showMessageBox('Abriendo enlace de CONTRAPUNTO...')">CONTRAPUNTO</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Bloomberg...">Bloomberg</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EL MUNDO...">EL MUNDO</span>
+                        <span class="text-purple-600 font-semibold hover:text-purple-800 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Yahoo! Finance...">yahoo! finance</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de PYMNTS...">PYMNTS</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EN BANCOS...">EN BANCOS</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de El Estímulo...">-el estímulo-</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EL UNIVERSAL...">EL UNIVERSAL</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de eldiario.es...">eldiario.</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Hispano Post...">Hispano Post</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Últimas Noticias...">Últimas Noticias</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de TalCual...">TalCual</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de CONTRAPUNTO...">CONTRAPUNTO</span>
                     </div>
-                    <a class="text-sm text-blue-600 mt-4 inline-block hover:underline hover:text-blue-700 transition-colors" href="#" onclick="showMessageBox('Navegando a sistemas en línea...')">sistemas en línea</a>
+                    <a class="text-sm text-blue-600 mt-4 inline-block hover:underline hover:text-blue-700 transition-colors" href="#" id="online-systems-link">sistemas en línea</a>
                 </section>
             </section>
         </div>
 
-        <div id="content-worldocoin" class="content-section hidden worldocoin-section">
-            <section id="hero-worldocoin" class="max-w-[1200px] mx-auto px-4 py-16 flex flex-col md:flex-row md:items-center md:justify-between space-y-10 md:space-y-0">
+        <div id="content-worldcoin" class="content-section hidden worldcoin-section">
+            <section id="hero-worldcoin" class="max-w-[1200px] mx-auto px-4 py-16 flex flex-col md:flex-row md:items-center md:justify-between space-y-10 md:space-y-0">
                 <div class="md:w-1/2 space-y-6 text-center md:text-left">
                     <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-md mx-auto md:mx-0 text-gray-900">
                         Compra, vende y envía dinero con tus <span class="text-yellow-500">Worldcoins</span> a todo el mundo.
@@ -1386,10 +1137,10 @@
                         Envía dinero a tus amigos y familia con nuestro rápido sistema de cambio. Tu mejor aliado de cambio, compramos tus Worldcoins al mejor precio ❤️.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="main-btn bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-lg font-semibold px-8 py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="main-btn bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-lg font-semibold px-8 py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" id="sell-worldcoins-btn">
                             Vender Ahora
                         </a>
-                        <a class="text-base text-gray-600 underline hover:text-gray-900 transition-colors duration-200" href="#how-to-buy">
+                        <a class="text-base text-gray-600 underline hover:text-gray-900 transition-colors duration-200" href="#how-to-buy" id="how-it-works-link">
                             Ver cómo funciona
                         </a>
                     </div>
@@ -1399,9 +1150,9 @@
                         <img alt="Icono de Worldcoin" class="w-8 h-8 rounded-full" src="https://placehold.co/32x32/1E90FF/FFFFFF?text=WLD" onerror="this.onerror=null;this.src='https://placehold.co/32x32/1E90FF/FFFFFF?text=WLD';"/>
                         <span class="font-bold text-xl text-gray-900">Worldcoin</span>
                     </div>
-                    <p class="text-5xl font-extrabold mb-3 text-gray-900">$1.145 USDT</p>
+                    <p class="text-5xl font-extrabold mb-3 text-gray-900">1.145 $USD</p>
                     <p class="text-gray-600 mb-8 text-sm">Precio estimado</p>
-                    <button class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" onclick="showMessageBox('Redirigiendo a la compra de Worldcoin...')">
+                    <button class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" id="buy-worldcoin-btn">
                         Comprar Worldcoin
                     </button>
                 </div>
@@ -1409,20 +1160,20 @@
 
             <section class="max-w-[1200px] mx-auto px-4 py-10 border-t border-b border-gray-200 bg-gray-100">
                 <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600 text-sm">
-                    <img alt="Logo Visa" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Visa';"/>
-                    <img alt="Logo Mastercard" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard_logo.svg/2560px-Mastercard_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Mastercard';"/>
-                    <img alt="Logo American Express" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo.svg/2560px-American_Express_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Amex';"/>
-                    <img alt="Logo Diners Club" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Diners_Club_International_logo.svg/2560px-Diners_Club_International_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Diners';"/>
-                    <img alt="Logo Apple Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/2560px-Apple_Pay_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=ApplePay';"/>
-                    <img alt="Logo Google Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Google_Pay_Logo.svg/2560px-Google_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=GooglePay';"/>
-                    <img alt="Logo Samsung Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Samsung_Pay_Logo.svg/2560px-Samsung_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=SamsungPay';"/>
+                    <img alt="Logo Visa" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Visa';"/>
+                    <img alt="Logo Mastercard" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard_logo.svg/2560px-Mastercard_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Mastercard';"/>
+                    <img alt="Logo American Express" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo.svg/2560px-American_Express_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Amex';"/>
+                    <img alt="Logo Diners Club" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Diners_Club_International_logo.svg/2560px-Diners_Club_International_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Diners';"/>
+                    <img alt="Logo Apple Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/2560px-Apple_Pay_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=ApplePay';"/>
+                    <img alt="Logo Google Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Google_Pay_Logo.svg/2560px-Google_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=GooglePay';"/>
+                    <img alt="Logo Samsung Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Samsung_Pay_Logo.svg/2560px-Samsung_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=SamsungPay';"/>
                 </div>
             </section>
 
             <section id="about" class="max-w-[1200px] mx-auto px-4 py-16 bg-white rounded-lg my-12 shadow-inner">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                     <div class="md:order-2">
-                        <img src="https://rapicambios.github.io/public/assets/img/hero/orb.avif" alt="Plataforma de Worldocoin" class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300"/>
+                        <img src="https://placehold.co/600x400/D1C4E9/4527A0?text=Worldcoin+Plataforma" alt="Plataforma de Worldcoin" class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300"/>
                     </div>
                     <div class="md:order-1 space-y-6">
                         <h2 class="text-3xl font-extrabold text-gray-900 leading-tight">
@@ -1431,7 +1182,7 @@
                         <p class="text-gray-600 text-lg leading-relaxed">
                             Rapicambios X Fastwldtradex es una empresa de servicios financieros especializada en la intermediación de criptomonedas y en envíos de dinero electrónicos vía transferencia bancaria a cuentas en el exterior o a personas, mediante giros instantáneos a todo el mundo y en todo Chile.
                         </p>
-                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md">
+                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md" id="contact-us-worldcoin-btn">
                             Contáctanos
                         </a>
                     </div>
@@ -1443,42 +1194,42 @@
                     Cómo comprar Worldcoins con Worldcoin
                 </h2>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 1: Crea una cuenta.">
                         <div class="text-yellow-500 text-3xl font-bold mb-2">1</div>
                         <h3 class="font-semibold text-xl text-gray-900">Crea una cuenta</h3>
                         <p class="text-gray-600 text-base">
                             Regístrate con tu correo electrónico y verifica tu identidad para comenzar de forma segura.
                         </p>
                     </div>
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 2: Elige Worldcoin.">
                         <div class="text-purple-600 text-3xl font-bold mb-2">2</div>
                         <h3 class="font-semibold text-xl text-gray-900">Elige Worldcoin</h3>
                         <p class="text-gray-600 text-base">
                             Selecciona Worldcoin como la criptomoneda que deseas comprar y la cantidad deseada.
                         </p>
                     </div>
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 3: Realiza el pago.">
                         <div class="text-green-600 text-3xl font-bold mb-2">3</div>
                         <h3 class="font-semibold text-xl text-gray-900">Realiza el pago</h3>
                         <p class="text-gray-600 text-base">
                             Usa tu tarjeta de crédito, débito o Apple Pay para completar la compra de forma rápida.
                         </p>
                     </div>
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 4: Recibe tus Worldcoins.">
                         <div class="text-yellow-400 text-3xl font-bold mb-2">4</div>
                         <h3 class="font-semibold text-xl text-gray-900">Recibe tus Worldcoins</h3>
                         <p class="text-gray-600 text-base">
                             Tus Worldcoins se enviarán a tu billetera digital de forma segura y eficiente.
                         </p>
                     </div>
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 5: Disfruta y gestiona.">
                         <div class="text-indigo-600 text-3xl font-bold mb-2">5</div>
                         <h3 class="font-semibold text-xl text-gray-900">Disfruta y gestiona</h3>
                         <p class="text-gray-600 text-base">
                             Administra tus activos y realiza más compras o ventas fácilmente en nuestra plataforma.
                         </p>
                     </div>
-                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 6: Soporte 24/7.">
                         <div class="text-red-600 text-3xl font-bold mb-2">6</div>
                         <h3 class="font-semibold text-xl text-gray-900">Soporte 24/7</h3>
                         <p class="text-gray-600 text-base">
@@ -1493,27 +1244,27 @@
                     Criptomonedas compatibles con Worldcoin
                 </h3>
                 <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600 text-sm">
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Bitcoin">
                         <img alt="Icono Bitcoin" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/2560px-Bitcoin.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/FF9900/FFFFFF?text=BTC';"/>
                         <span>Bitcoin</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Ethereum">
                         <img alt="Icono Ethereum" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/2560px-Ethereum-icon-purple.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/627EEA/FFFFFF?text=ETH';"/>
                         <span>Ethereum</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Tether USDT">
                         <img alt="Icono Tether USDT" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Tether_USDT_logo.svg/2560px-Tether_USDT_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/50AF95/FFFFFF?text=USDT';"/>
                         <span>Tether</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Worldcoin">
                         <img alt="Icono Worldcoin" class="w-10 h-10 crypto-logo" src="https://placehold.co/40x40/1E90FF/FFFFFF?text=WLD" onerror="this.onerror=null;this.src='https://placehold.co/40x40/1E90FF/FFFFFF?text=WLD';"/>
                         <span>Worldcoin</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Binance Coin BNB">
                         <img alt="Icono Binance Coin BNB" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Binance_coin_logo.svg/2560px-Binance_coin_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/F3BA2F/FFFFFF?text=BNB';"/>
                         <span>Binance Coin</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-2">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Cardano ADA">
                         <img alt="Icono Cardano ADA" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Cardano_logo.svg/2560px-Cardano_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/0033AD/FFFFFF?text=ADA';"/>
                         <span>Cardano</span>
                     </div>
@@ -1528,25 +1279,25 @@
                     Envía dinero a tus familiares y amigos o compra la moneda que necesitas de forma fácil y rápida desde donde estés, a más de 180 países de destino con el respaldo y seguridad de Fastwldtradex.
                 </p>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-3">
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Venezuela">
                         <img alt="Bandera de Venezuela" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://flagsapi.com/VE/flat/64.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=VE';"/>
                         <span class="font-semibold text-gray-900 text-lg">Venezuela</span>
                     </div>
-                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-3">
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Chile">
                         <img alt="Bandera de Chile" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://flagsapi.com/CL/flat/64.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=CL';"/>
                         <span class="font-semibold text-gray-900 text-lg">Chile</span>
                     </div>
-                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-3">
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Perú">
                         <img alt="Bandera de Perú" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://flagsapi.com/PE/flat/64.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=PE';"/>
                         <span class="font-semibold text-gray-900 text-lg">Perú</span>
                     </div>
-                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-3">
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Bolivia">
                         <img alt="Bandera de Bolivia" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://flagsapi.com/BO/flat/64.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=BO';"/>
                         <span class="font-semibold text-gray-900 text-lg">Bolivia</span>
                     </div>
                 </div>
                 <div class="text-center mt-12">
-                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-8 py-4 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-8 py-4 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md" id="view-all-countries-btn">
                         Ver todos los países
                     </a>
                 </div>
@@ -1560,28 +1311,28 @@
                     Hazte cliente. Nuestros procesos son simples y transparentes, con nosotros encontrarás toda la ayuda financiera que necesitas para todas tus operaciones en criptomonedas.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <div class="flex flex-col items-center space-y-3">
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Clientes felices">
                         <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
                             <i class="fas fa-smile text-3xl"></i>
                         </div>
                         <p class="text-4xl font-bold why-best-text">37,589<span class="text-yellow-500">+</span></p>
                         <span class="why-best-label text-sm font-medium">Clientes felices</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-3">
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Intercambios finalizados">
                         <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
                             <i class="fas fa-check-circle text-3xl"></i>
                         </div>
                         <p class="text-4xl font-bold why-best-text">45,436<span class="text-yellow-500">+</span></p>
                         <span class="why-best-label text-sm font-medium">Intercambios finalizados</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-3">
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Países disponibles">
                         <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
                             <i class="fas fa-globe text-3xl"></i>
                         </div>
                         <p class="text-4xl font-bold why-best-text">180<span class="text-yellow-500">+</span></p>
                         <span class="why-best-label text-sm font-medium">Países disponibles</span>
                     </div>
-                    <div class="flex flex-col items-center space-y-3">
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Nuevos clientes">
                         <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
                             <i class="fas fa-users text-3xl"></i>
                         </div>
@@ -1590,14 +1341,14 @@
                     </div>
                 </div>
                 <div class="mt-12">
-                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="main-btn bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-base font-semibold px-8 py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="main-btn bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-base font-semibold px-8 py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" id="start-now-worldcoin-btn">
                         ¡Comienza ahora!
                     </a>
                 </div>
             </section>
 
             <section class="max-w-[1200px] mx-auto px-4 py-16 bg-gray-100">
-                <img alt="Concepto de activos digitales y blockchain" class="w-full rounded-xl mb-10 shadow-lg" height="300" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.linkedin.com%2Fpulse%2Fshaping-two-innovation-stories-case-web3-jared-cohen&psig=AOvVaw2xrgPFfAxb27Tu8NaS-Npt&ust=1748932159635000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCk7I2O0o0DFQAAAAAdAAAAABAE" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3';"/>
+                <img alt="Concepto de activos digitales y blockchain" class="w-full rounded-xl mb-10 shadow-lg" height="300" src="https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3';"/>
                 <h3 class="text-center text-3xl font-extrabold mb-4 text-gray-900">
                     Mira lo que dicen nuestros clientes
                 </h3>
@@ -1605,22 +1356,22 @@
                     Miles de usuarios satisfechos confían en Worldcoin para comprar y vender sus criptomonedas de forma segura y rápida.
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-4 text-center">
-                        <img alt="Foto de perfil de Ana G." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Ana G.">
+                        <img alt="Foto de perfil de Ana G." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://storage.googleapis.com/a1aa/image/cb8bdae0-dacc-43d6-01f5-cab03a778e9e.jpg" width="100"/>
                         <p class="text-gray-600 text-base leading-relaxed">
                             "Worldcoin hizo que comprar Worldcoin fuera muy fácil y rápido. ¡Muy recomendable!"
                         </p>
                         <span class="font-semibold text-gray-900 text-sm">Ana G.</span>
                     </div>
-                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-4 text-center">
-                        <img alt="Foto de perfil de Carlos M." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Carlos M.">
+                        <img alt="Foto de perfil de Carlos M." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://storage.googleapis.com/a1aa/image/94c8f0db-9a39-4273-a4bb-c926d6558cfd.jpg" width="100"/>
                         <p class="text-gray-600 text-base leading-relaxed">
                             "La plataforma es segura y el soporte siempre está disponible. Me encanta usar Worldcoin."
                         </p>
                         <span class="font-semibold text-gray-900 text-sm">Carlos M.</span>
                     </div>
-                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center space-y-4 text-center">
-                        <img alt="Foto de perfil de Lucía R." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Lucía R.">
+                        <img alt="Foto de perfil de Lucía R." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://storage.googleapis.com/a1aa/image/7a79302c-0f14-478b-a900-0e5796554f8f.jpg" width="100"/>
                         <p class="text-gray-600 text-base leading-relaxed">
                             "Muy fácil de usar y con muchas opciones de pago. Perfecto para principiantes."
                         </p>
@@ -1687,23 +1438,23 @@
                     ¿Necesitas ayuda antes de comprar Worldcoins?
                 </h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200">
+                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200 help-item" data-message="Información sobre Web3.">
                         <img alt="Concepto de Web3" class="rounded-lg w-40 h-40 object-cover shadow-md" height="150" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/E0F2F7/000000?text=Web3+Concept';"/>
                         <h4 class="font-semibold text-xl text-gray-900">ALL ABOUT WEB3</h4>
                         <p class="text-gray-600 text-base text-center leading-relaxed">
                             Aprende todo sobre Web3 y cómo las criptomonedas están cambiando el mundo.
                         </p>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200" onclick="showMessageBox('Redirigiendo a información sobre Web3...')">
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200 help-button" data-message="Redirigiendo a información sobre Web3...">
                             Leer más
                         </button>
                     </div>
-                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200">
+                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200 help-item" data-message="Contactar soporte.">
                         <img alt="Soporte 24/7" class="rounded-lg w-40 h-40 object-cover shadow-md" height="150" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/E8F5E9/000000?text=Soporte+24/7';"/>
                         <h4 class="font-semibold text-xl text-gray-900">WE'VE GOT YOUR BACK</h4>
                         <p class="text-gray-600 text-base text-center leading-relaxed">
                             Nuestro equipo de soporte está listo para ayudarte en cada paso.
                         </p>
-                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200" onclick="showMessageBox('Contactando al soporte...')">
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200 help-button" data-message="Contactando al soporte...">
                             Contactar soporte
                         </button>
                     </div>
@@ -1718,55 +1469,194 @@
                     <p class="text-lg sm:text-xl mb-12">
                         ¿Qué esperas para comenzar tu primer comercio?
                     </p>
-                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-white text-yellow-500 text-xl font-bold px-10 py-5 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-lg transform hover:scale-105">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-white text-yellow-500 text-xl font-bold px-10 py-5 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-lg transform hover:scale-105" id="sell-worldcoins-cta-btn">
                         ¡Vender Worldcoins Ahora!
                     </a>
                 </div>
             </section>
         </div>
 
+        <div id="content-prepaid-services" class="content-section hidden prepaid-services-section">
+            <section class="max-w-7xl mx-auto px-4 py-12 bg-white rounded-xl shadow-lg mb-12 hero-card">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="md:w-1/2 text-center md:text-left space-y-6">
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+                            Recarga tu vida con <span class="text-yellow-500">Servicios Prepago</span>
+                        </h1>
+                        <p class="text-lg text-gray-700">
+                            Tarjetas de regalo, recargas telefónicas y mucho más, todo en un solo lugar.
+                        </p>
+                        <button class="bg-yellow-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="explore-prepaid-services-btn">
+                            Explorar Servicios
+                        </button>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center relative">
+                        <img src="https://placehold.co/400x250/1a1a1a/f59e0b?text=Gift+Card+Bundle" alt="Paquete de tarjetas de regalo" class="w-full max-w-sm rounded-xl shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <img src="https://placehold.co/400x250/1a1a1a/f59e0b?text=Phone+Recharge" alt="Recarga telefónica" class="w-full max-w-sm rounded-xl shadow-xl absolute top-4 left-4 transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-8 mb-12">
+                <h2 class="text-2xl font-bold text-center mb-8">Servicios Populares</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Netflix">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=Netflix" alt="Logo Netflix" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Netflix</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Spotify">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=Spotify" alt="Logo Spotify" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Spotify</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Uber">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=Uber" alt="Logo Uber" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Uber</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Google Play">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=Google+Play" alt="Logo Google Play" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Google Play</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Apple App Store">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=App+Store" alt="Logo Apple App Store" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Apple App Store</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="PlayStation">
+                        <img src="https://placehold.co/100x60/FFFFFF/000000?text=PlayStation" alt="Logo PlayStation" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">PlayStation</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-8 mb-12">
+                <h2 class="text-2xl font-bold text-center mb-6">Explora por categorías</h2>
+                <div class="overflow-x-auto hide-scrollbar pb-4">
+                    <div class="flex space-x-4 py-2">
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Streaming...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                            <span class="text-xs font-semibold">Streaming</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Juegos...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-8C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            <span class="text-xs font-semibold">Juegos</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Recargas Móviles...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                            <span class="text-xs font-semibold">Recargas Móviles</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Compras Online...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zm-8.7-18L3 5.3v11.4h18V5.3L14.7 0H8.3zM12 14c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2s2 .9 2 2v4c0 1.1-.9 2-2 2z"/></svg>
+                            <span class="text-xs font-semibold">Compras Online</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Tarjetas de Regalo...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 9H4V7h16v2zm0 4H4v-2h16v2zm0 4H4v-2h16v2zM22 3H2c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                            <span class="text-xs font-semibold">Tarjetas de Regalo</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Viajes...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4h-2V2h-2v2H8V2H6v2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"/></svg>
+                            <span class="text-xs font-semibold">Viajes</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Comida...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            <span class="text-xs font-semibold">Comida</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Utilidades...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                            <span class="text-xs font-semibold">Utilidades</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Entretenimiento...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-11-4H9V8h2v4zm4 0h-2V8h2v4z"/></svg>
+                            <span class="text-xs font-semibold">Entretenimiento</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Salud y Bienestar...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4.97 0-9 4.03-9 9 0 3.53 2.04 6.57 5 8.02V21h2v-2.02c2.96-1.45 5-4.49 5-8.02 0-4.97-4.03-9-9-9zm0 16c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                            <span class="text-xs font-semibold">Salud y Bienestar</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Criptomonedas...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            <span class="text-xs font-semibold">Criptomonedas</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Moda...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2h-4v2h4V4zm6 14H4V8h16v10z"/></svg>
+                            <span class="text-xs font-semibold">Moda</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-12 bg-yellow-100 rounded-xl shadow-lg text-center cta-prepaid-services">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                    ¡La forma más fácil de comprar y recargar!
+                </h2>
+                <p class="text-lg mb-8 text-gray-700">
+                    Accede a un mundo de posibilidades con tus servicios prepago favoritos.
+                </p>
+                <a href="#" class="bg-gray-900 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-800 transition-all scale-up-hover" id="view-all-prepaid-services-btn">
+                    <i class="fas fa-wallet mr-2"></i> Ver Todos los Servicios
+                </a>
+            </section>
+        </div>
+
     </main>
 
+    <!-- Footer -->
     <footer class="bg-gray-800 text-gray-300 py-10 px-4 rounded-t-xl shadow-inner">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
             <div class="col-span-1">
-                <a href="#" class="flex items-center space-x-2 mb-4 transition-opacity hover:opacity-80" onclick="showMessageBox('Volviendo al inicio...')">
-                    <img alt="Logo de BuscaLoYa" class="w-10 h-10 rounded-full" height="40" src="https://placehold.co/40x40/FFD700/000?text=BL" width="40"/>
+                <a href="#" class="flex items-center space-x-2 mb-4 transition-opacity hover:opacity-80" id="footer-home-link">
+                    <img alt="Logo de BuscaLoYa" class="w-10 h-10 rounded-full" height="40" src="./image-removebg-preview (2).png" width="40"/>
                     <span class="text-3xl font-bold text-white">BuscaLoYa</span>
                 </a>
                 <p class="text-sm">Tu mercado online de confianza para comprar y vender de todo.</p>
                 <div class="flex space-x-4 mt-4 text-gray-400">
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Facebook" onclick="showMessageBox('Abriendo Facebook...')"><i class="fab fa-facebook-f fa-lg"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Twitter" onclick="showMessageBox('Abriendo Twitter...')"><i class="fab fa-twitter fa-lg"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="Instagram" onclick="showMessageBox('Abriendo Instagram...')"><i class="fab fa-instagram fa-lg"></i></a>
-                    <a href="#" class="hover:text-white transition-colors" aria-label="LinkedIn" onclick="showMessageBox('Abriendo LinkedIn...')"><i class="fab fa-linkedin-in fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Facebook" data-message="Abriendo Facebook..."><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Twitter" data-message="Abriendo Twitter..."><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Instagram" data-message="Abriendo Instagram..."><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="LinkedIn" data-message="Abriendo LinkedIn..."><i class="fab fa-linkedin-in fa-lg"></i></a>
                 </div>
             </div>
             <div>
                 <h3 class="font-semibold text-white mb-3">Navegación</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Navegando a Inicio...')">Inicio</a></li>
-                    <li><a href="#buscaloya-section" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Navegando a BuscaLoYa...')">BuscaLoYa</a></li>
-                    <li><a href="#financiamiento-section" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Navegando a Financiamiento...')">Financiamiento</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Navegando a Publicar anuncio...')">Publicar anuncio</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Inicio...">Inicio</a></li>
+                    <li><a href="#buscaloya-section" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a BuscaLoYa...">BuscaLoYa</a></li>
+                    <li><a href="#financiamiento-section" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Financiamiento...">Financiamiento</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Publicar anuncio...">Publicar anuncio</a></li>
                 </ul>
             </div>
             <div>
                 <h3 class="font-semibold text-white mb-3">Soporte</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Centro de Ayuda...')">Centro de Ayuda</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Preguntas Frecuentes...')">Preguntas Frecuentes</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando página de Contacto...')">Contacto</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Mapa del sitio...')">Mapa del sitio</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Centro de Ayuda...">Centro de Ayuda</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Preguntas Frecuentes...">Preguntas Frecuentes</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando página de Contacto...">Contacto</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Mapa del sitio...">Mapa del sitio</a></li>
                 </ul>
             </div>
             <div>
                 <h3 class="font-semibold text-white mb-3">Legal</h3>
                 <ul class="space-y-2 text-sm">
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Términos y Condiciones...')">Términos y Condiciones</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Política de Privacidad...')">Política de Privacidad</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Política de Cookies...')">Política de Cookies</a></li>
-                    <li><a href="#" class="hover:text-yellow-500 transition-colors" onclick="showMessageBox('Cargando Aviso Legal...')">Aviso Legal</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Términos y Condiciones...">Términos y Condiciones</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Política de Privacidad...">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Política de Cookies...">Política de Cookies</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Aviso Legal...">Aviso Legal</a></li>
                 </ul>
             </div>
         </div>
@@ -1775,19 +1665,14 @@
         </div>
     </footer>
 
-    <button aria-label="Soporte de chat" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50" onclick="showMessageBox('Iniciando chat de soporte...')">
+    <button aria-label="Soporte de chat" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50" id="chat-support-btn">
         <i class="fas fa-comment-alt text-xl"></i>
     </button>
     <button id="scroll-to-top-btn" aria-label="Volver arriba" class="fixed bottom-24 right-6 bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50 hidden">
         <i class="fas fa-arrow-up text-xl"></i>
     </button>
 
-    <div id="message-box-overlay" class="message-box-overlay"></div>
-    <div id="message-box" class="message-box">
-        <p id="message-box-text" class="text-lg font-semibold mb-4"></p>
-        <button id="message-box-close" class="bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-700 transition-colors">Cerrar</button>
-    </div>
-
+    <!-- Cookie Banner -->
     <div class="fixed bottom-20 left-4 rounded-lg shadow-lg p-4 max-w-xs z-50" id="cookie-banner">
         <div class="flex items-center space-x-3">
             <i class="fas fa-cookie-bite text-yellow-400 text-xl"></i>
@@ -1805,445 +1690,7 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Hide loader once DOM is fully loaded
-            const loaderOverlay = document.getElementById('loader-overlay');
-            if (loaderOverlay) {
-                loaderOverlay.style.opacity = '0';
-                setTimeout(() => {
-                    loaderOverlay.style.display = 'none';
-                }, 500); // Allow transition to complete
-            }
-
-            // --- Custom Message Box Utility ---
-            const messageBox = document.getElementById('message-box');
-            const messageBoxText = document.getElementById('message-box-text');
-            const messageBoxClose = document.getElementById('message-box-close');
-            const messageBoxOverlay = document.getElementById('message-box-overlay');
-
-            window.showMessageBox = (message) => { // Make it global for inline onclick
-                messageBoxText.textContent = message;
-                messageBox.classList.add('show');
-                messageBoxOverlay.classList.add('show');
-            };
-
-            const hideMessageBox = () => {
-                messageBox.classList.remove('show');
-                messageBoxOverlay.classList.remove('show');
-            };
-
-            messageBoxClose.addEventListener('click', hideMessageBox);
-            messageBoxOverlay.addEventListener('click', hideMessageBox);
-
-            // --- Mobile Menu Toggle ---
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-            let isMobileMenuOpen = false;
-
-            // --- Main Tab Navigation Logic (Marketplace vs. Financiamiento vs. Worldocoin) ---
-            const tabMarketplace = document.getElementById('tab-marketplace');
-            const tabFinanciamiento = document.getElementById('tab-financiamiento');
-            const tabWorldocoin = document.getElementById('tab-worldocoin');
-
-            const contentMarketplace = document.getElementById('content-marketplace');
-            const contentFinanciamiento = document.getElementById('content-financiamiento');
-            const contentWorldocoin = document.getElementById('content-worldocoin');
-
-            const mobileNavMarketplace = document.getElementById('mobile-nav-marketplace');
-            const mobileNavFinanciamiento = document.getElementById('mobile-nav-financiamiento');
-            const mobileNavWorldocoin = document.getElementById('mobile-nav-worldocoin');
-
-            function showTab(tabName) {
-                // Hide all content sections first
-                contentMarketplace.classList.add('hidden');
-                contentFinanciamiento.classList.add('hidden');
-                contentWorldocoin.classList.add('hidden');
-
-                // Reset all tab buttons to default style
-                document.querySelectorAll('.tab-main-button').forEach(btn => {
-                    btn.classList.remove('bg-yellow-600', 'text-white');
-                    btn.classList.add('bg-white', 'text-gray-800');
-                });
-
-                // Show the selected tab content and style the active button
-                if (tabName === 'marketplace') {
-                    contentMarketplace.classList.remove('hidden');
-                    tabMarketplace.classList.remove('bg-white', 'text-gray-800');
-                    tabMarketplace.classList.add('bg-yellow-600', 'text-white');
-                    if (mobileNavMarketplace) {
-                        mobileNavMarketplace.classList.remove('bg-white', 'text-gray-800');
-                        mobileNavMarketplace.classList.add('bg-yellow-600', 'text-white');
-                    }
-                } else if (tabName === 'financiamiento') {
-                    contentFinanciamiento.classList.remove('hidden');
-                    tabFinanciamiento.classList.remove('bg-white', 'text-gray-800');
-                    tabFinanciamiento.classList.add('bg-yellow-600', 'text-white');
-                    if (mobileNavFinanciamiento) {
-                        mobileNavFinanciamiento.classList.remove('bg-white', 'text-gray-800');
-                        mobileNavFinanciamiento.classList.add('bg-yellow-600', 'text-white');
-                    }
-                } else if (tabName === 'worldocoin') {
-                    contentWorldocoin.classList.remove('hidden');
-                    tabWorldocoin.classList.remove('bg-white', 'text-gray-800');
-                    tabWorldocoin.classList.add('bg-yellow-600', 'text-white');
-                    if (mobileNavWorldocoin) {
-                        mobileNavWorldocoin.classList.remove('bg-white', 'text-gray-800');
-                        mobileNavWorldocoin.classList.add('bg-yellow-600', 'text-white');
-                    }
-                }
-
-                // Close mobile menu if open
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                    mobileMenuButton.click(); // Simulate click to close
-                }
-            }
-
-            if (tabMarketplace) tabMarketplace.addEventListener('click', () => showTab('marketplace'));
-            if (tabFinanciamiento) tabFinanciamiento.addEventListener('click', () => showTab('financiamiento'));
-            if (tabWorldocoin) tabWorldocoin.addEventListener('click', () => showTab('worldocoin'));
-
-            if (mobileNavMarketplace) mobileNavMarketplace.addEventListener('click', () => showTab('marketplace'));
-            if (mobileNavFinanciamiento) mobileNavFinanciamiento.addEventListener('click', () => showTab('financiamiento'));
-            if (mobileNavWorldocoin) mobileNavWorldocoin.addEventListener('click', () => showTab('worldocoin'));
-
-            // Initialize with marketplace tab active
-            showTab('marketplace');
-
-            // --- Mobile Menu Toggle ---
-            if (mobileMenuButton) {
-                mobileMenuButton.addEventListener('click', () => {
-                    if (isMobileMenuOpen) {
-                        mobileMenu.classList.remove('slide-down-menu');
-                        mobileMenu.classList.add('slide-up-menu');
-                        mobileMenu.addEventListener('animationend', () => {
-                            mobileMenu.classList.add('hidden');
-                            mobileMenu.classList.remove('slide-up-menu');
-                        }, { once: true });
-                        mobileMenuIcon.classList.remove('fa-times');
-                        mobileMenuIcon.classList.add('fa-bars');
-                    } else {
-                        mobileMenu.classList.remove('hidden');
-                        mobileMenu.classList.add('slide-down-menu');
-                        mobileMenuIcon.classList.remove('fa-bars');
-                        mobileMenuIcon.classList.add('fa-times');
-                    }
-                    isMobileMenuOpen = !isMobileMenuOpen;
-                });
-            }
-
-            // --- Carousel Functionality (for multiple carousels) ---
-            document.querySelectorAll('.carousel-prev-btn, .carousel-next-btn').forEach(button => {
-                button.addEventListener('click', (event) => {
-                    const targetId = event.currentTarget.dataset.target;
-                    const carousel = document.getElementById(targetId);
-                    if (carousel) {
-                        // Calculate scroll amount based on the first item's width plus its right margin/gap
-                        const firstItem = carousel.querySelector('article, div.flex-shrink-0');
-                        const itemWidth = firstItem ? firstItem.offsetWidth : 0;
-                        const itemStyle = firstItem ? window.getComputedStyle(firstItem) : null;
-                        const itemMarginRight = itemStyle ? parseFloat(itemStyle.marginRight) : 0;
-                        const scrollAmount = itemWidth + itemMarginRight;
-
-                        if (event.currentTarget.classList.contains('carousel-next-btn')) {
-                            carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-                        } else {
-                            carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
-                        }
-                    }
-                });
-            });
-
-            // --- Thumbnail Image Swapper (for Marketplace categories) ---
-            document.querySelectorAll('article .thumbnail-image').forEach(thumbnail => {
-                thumbnail.addEventListener('mouseover', (event) => {
-                    const mainImage = event.target.closest('article').querySelector('.main-category-image');
-                    if (mainImage) {
-                        mainImage.src = event.target.dataset.mainImage;
-                    }
-                });
-            });
-
-            // --- Favorite Button Toggle ---
-            document.querySelectorAll('.favorite-btn').forEach(button => {
-                button.addEventListener('click', () => {
-                    const icon = button.querySelector('i');
-                    if (icon.classList.contains('far')) { // If it's the outlined heart
-                        icon.classList.remove('far');
-                        icon.classList.add('fas', 'text-red-600'); // Change to solid and red
-                        showMessageBox('¡Anuncio añadido a favoritos!');
-                    } else { // If it's the solid heart
-                        icon.classList.remove('fas', 'text-red-600');
-                        icon.classList.add('far'); // Change back to outlined
-                        showMessageBox('Anuncio eliminado de favoritos.');
-                    }
-                });
-            });
-
-            // --- Main Search and Filter Logic ---
-            const searchInput = document.getElementById('buscaloya-search-input');
-            const categorySelect = document.getElementById('buscaloya-category-select');
-            const locationSelect = document.getElementById('buscaloya-location-select');
-            const searchButton = document.getElementById('buscaloya-search-button');
-
-            // Get all product items that can be filtered across all relevant sections
-            const allProductItems = document.querySelectorAll('.product-item');
-
-            function filterProducts() {
-                const searchTerm = searchInput.value.toLowerCase().trim();
-                const selectedCategory = categorySelect.value.toLowerCase();
-                const selectedLocation = locationSelect.value.toLowerCase();
-
-                allProductItems.forEach(item => {
-                    const itemSearchTerm = item.dataset.searchTerm ? item.dataset.searchTerm.toLowerCase() : '';
-                    const itemCategory = item.dataset.category ? item.dataset.category.toLowerCase() : '';
-                    const itemLocation = item.dataset.location ? item.dataset.location.toLowerCase() : '';
-
-                    const matchesSearch = searchTerm === '' || itemSearchTerm.includes(searchTerm);
-                    const matchesCategory = selectedCategory === '' || itemCategory === selectedCategory;
-                    const matchesLocation = selectedLocation === '' || itemLocation === selectedLocation;
-
-                    if (matchesSearch && matchesCategory && matchesLocation) {
-                        item.classList.remove('hidden');
-                        item.classList.add('fade-in'); // Optional: re-add fade-in animation
-                    } else {
-                        item.classList.add('hidden');
-                        item.classList.remove('fade-in');
-                    }
-                });
-            }
-
-            // Attach event listeners for filtering
-            if (searchButton) searchButton.addEventListener('click', (event) => {
-                event.preventDefault(); // Prevent form submission
-                filterProducts();
-                showMessageBox('Realizando búsqueda...');
-            });
-            if (searchInput) searchInput.addEventListener('input', filterProducts); // Live search
-            if (categorySelect) categorySelect.addEventListener('change', filterProducts);
-            if (locationSelect) locationSelect.addEventListener('change', filterProducts);
-
-            // --- Newsletter Signup Form (Marketplace) ---
-            const buscaloyaNewsletterForm = document.getElementById('buscaloya-newsletter-form');
-            if (buscaloyaNewsletterForm) {
-                buscaloyaNewsletterForm.addEventListener('submit', (event) => {
-                    event.preventDefault(); // Prevent default form submission
-                    const emailInput = buscaloyaNewsletterForm.querySelector('input[type="email"]');
-                    const email = emailInput.value.trim();
-                    if (email) {
-                        showMessageBox(`¡Gracias por suscribirte con ${email} a las noticias de BuscaLoYa!`);
-                        emailInput.value = ''; // Clear the input field
-                    } else {
-                        showMessageBox('Por favor, introduce un correo electrónico válido para suscribirte.');
-                    }
-                });
-            }
-
-            // --- Newsletter Signup Form (Financing) ---
-            const buscaloyaNewsletterFormFinanciamiento = document.getElementById('buscaloya-newsletter-form-financiamiento');
-            if (buscaloyaNewsletterFormFinanciamiento) {
-                buscaloyaNewsletterFormFinanciamiento.addEventListener('submit', (event) => {
-                    event.preventDefault();
-                    const emailInput = buscaloyaNewsletterFormFinanciamiento.querySelector('input[type="email"]');
-                    const email = emailInput.value.trim();
-                    if (email) {
-                        showMessageBox(`¡Gracias por suscribirte con ${email} a las noticias de Financiamiento BuscaLoYa!`);
-                        emailInput.value = ''; // Clear the input field
-                    } else {
-                        showMessageBox('Por favor, introduce un correo electrónico válido para suscribirte.');
-                    }
-                });
-            }
-
-            // --- Global Utility: Scroll to Top Button ---
-            const scrollToTopBtn = document.getElementById('scroll-to-top-btn');
-            if (scrollToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) { // Show button after scrolling 300px
-                        scrollToTopBtn.classList.remove('hidden');
-                    } else {
-                        scrollToTopBtn.classList.add('hidden');
-                    }
-                });
-
-                scrollToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth' // Smooth scroll to top
-                    });
-                });
-            } else {
-                console.warn('Scroll to top button not found.');
-            }
-
-            // --- Cookie banner functionality ---
-            const cookieBanner = document.getElementById('cookie-banner');
-            const acceptCookiesBtn = document.getElementById('accept-cookies-btn');
-            const viewCookiesBtn = document.getElementById('view-cookies-btn');
-
-            // Check if cookie consent has been given
-            const hasAcceptedCookies = localStorage.getItem('cookieConsent');
-            if (hasAcceptedCookies) {
-                cookieBanner.classList.add('hidden');
-            }
-
-            acceptCookiesBtn.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'true');
-                cookieBanner.classList.add('hidden');
-            });
-
-            viewCookiesBtn.addEventListener('click', () => {
-                showMessageBox('Redirigiendo a la página de políticas de cookies...');
-            });
-
-            // FAQ accordion functionality (applied to Worldocoin section)
-            const faqItems = document.querySelectorAll('#content-worldocoin .faq-item');
-            faqItems.forEach(item => {
-                item.addEventListener('toggle', () => {
-                    if (item.open) {
-                        // Close other open FAQ items in the Worldocoin section
-                        faqItems.forEach(otherItem => {
-                            if (otherItem !== item && otherItem.open) {
-                                otherItem.open = false;
-                            }
-                        });
-                    }
-                });
-            });
-
-            // Banner Carousel for Marketplace (from original indexbuscaloya.html)
-            const bannerImages = document.querySelectorAll('#banner-carousel img');
-            const bannerDots = document.querySelectorAll('#banner-dots span');
-            let currentBannerIndex = 0;
-
-            const showBanner = (index) => {
-                bannerImages.forEach((img, i) => {
-                    img.classList.remove('opacity-100');
-                    img.classList.add('opacity-0');
-                    bannerDots[i].classList.remove('opacity-100', 'bg-white');
-                    bannerDots[i].classList.add('opacity-50', 'bg-white');
-                });
-                if (bannerImages[index]) {
-                    bannerImages[index].classList.remove('opacity-0');
-                    bannerImages[index].classList.add('opacity-100');
-                }
-                if (bannerDots[index]) {
-                    bannerDots[index].classList.remove('opacity-50');
-                    bannerDots[index].classList.add('opacity-100');
-                }
-            };
-
-            const nextBanner = () => {
-                currentBannerIndex = (currentBannerIndex + 1) % bannerImages.length;
-                showBanner(currentBannerIndex);
-            };
-
-            if (bannerImages.length > 0) {
-                bannerDots.forEach(dot => {
-                    dot.addEventListener('click', (event) => {
-                        const index = parseInt(event.target.dataset.dotIndex);
-                        currentBannerIndex = index;
-                        showBanner(currentBannerIndex);
-                    });
-                });
-                setInterval(nextBanner, 5000); // Change banner every 5 seconds
-                showBanner(currentBannerIndex); // Show initial banner
-            }
-
-
-            // Club BuscaLoYa Carousel (Financing section)
-            const clubBuscaloyaCarouselTrack = document.querySelector('#content-financiamiento #carousel-track');
-            const clubBuscaloyaSlides = clubBuscaloyaCarouselTrack ? Array.from(clubBuscaloyaCarouselTrack.children) : [];
-            const clubBuscaloyaPrevSlideButton = document.querySelector('#content-financiamiento .buscaloya-carousel-prev-btn');
-            const clubBuscaloyaNextSlideButton = document.querySelector('#content-financiamiento .buscaloya-carousel-next-btn');
-            const clubBuscaloyaCarouselDots = document.querySelectorAll('#content-financiamiento #buscaloya-carousel-dots span');
-            let currentClubBuscaLoYaSlideIndex = 0;
-
-            const updateClubBuscaLoYaCarousel = () => {
-                if (clubBuscaloyaSlides.length === 0 || !clubBuscaloyaCarouselTrack) return;
-                const slideWidth = clubBuscaloyaSlides[0].offsetWidth; // Get the width of a single slide
-                clubBuscaloyaCarouselTrack.style.transform = `translateX(-${currentClubBuscaLoYaSlideIndex * slideWidth}px)`;
-
-                clubBuscaloyaCarouselDots.forEach((dot, index) => {
-                    dot.classList.remove('bg-white');
-                    dot.classList.add('bg-gray-600');
-                    if (index === currentClubBuscaLoYaSlideIndex) {
-                        dot.classList.remove('bg-gray-600');
-                        dot.classList.add('bg-white');
-                    }
-                });
-            };
-
-            if (clubBuscaloyaPrevSlideButton) {
-                clubBuscaloyaPrevSlideButton.addEventListener('click', () => {
-                    currentClubBuscaLoYaSlideIndex = (currentClubBuscaLoYaSlideIndex - 1 + clubBuscaloyaSlides.length) % clubBuscaloyaSlides.length;
-                    updateClubBuscaLoYaCarousel();
-                });
-            }
-
-            if (clubBuscaloyaNextSlideButton) {
-                clubBuscaloyaNextSlideButton.addEventListener('click', () => {
-                    currentClubBuscaLoYaSlideIndex = (currentClubBuscaLoYaSlideIndex + 1) % clubBuscaloyaSlides.length;
-                    updateClubBuscaLoYaCarousel();
-                });
-            }
-
-            clubBuscaloyaCarouselDots.forEach(dot => {
-                dot.addEventListener('click', (event) => {
-                    currentClubBuscaLoYaSlideIndex = parseInt(event.target.dataset.slideIndex);
-                    updateClubBuscaLoYaCarousel();
-                });
-            });
-
-            // Auto-advance the carousel
-            if (clubBuscaloyaSlides.length > 1) {
-                setInterval(() => {
-                    if (clubBuscaloyaNextSlideButton) clubBuscaloyaNextSlideButton.click();
-                }, 5000); // Change slide every 5 seconds
-            }
-
-            // Initial update for club carousel
-            if (clubBuscaloyaSlides.length > 0) {
-                updateClubBuscaLoYaCarousel();
-            }
-
-            // Financing Tab Content Switcher (Principal/Crédito)
-            const buscaloyaTabButtons = document.querySelectorAll('.buscaloya-tab-button');
-            const buscaloyaTabContents = document.querySelectorAll('.buscaloya-tab-content');
-
-            buscaloyaTabButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Deactivate all buttons and hide all content
-                    buscaloyaTabButtons.forEach(btn => {
-                        btn.classList.remove('bg-black', 'text-white', 'shadow-md');
-                        btn.classList.add('text-gray-400', 'border', 'border-gray-300');
-                    });
-                    buscaloyaTabContents.forEach(content => {
-                        content.classList.add('hidden');
-                        content.classList.remove('slide-in-right');
-                    });
-
-                    // Activate the clicked button
-                    button.classList.remove('text-gray-400', 'border', 'border-gray-300');
-                    button.classList.add('bg-black', 'text-white', 'shadow-md');
-
-                    // Show the corresponding content
-                    const targetTab = button.dataset.tab;
-                    const targetContent = document.getElementById(`buscaloya-tab-content-${targetTab}`);
-                    if (targetContent) {
-                        targetContent.classList.remove('hidden');
-                        targetContent.classList.add('slide-in-right');
-                    }
-                });
-            });
-
-            // Initialize the financing sub-tabs to show 'Principal' by default
-            const initialFinancingTab = document.querySelector('.buscaloya-tab-button[data-tab="principal"]');
-            if (initialFinancingTab) {
-                initialFinancingTab.click();
-            }
-        });
-    </script>
+    <!-- Link to external JavaScript file -->
+    <script src="app.js" defer></script>
 </body>
 </html>
