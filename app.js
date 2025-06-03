@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Club BuscaLoYa Carousel (Auto-play and Manual Navigation - specific translateX logic) ---
-    // Get the main carousel element and proceed only if it exists
+    // Get the main carousel element and proceed only if it.
     const clubBuscaloyaCarouselElement = document.getElementById('club-buscaloya-carousel');
 
     if (clubBuscaloyaCarouselElement) {
@@ -433,7 +433,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('buscaloya-category-select');
     const locationSelect = document.getElementById('buscaloya-location-select');
     const searchButton = document.getElementById('buscaloya-search-button');
-    const clearSearchButton = document.getElementById('clear-search-btn'); // New: Clear search button
+    const clearSearchContainer = document.getElementById('clear-search-container'); // Reference to the container
+    const clearSearchButton = document.getElementById('clear-search-btn'); // Reference to the button itself
 
     // Get all product items that can be filtered across all relevant sections
     const allProductItems = document.querySelectorAll('.product-item');
@@ -498,12 +499,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Manage clear search button visibility
-        if (clearSearchButton) {
+        // Manage clear search button container visibility
+        if (clearSearchContainer) { // Use clearSearchContainer here
             if (isSearchActive) {
-                clearSearchButton.classList.remove('hidden');
+                clearSearchContainer.classList.remove('hidden');
             } else {
-                clearSearchButton.classList.add('hidden');
+                clearSearchContainer.classList.add('hidden');
             }
         }
 
