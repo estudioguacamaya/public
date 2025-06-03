@@ -433,14 +433,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const categorySelect = document.getElementById('buscaloya-category-select');
     const locationSelect = document.getElementById('buscaloya-location-select');
     const searchButton = document.getElementById('buscaloya-search-button');
+    const clearSearchButton = document.getElementById('clear-search-btn'); // New: Clear search button
 
     // Get all product items that can be filtered across all relevant sections
     const allProductItems = document.querySelectorAll('.product-item');
+    const marketplaceSection = document.getElementById('content-marketplace');
+    // Elements within marketplace that are NOT product items and should be hidden during search
+    const nonProductElements = marketplaceSection ? marketplaceSection.querySelectorAll('[data-non-product-content="true"]') : [];
+    const noResultsMessage = document.getElementById('no-search-results-message'); // Message for no search results
 
     function filterProducts() {
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
         const selectedCategory = categorySelect ? categorySelect.value.toLowerCase() : '';
         const selectedLocation = locationSelect ? locationSelect.value.toLowerCase() : '';
+
+        let resultsFound = false;
+        let firstMatchedProduct = null;
+
+        // Determine if any search criteria is active
+        const isSearchActive = searchTerm !== '' || selectedCategory !== '' || selectedLocation !== '';
+
+        if (isSearchActive) {
+            // Hide all non-product content in Marketplace when a search is active
+            nonProductElements.forEach(el => el.classList.add('hidden'));
+            // Ensure marketplace tab is active to show results
+            showTab('content-marketplace');
+        } else {
+            // No search active, show all non-product content
+            nonProductElements.forEach(el => el.classList.remove('hidden'));
+        }
 
         allProductItems.forEach(item => {
             const itemSearchTerm = item.dataset.searchTerm ? item.dataset.searchTerm.toLowerCase() : '';
@@ -454,22 +475,70 @@ document.addEventListener('DOMContentLoaded', () => {
             if (matchesSearch && matchesCategory && matchesLocation) {
                 item.classList.remove('hidden');
                 item.classList.add('fade-in'); // Optional: re-add fade-in animation
+                resultsFound = true;
+                if (!firstMatchedProduct) {
+                    firstMatchedProduct = item; // Store the first matching product
+                }
             } else {
                 item.classList.add('hidden');
                 item.classList.remove('fade-in');
             }
         });
+
+        // Manage no results message
+        if (noResultsMessage) {
+            if (resultsFound) {
+                noResultsMessage.classList.add('hidden');
+            } else {
+                if (isSearchActive) { // Only show message if a search was attempted and found nothing
+                    noResultsMessage.classList.remove('hidden');
+                } else {
+                    noResultsMessage.classList.add('hidden'); // Hide if no search is active
+                }
+            }
+        }
+
+        // Manage clear search button visibility
+        if (clearSearchButton) {
+            if (isSearchActive) {
+                clearSearchButton.classList.remove('hidden');
+            } else {
+                clearSearchButton.classList.add('hidden');
+            }
+        }
+
+        // Scroll to the first found product if search is active and results are found
+        if (isSearchActive && firstMatchedProduct) {
+            firstMatchedProduct.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Close any open message box after scrolling to the product
+            messageBox.classList.remove('show');
+            messageBoxOverlay.classList.remove('show');
+            if (messageBoxOverlay) {
+                messageBoxOverlay.style.pointerEvents = 'none';
+            }
+        }
     }
 
     // Attach event listeners for filtering
     if (searchButton) searchButton.addEventListener('click', (event) => {
         event.preventDefault(); // Prevent form submission
         filterProducts();
-        showMessageBox('Realizando búsqueda...');
+        // Removed: showMessageBox('Realizando búsqueda...'); - visual feedback is now scrolling/filtering
     });
     if (searchInput) searchInput.addEventListener('input', filterProducts); // Live search
     if (categorySelect) categorySelect.addEventListener('change', filterProducts);
     if (locationSelect) locationSelect.addEventListener('change', filterProducts);
+
+    // New: Event listener for clearing the search
+    if (clearSearchButton) {
+        clearSearchButton.addEventListener('click', () => {
+            if (searchInput) searchInput.value = '';
+            if (categorySelect) categorySelect.value = '';
+            if (locationSelect) locationSelect.value = '';
+            filterProducts(); // Re-run filter to show all products and non-product content
+            showMessageBox('Búsqueda limpiada. Mostrando todo el contenido.');
+        });
+    }
 
     // --- Newsletter Signup Form (Marketplace) ---
     const buscaloyaNewsletterForm = document.getElementById('buscaloya-newsletter-form');
