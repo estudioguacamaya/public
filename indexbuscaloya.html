@@ -40,7 +40,7 @@
     <!-- Header / Main Navigation -->
     <header class="bg-white shadow-md py-3 px-4 rounded-b-xl max-w-7xl mx-auto border-b border-gray-200 relative z-50">
         <div class="flex items-center justify-between">
-            <a class="flex items-center space-x-2 transition-opacity hover:opacity-80" href="#" id="logo-home-link">
+            <a class="flex items-center space-x-2 transition-opacity hover:opacity-80" href="./index.html" id="logo-home-link">
                 <img alt="Logo de BuscaLoYa, mano azul sosteniendo un círculo amarillo" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/dc99515c-f140-468c-7bbe-d6aa9ff1ff22.jpg" width="32"/>
                 <span class="text-2xl font-bold text-gray-800">BuscaLoYa</span>
             </a>
@@ -119,7 +119,8 @@
 
         <!-- Marketplace Section -->
         <div id="content-marketplace" class="content-section active fade-in">
-            <section class="text-center py-12 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg mb-12">
+            <!-- Hero Section -->
+            <section class="text-center py-12 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg mb-12" data-non-product-content="true">
                 <h1 class="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 animate-bounce-custom">
                     ¡Encuentra lo que buscas, vende lo que tienes!
                 </h1>
@@ -136,7 +137,8 @@
                 </div>
             </section>
 
-            <section class="mb-12">
+            <!-- Search and Filter Section -->
+            <section class="mb-12" data-non-product-content="true">
                 <h2 class="text-2xl font-bold text-center mb-6">¿Qué necesitas hoy?</h2>
                 <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4">
                     <div class="relative w-full md:w-2/5">
@@ -149,6 +151,7 @@
                             <option value="">Todas las categorías</option>
                             <option value="Electrónica">Electrónica</option>
                             <option value="Vehículos">Vehículos</option>
+                            <option value="Inmuebles">Inmuebles</option>
                             <option value="Hogar">Hogar</option>
                             <option value="Servicios">Servicios</option>
                             <option value="Moda">Moda</option>
@@ -161,7 +164,6 @@
                             <option value="Zapatos Deportivos">Zapatos Deportivos</option>
                             <option value="Electrónica para el Hogar">Electrónica para el Hogar</option>
                             <option value="Libros y Revistas">Libros y Revistas</option>
-                            <option value="Inmuebles">Inmuebles</option>
                             <option value="Autos">Autos</option>
                         </select>
                         <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
@@ -203,7 +205,21 @@
                 </div>
             </section>
 
-            <section class="mb-12">
+            <!-- Clear Search Button (initially hidden) -->
+            <div class="text-center mb-8 hidden" id="clear-search-container">
+                <button id="clear-search-btn" class="bg-blue-500 text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-times-circle mr-2"></i> Limpiar Búsqueda
+                </button>
+            </div>
+
+            <!-- No Search Results Message (initially hidden) -->
+            <div id="no-search-results-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mb-8">
+                <strong class="font-bold">¡Lo sentimos!</strong>
+                <span class="block sm:inline"> No se encontraron productos que coincidan con tu búsqueda. Intenta con otros criterios.</span>
+            </div>
+
+            <!-- Category Explore Section -->
+            <section class="mb-12" data-non-product-content="true">
                 <h2 class="text-2xl font-bold text-center mb-6">Explora por Categorías</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
                     <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Vehículos...">
@@ -245,7 +261,8 @@
                 </div>
             </section>
 
-            <section aria-label="Categorías de productos destacadas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Featured Product Categories (top row) -->
+            <section aria-label="Categorías de productos destacadas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4" data-non-product-content="true">
                 <article aria-label="Artículos de papelería para tu casa y oficina" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
                     <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
                         <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
@@ -280,7 +297,8 @@
                 </article>
             </section>
 
-            <section aria-label="Categorías de productos con miniaturas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- Category Thumbnail Section -->
+            <section aria-label="Categorías de productos con miniaturas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4" data-non-product-content="true">
                 <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
                     <h4 class="font-semibold text-sm mb-2">Cuidado solar</h4>
                     <img alt="Botella y tubo de productos para el cuidado solar sobre fondo rosa" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/0765bd2b-a343-4364-7099-948fad18aaa8.jpg" width="400"/>
@@ -343,6 +361,7 @@
                 </article>
             </section>
 
+            <!-- Product Carousel: Inmuebles -->
             <section aria-label="Productos Destacados" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
                 <h3 class="text-xl sm:text-2xl font-bold mb-4">
                     Productos <span class="font-normal">que te podrían interesar...</span>
@@ -547,6 +566,7 @@
                 </button>
             </section>
 
+            <!-- Product Carousel: Vehículos -->
             <section aria-label="Productos Destacados de Vehículos" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
                 <h4 class="text-xl sm:text-2xl font-bold mb-4">Productos Destacados de Vehículos</h4>
                 <div id="autos-carousel" class="overflow-x-auto hide-scrollbar pb-4">
@@ -783,7 +803,8 @@
                 </div>
             </section>
 
-            <section class="bg-gray-800 text-white py-12 px-6 rounded-xl shadow-lg text-center mb-12">
+            <!-- Sell Something Section -->
+            <section class="bg-gray-800 text-white py-12 px-6 rounded-xl shadow-lg text-center mb-12" data-non-product-content="true">
                 <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Tienes algo que vender?</h2>
                 <p class="text-lg mb-8">
                     Publica tus anuncios de forma rápida y gratuita. ¡Miles de compradores te esperan!
@@ -793,7 +814,8 @@
                 </a>
             </section>
 
-            <section class="mb-12">
+            <!-- Why Choose BuscaLoYa Section -->
+            <section class="mb-12" data-non-product-content="true">
                 <h2 class="text-2xl font-bold text-center mb-8">¿Por qué elegir BuscaLoYa?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect">
@@ -820,7 +842,8 @@
                 </div>
             </section>
 
-            <section class="mb-12 bg-white p-8 rounded-xl shadow-lg">
+            <!-- Testimonials Section -->
+            <section class="mb-12 bg-white p-8 rounded-xl shadow-lg" data-non-product-content="true">
                 <h2 class="text-2xl font-bold text-center mb-8">Lo que dicen nuestros usuarios</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 fade-in">
@@ -850,7 +873,8 @@
                 </div>
             </section>
 
-            <section class="bg-yellow-100 p-8 rounded-xl shadow-lg text-center mb-12">
+            <!-- Newsletter Signup Section -->
+            <section class="bg-yellow-100 p-8 rounded-xl shadow-lg text-center mb-12" data-non-product-content="true">
                 <h2 class="text-2xl font-bold mb-4">¡No te pierdas ninguna oferta!</h2>
                 <p class="text-gray-700 mb-6">Suscríbete a nuestra newsletter para recibir las mejores promociones directamente en tu bandeja de entrada.</p>
                 <form id="buscaloya-newsletter-form" class="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto">
@@ -1576,7 +1600,7 @@
                             <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
                             <span class="text-xs font-semibold">Comida</span>
                         </div>
-                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Utilidades...">
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-category-item" data-message="Navegando a Utilidades...">
                             <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
                             <span class="text-xs font-semibold">Utilidades</span>
                         </div>
