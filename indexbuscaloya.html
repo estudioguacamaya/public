@@ -1,0 +1,1885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>BuscaLoYa - Tu Plataforma Integrada</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <!-- Google Fonts for Montserrat and Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+    <!-- Custom Stylesheet -->
+    <link href="style.css" rel="stylesheet"/>
+</head>
+<body class="bg-gray-100 text-gray-900">
+
+    <!-- Loader Overlay -->
+    <div id="loader-overlay" class="hidden">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Message Box and Overlay -->
+    <div id="message-box-overlay" class="message-box-overlay"></div>
+    <div id="message-box" class="message-box">
+        <p id="message-box-text" class="text-gray-800 text-lg mb-4"></p>
+        <button id="message-box-close" class="bg-yellow-500 text-gray-900 font-bold py-2 px-6 rounded-full shadow-md hover:bg-yellow-600 transition-colors">
+            Cerrar
+        </button>
+    </div>
+
+    <!-- Top Banner -->
+    <div class="bg-yellow-400 text-gray-900 text-center text-xs sm:text-sm py-1 px-2 rounded-b-lg shadow-sm">
+        <span>
+            🌟 ¡Descubre nuestras últimas ofertas y promociones exclusivas!
+            <a class="underline font-semibold hover:text-white transition-colors" href="#" id="promo-link">Ver más</a>
+        </span>
+    </div>
+
+    <!-- Header / Main Navigation -->
+    <header class="bg-white shadow-md py-3 px-4 rounded-b-xl max-w-7xl mx-auto border-b border-gray-200 relative z-50">
+        <div class="flex items-center justify-between">
+            <a class="flex items-center space-x-2 transition-opacity hover:opacity-80" href="./index.html" id="logo-home-link">
+                <img alt="Logo de BuscaLoYa, mano azul sosteniendo un círculo amarillo" class="w-8 h-8 rounded-full" height="32" src="https://storage.googleapis.com/a1aa/image/dc99515c-f140-468c-7bbe-d6aa9ff1ff22.jpg" width="32"/>
+                <span class="text-2xl font-bold text-gray-800">BuscaLoYa</span>
+            </a>
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-2 bg-gray-100 rounded-full p-1 shadow-inner">
+                <button id="tab-marketplace" class="tab-main-button bg-yellow-600 text-white px-5 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-700 transition-colors">
+                    <i class="fas fa-shopping-bag mr-2"></i> Compra y Venta
+                </button>
+                <button id="tab-financiamiento" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-wallet mr-2"></i> Financiamiento
+                </button>
+                <button id="tab-worldcoin" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-globe mr-2"></i> Worldcoin
+                </button>
+                <button id="tab-prepaid-services" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-gift mr-2"></i> Prepagos
+                </button>
+                <button id="tab-my-account" class="tab-main-button bg-white text-gray-800 px-5 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-user-circle mr-2"></i> Mi Cuenta
+                </button>
+            </nav>
+            <div class="hidden md:flex items-center space-x-4">
+                <button class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors" id="publish-ad-desktop-btn">
+                    <i class="fas fa-plus mr-1"></i> Publicar anuncio
+                </button>
+                <button class="text-gray-700 hover:text-yellow-600 focus:outline-none transition-colors rounded-full p-2" id="my-account-desktop-btn">
+                    <i class="far fa-user fa-lg"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" aria-label="Toggle mobile menu" class="md:hidden text-gray-700 hover:text-gray-900 transition-colors rounded-full p-2">
+                <i class="fas fa-bars text-xl" id="mobile-menu-icon"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile-only main navigation buttons (visible outside menu) -->
+    <div class="md:hidden relative flex justify-start items-center space-x-2 sm:space-x-4 px-4 py-3 bg-gray-100 rounded-b-xl shadow-sm overflow-x-auto hide-scrollbar scroll-hint-right z-30">
+        <button id="mobile-main-nav-marketplace" class="tab-main-button flex-shrink-0 bg-yellow-600 text-white text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-700 transition-colors">
+            <i class="fas fa-shopping-bag mr-1"></i> Compra y Venta
+        </button>
+        <button id="mobile-main-nav-financiamiento" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-wallet mr-1"></i> Financiamiento
+        </button>
+        <button id="mobile-main-nav-worldcoin" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-globe mr-1"></i> Worldcoin
+        </button>
+        <button id="mobile-main-nav-prepaid-services" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-gift mr-1"></i> Prepagos
+        </button>
+        <button id="mobile-main-nav-my-account" class="tab-main-button flex-shrink-0 bg-white text-gray-800 text-sm px-4 py-2 rounded-full font-semibold shadow-md hover:bg-gray-200 transition-colors">
+            <i class="fas fa-user-circle mr-1"></i> Mi Cuenta
+        </button>
+        <!-- Scroll indicator for mobile -->
+        <div class="absolute right-0 top-0 bottom-0 w-10 bg-gradient-to-l from-gray-100 to-transparent pointer-events-none"></div>
+    </div>
+
+    <!-- Mobile menu (hidden by default, toggled by button) -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg py-4 fixed w-full top-0 left-0 h-full overflow-y-auto -translate-y-full z-40 rounded-b-xl">
+        <div class="flex justify-end px-4 pt-2">
+            <button id="close-mobile-menu-button" aria-label="Close mobile menu" class="text-gray-700 hover:text-gray-900 transition-colors rounded-full p-2">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-start px-4 space-y-2 mt-4">
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-home-link">Inicio</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#buscaloya-section" id="mobile-buscaloya-link">BuscaLoYa</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-sell-link">Vender</a>
+            <a class="block w-full px-4 py-2 text-base text-gray-700 hover:bg-gray-100 rounded-md" href="#" id="mobile-help-link">Ayuda</a>
+            <hr class="my-2 border-gray-200 w-full">
+            <button class="block w-full text-left bg-yellow-500 text-gray-900 px-4 py-2 rounded-full font-semibold shadow-md hover:bg-yellow-600 transition-colors" id="mobile-publish-ad-btn">
+                <i class="fas fa-plus mr-1"></i> Publicar anuncio
+            </button>
+            <button class="block w-full text-left text-gray-700 px-4 py-2 rounded-full hover:bg-gray-100 transition-colors" id="mobile-my-account-btn">
+                <i class="far fa-user mr-2"></i> Mi cuenta
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content Area (Tabs) -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+
+        <!-- Marketplace Section -->
+        <div id="content-marketplace" class="content-section active fade-in">
+            <!-- Hero Section -->
+            <section class="text-center py-12 bg-gradient-to-br from-yellow-100 to-white rounded-xl shadow-lg mb-12" data-non-product-content="true">
+                <h1 class="text-3xl md:text-5xl font-extrabold text-gray-800 mb-4 animate-bounce-custom">
+                    ¡Encuentra lo que buscas, vende lo que tienes!
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-8 fade-in">
+                    Tu plataforma todo en uno para compras, ventas y más.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="buy-now-btn">
+                        <i class="fas fa-shopping-cart mr-2"></i> Comprar ahora
+                    </a>
+                    <a href="#" class="bg-gray-800 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-900 transition-all scale-up-hover" id="publish-free-btn">
+                        <i class="fas fa-plus mr-2"></i> Publicar gratis
+                    </a>
+                </div>
+            </section>
+
+            <!-- Search and Filter Section -->
+            <section class="mb-12" data-non-product-content="true">
+                <h2 class="text-2xl font-bold text-center mb-6">¿Qué necesitas hoy?</h2>
+                <div class="bg-white p-6 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4">
+                    <div class="relative w-full md:w-2/5">
+                        <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="buscaloya-search-input" placeholder="Busca productos, servicios..." class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-yellow-500 shadow-sm transition-all" />
+                    </div>
+                    <div class="relative w-full md:w-1/5">
+                        <i class="fas fa-tag absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <select id="buscaloya-category-select" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500 shadow-sm transition-all">
+                            <option value="">Todas las categorías</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Vehículos">Vehículos</option>
+                            <option value="Inmuebles">Inmuebles</option>
+                            <option value="Hogar">Hogar</option>
+                            <option value="Servicios">Servicios</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Juegos y Juguetes">Juegos y Juguetes</option>
+                            <option value="Libros">Libros</option>
+                            <option value="Deportes y Fitness">Deportes y Fitness</option>
+                            <option value="Herramientas">Herramientas</option>
+                            <option value="Cuidado solar">Cuidado solar</option>
+                            <option value="Sillas y sillones">Sillas y sillones</option>
+                            <option value="Zapatos Deportivos">Zapatos Deportivos</option>
+                            <option value="Electrónica para el Hogar">Electrónica para el Hogar</option>
+                            <option value="Libros y Revistas">Libros y Revistas</option>
+                            <option value="Autos">Autos</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <div class="relative w-full md:w-1/5">
+                        <i class="fas fa-map-marker-alt absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <select id="buscaloya-location-select" class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-full appearance-none bg-white focus:outline-none focus:ring-2 focus:ring-yellow-500 shadow-sm transition-all">
+                            <option value="">Ubicación (Estados de Venezuela)</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Anzoátegui">Anzoátegui</option>
+                            <option value="Apure">Apure</option>
+                            <option value="Aragua">Aragua</option>
+                            <option value="Barinas">Barinas</option>
+                            <option value="Bolívar">Bolívar</option>
+                            <option value="Carabobo">Carabobo</option>
+                            <option value="Cojedes">Cojedes</option>
+                            <option value="Delta Amacuro">Delta Amacuro</option>
+                            <option value="Distrito Capital">Distrito Capital</option>
+                            <option value="Falcón">Falcón</option>
+                            <option value="Guárico">Guárico</option>
+                            <option value="La Guaira">La Guaira</option>
+                            <option value="Lara">Lara</option>
+                            <option value="Mérida">Mérida</option>
+                            <option value="Miranda">Miranda</option>
+                            <option value="Monagas">Monagas</option>
+                            <option value="Nueva Esparta">Nueva Esparta</option>
+                            <option value="Portuguesa">Portuguesa</option>
+                            <option value="Sucre">Sucre</option>
+                            <option value="Táchira">Táchira</option>
+                            <option value="Trujillo">Trujillo</option>
+                            <option value="Yaracuy">Yaracuy</option>
+                            <option value="Zulia">Zulia</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+                    </div>
+                    <button id="buscaloya-search-button" class="w-full md:w-1/5 bg-gray-800 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-900 transition-all scale-up-hover">
+                        <i class="fas fa-search mr-2"></i> Buscar
+                    </button>
+                </div>
+            </section>
+
+            <!-- Clear Search Button Container (visible when search is active) -->
+            <div class="text-center mb-8 hidden sticky top-0 z-40 bg-gray-100 py-4 rounded-b-xl shadow-md" id="clear-search-container">
+                <button id="clear-search-btn" class="bg-blue-500 text-white font-bold py-2 px-6 rounded-full shadow-md hover:bg-blue-600 transition-colors">
+                    <i class="fas fa-times-circle mr-2"></i> Limpiar Búsqueda
+                </button>
+            </div>
+
+            <!-- No Search Results Message (initially hidden) -->
+            <div id="no-search-results-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mb-8">
+                <strong class="font-bold">¡Lo sentimos!</strong>
+                <span class="block sm:inline"> No se encontraron productos que coincidan con tu búsqueda. Intenta con otros criterios.</span>
+            </div>
+
+            <!-- Category Explore Section -->
+            <section class="mb-12" data-non-product-content="true">
+                <h2 class="text-2xl font-bold text-center mb-6">Explora por Categorías</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Vehículos...">
+                        <div class="bg-blue-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-car text-blue-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Vehículos</span>
+                    </a>
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Inmuebles...">
+                        <div class="bg-green-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-home text-green-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Inmuebles</span>
+                    </a>
+                    <a href="#" class="bg-purple-100 p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Empleo...">
+                        <div class="bg-purple-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-briefcase text-purple-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Empleo</span>
+                    </a>
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Electrónica...">
+                        <div class="bg-red-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-laptop text-red-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Electrónica</span>
+                    </a>
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Moda...">
+                        <div class="bg-yellow-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-tshirt text-yellow-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Moda</span>
+                    </a>
+                    <a href="#" class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect category-link" data-message="Navegando a la categoría de Hogar & Jardín...">
+                        <div class="bg-indigo-100 rounded-full p-3 mb-3">
+                            <i class="fas fa-seedling text-indigo-600 text-2xl"></i>
+                        </div>
+                        <span class="font-semibold text-gray-700">Hogar & Jardín</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Featured Product Categories (top row) -->
+            <section aria-label="Categorías de productos destacadas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 gap-4" data-non-product-content="true">
+                <article aria-label="Artículos de papelería para tu casa y oficina" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                    <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                        <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                        <h3 class="font-bold text-sm sm:text-base mb-2">ARTÍCULOS DE PAPELERÍA PARA TU CASA Y OFICINA</h3>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a artículos de papelería..." href="#">Ver más</a>
+                    </div>
+                    <img alt="Caja de marcadores de colores sobre un fondo degradado azul y rosa" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/88fe343c-bc62-4d91-7383-d0d4f974b8bb.jpg" width="300"/>
+                </article>
+                <article aria-label="Encuentra tu nuevo smartphone" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                    <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                        <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                        <h3 class="font-bold text-sm sm:text-base mb-2">ENCUENTRA TU NUEVO SMARTPHONE</h3>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a smartphones..." href="#">Ver más</a>
+                    </div>
+                    <img alt="Smartphone sobre fondo azul con efectos de luz" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/01a83626-20c6-4408-638d-c5ab3567c3d4.jpg" width="300"/>
+                </article>
+                <article aria-label="¡Lo mejor en iluminación!" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                    <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                        <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                        <h3 class="font-bold text-sm sm:text-base mb-2">¡LO MEJOR EN ILUMINACIÓN!</h3>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a iluminación..." href="#">Ver más</a>
+                    </div>
+                    <img alt="Tira de luz de neón azul sobre fondo oscuro" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/af810ea3-28b3-45a2-babe-2b1bb65fbb03.jpg" width="300"/>
+                </article>
+                <article aria-label="Impresoras, tóners y mucho más" class="bg-white rounded-lg flex flex-col sm:flex-row items-center shadow-sm hover:shadow-md transition-all card-hover-effect overflow-hidden">
+                    <div class="p-4 sm:w-1/2 text-[9px] sm:text-xs">
+                        <p class="uppercase text-gray-500 tracking-widest mb-1">Envíos gratis en 48h</p>
+                        <h3 class="font-bold text-sm sm:text-base mb-2">IMPRESORAS, TÓNERS Y MUCHO MÁS</h3>
+                        <a class="inline-block bg-blue-600 text-white text-[9px] px-4 py-1 rounded-full hover:bg-blue-700 transition-colors category-link" data-message="Redirigiendo a impresoras..." href="#">Ver más</a>
+                    </div>
+                    <img alt="Impresora con cartucho de tóner sobre fondo blanco" class="w-full sm:w-1/2 h-32 sm:h-40 object-cover rounded-r-lg" height="160" src="https://storage.googleapis.com/a1aa/image/74d8b59a-35ca-4aef-2b09-00b82efc5a4f.jpg" width="300"/>
+                </article>
+            </section>
+
+            <!-- Category Thumbnail Section -->
+            <section aria-label="Categorías de productos con miniaturas" class="max-w-7xl mx-auto mt-6 px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4" data-non-product-content="true">
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Cuidado solar</h4>
+                    <img alt="Botella y tubo de productos para el cuidado solar sobre fondo rosa" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/0765bd2b-a343-4364-7099-948fad18aaa8.jpg" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de producto de cuidado solar 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/fda04952-224a-4812-f682-77d563de9a11.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/fda04952-224a-4812-f682-77d563de9a11.jpg" width="40"/>
+                        <img alt="Miniatura de producto de cuidado solar 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/86981076-fa22-418e-bfb7-3ee90947dffe.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/86981076-fa22-418e-bfb7-3ee90947dffe.jpg" width="40"/>
+                        <img alt="Miniatura de producto de cuidado solar 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/18a25f91-b838-45a5-fadb-fd755c6d149b.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/18a25f91-b838-45a5-fadb-fd755c6d149b.jpg" width="40"/>
+                        <img alt="Miniatura de producto de cuidado solar 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/8f9d7573-b1ad-4f80-4f1f-31658fabac36.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/8f9d7573-b1ad-4f80-4f1f-31658fabac36.jpg" width="40"/>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Sillas y sillones</h4>
+                    <img alt="Silla roja y sillón gris sobre fondo claro" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/77681193-1371-4ffb-bf5a-2d10bea785b8.jpg" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de silla 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/ef18eccf-ccc3-4e8a-9db7-3e3c1b274ddf.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/ef18eccf-ccc3-4e8a-9db7-3e3c1b274ddf.jpg" width="40"/>
+                        <img alt="Miniatura de silla 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/c6bb9b8f-45b5-4e75-7acd-c8167dad2c15.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/c6bb9b8f-45b5-4e75-7acd-c8167dad2c15.jpg" width="40"/>
+                        <img alt="Miniatura de silla 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/e45456da-a602-4bfb-a735-5e9ef0d20fbf.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/e45456da-a602-4bfb-a735-5e9ef0d20fbf.jpg" width="40"/>
+                        <img alt="Miniatura de silla 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/14e8ea10-d9aa-4bf0-a85f-f87988fa7b40.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/14e8ea10-d9aa-4bf0-a85f-f87988fa7b40.jpg" width="40"/>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Zapatos Deportivos</h4>
+                    <img alt="Dos zapatillas deportivas sobre fondo naranja" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://storage.googleapis.com/a1aa/image/c31e83a1-6488-4a31-69e6-f71dab106a97.jpg" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de zapatilla deportiva 1" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/4a180357-e5d5-4b6a-93f0-f9a02402708d.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/4a180357-e5d5-4b6a-93f0-f9a02402708d.jpg" width="40"/>
+                        <img alt="Miniatura de zapatilla deportiva 2" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/fe5e3903-3e5a-46b7-3cc6-b1d7a4286757.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/fe5e3903-3e5a-46b7-3cc6-b1d7a4286757.jpg" width="40"/>
+                        <img alt="Miniatura de zapatilla deportiva 3" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/06a01b04-0d72-4b92-9bc7-9e2d1aa25e48.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/06a01b04-0d72-4b92-9bc7-9e2d1aa25e48.jpg" width="40"/>
+                        <img alt="Miniatura de zapatilla deportiva 4" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://storage.googleapis.com/a1aa/image/56c7d60e-69f6-450b-9241-c62f2bd2efa9.jpg" height="40" src="https://storage.googleapis.com/a1aa/image/56c7d60e-69f6-450b-9241-c62f2bd2efa9.jpg" width="40"/>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Electrónica para el Hogar</h4>
+                    <img alt="Dispositivos electrónicos en un fondo moderno" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://placehold.co/400x180/ADD8E6/000000?text=Electr%C3%B3nica+Hogar" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de TV" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/ADD8E6/000000?text=TV" height="40" src="https://placehold.co/40x40/ADD8E6/000000?text=TV" width="40"/>
+                        <img alt="Miniatura de altavoz inteligente" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/ADD8E6/000000?text=Altavoz" height="40" src="https://placehold.co/40x40/ADD8E6/000000?text=Altavoz" width="40"/>
+                        <img alt="Miniatura de cámara de seguridad" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/ADD8E6/000000?text=C%C3%A1mara" height="40" src="https://placehold.co/40x40/ADD8E6/000000?text=C%C3%A1mara" width="40"/>
+                        <img alt="Miniatura de asistente de voz" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/ADD8E6/000000?text=Asistente" height="40" src="https://placehold.co/40x40/ADD8E6/000000?text=Asistente" width="40"/>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Juguetes y Juegos</h4>
+                    <img alt="Variedad de juguetes para niños" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://placehold.co/400x180/FFC0CB/000000?text=Juguetes+y+Juegos" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de oso de peluche" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Oso" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Oso" width="40"/>
+                        <img alt="Miniatura de bloques de construcción" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Bloques" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Bloques" width="40"/>
+                        <img alt="Miniatura de muñeca" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/FFC0CB/000000?text=Mu%C3%B1eca" height="40" src="https://placehold.co/40x40/FFC0CB/000000?text=Mu%C3%B1eca" width="40"/>
+                        <img alt="Miniatura de cómic" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" width="40"/>
+                    </div>
+                </article>
+                <article class="bg-white rounded-lg shadow-sm p-3 hover:shadow-md transition-all card-hover-effect">
+                    <h4 class="font-semibold text-sm mb-2">Libros y Revistas</h4>
+                    <img alt="Pila de libros coloridos" class="rounded-md mb-3 w-full object-cover h-36 main-category-image" height="180" src="https://placehold.co/400x180/A9A9A9/FFFFFF?text=Libros+y+Revistas" width="400"/>
+                    <div class="flex space-x-2 justify-center">
+                        <img alt="Miniatura de libro de ficción" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=Ficci%C3%B3n" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=Ficci%C3%B3n" width="40"/>
+                        <img alt="Miniatura de libro de no ficción" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=No+Ficci%C3%B3n" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=No+Ficci%C3%B3n" width="40"/>
+                        <img alt="Miniatura de revista de moda" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=Moda" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=Moda" width="40"/>
+                        <img alt="Miniatura de cómic" class="rounded-full border border-gray-300 w-10 h-10 object-cover cursor-pointer hover:border-blue-500 transition-colors thumbnail-image" data-main-image="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" height="40" src="https://placehold.co/40x40/A9A9A9/FFFFFF?text=C%C3%B3mic" width="40"/>
+                    </div>
+                </article>
+            </section>
+
+            <!-- Product Carousel: Inmuebles -->
+            <section aria-label="Productos Destacados" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
+                <h3 class="text-xl sm:text-2xl font-bold mb-4">
+                    Productos <span class="font-normal">que te podrían interesar...</span>
+                </h3>
+                <div id="inmuebles-carousel" class="overflow-x-auto hide-scrollbar pb-4">
+                    <div class="flex space-x-4" id="marketplace-products-container">
+                        <!-- Products will be dynamically loaded here from Firebase -->
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Zulia" data-search-term="Casa en Alquiler Urb. El Paraíso 2H 1B Maracaibo">
+                            <div class="relative">
+                                <img alt="Casa con reja gris en exterior con vegetación" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/d33fe517-0ec8-43b9-c315-521c6107df71.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$400.000</p>
+                                <p class="text-gray-600">Maracaibo, Zulia</p>
+                                <p class="font-semibold mt-1">Casa en Alquiler Urb. El Paraíso 2H 1B</p>
+                                <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bed"></i>
+                                        <span>2</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bath"></i>
+                                        <span>1</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-car"></i>
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Casa en Alquiler Urb. El Paraíso...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Carabobo" data-search-term="Casa en Venta Urb. El Trigal Valencia">
+                            <div class="relative">
+                                <img alt="Casa con reja de madera en exterior" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/22d6efc7-243f-4a4e-0986-deb55009127b.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$63.000.000 <span class="text-green-600 font-semibold text-sm">-3%</span></p>
+                                <p class="text-gray-600">Valencia, Carabobo</p>
+                                <p class="font-semibold mt-1">Casa en Venta Urb. El Trigal</p>
+                                <div class="flex justify-end mt-2">
+                                    <img alt="Logo inmobiliaria" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/5da88364-73dd-4540-1bff-09458e984d5e.jpg" width="40"/>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Casa en Venta Urb. El Trigal...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento Vista al Mar, Torre 4 Puerto La Cruz">
+                            <div class="relative">
+                                <img alt="Edificios altos de departamentos" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/9d3a4324-ce48-466b-c5fe-89c1fe243b51.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">UF4.272 <span class="text-green-600 font-semibold text-sm">-19%</span></p>
+                                <p class="text-gray-600">Puerto La Cruz, Anzoátegui</p>
+                                <p class="font-semibold mt-1">Apartamento Vista al Mar, Torre 4</p>
+                                <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>54 m²</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bed"></i>
+                                        <span>3</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bath"></i>
+                                        <span>2</span>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end mt-2">
+                                    <img alt="Logo DCIGSA" class="h-6" height="20" src="https://storage.googleapis.com/a1aa/image/6a6c123e-3e95-43fb-2223-5e64c80ec56a.jpg" width="40"/>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Apartamento Vista al Mar...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Mérida" data-search-term="Amplio Apartamento en Venta Cerca de Av. Las Américas 2H +2B+1E Mérida">
+                            <div class="relative">
+                                <img alt="Jardín con edificios de departamentos al fondo" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/8d51dc69-5f89-4637-17a8-4f8621016c31.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$147.000.000 <span class="text-green-600 font-semibold text-sm">-2%</span></p>
+                                <p class="text-gray-600">Mérida, Mérida</p>
+                                <p class="font-semibold mt-1">Amplio Apartamento en Venta Cerca de Av. Las Américas 2H +2B+1E</p>
+                                <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>90 m²</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bed"></i>
+                                        <span>2</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bath"></i>
+                                        <span>1</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Amplio Apartamento en Venta...">
+                                    Contactar ahora
+                                </button>
+                                <div class="absolute top-3 right-20 bg-[#ff6a00] text-white text-xs rounded-full px-2 py-0.5 font-semibold select-none cursor-default">
+                                    ¿Quieres tu anuncio aquí?
+                                </div>
+                                <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                    GO
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Anzoátegui" data-search-term="Apartamento de Lujo en Residencias Palm Beach Lechería">
+                            <div class="relative">
+                                <img alt="Apartamento moderno con vista a la ciudad" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/A0D9B1/000000?text=Apartamento+Moderno" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$250.000</p>
+                                <p class="text-gray-600">Lechería, Anzoátegui</p>
+                                <p class="font-semibold mt-1">Apartamento de Lujo en Residencias Palm Beach</p>
+                                <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>120 m²</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bed"></i>
+                                        <span>3</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-bath"></i>
+                                        <span>3</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Apartamento de Lujo...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Inmuebles" data-location="Falcón" data-search-term="Gran Terreno Urbano en Venta Sector Las Calderas Coro">
+                            <div class="relative">
+                                <img alt="Terreno para desarrollo urbano" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/B0E0E6/000000?text=Terreno+Urbano" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$80.000</p>
+                                <p class="text-gray-600">Coro, Falcón</p>
+                                <p class="font-semibold mt-1">Gran Terreno Urbano en Venta Sector Las Calderas</p>
+                                <div class="flex space-x-4 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-ruler-combined"></i>
+                                        <span>500 m²</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Gran Terreno Urbano...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <button aria-label="Anterior" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button aria-label="Siguiente" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </section>
+
+            <!-- Product Carousel: Vehículos -->
+            <section aria-label="Productos Destacados de Vehículos" class="max-w-6xl mx-auto mt-12 px-4 sm:px-0 relative">
+                <h4 class="text-xl sm:text-2xl font-bold mb-4">Productos Destacados de Vehículos</h4>
+                <div id="autos-carousel" class="overflow-x-auto hide-scrollbar pb-4">
+                    <div class="flex space-x-4">
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Lara" data-search-term="Peugeot Partner Barquisimeto">
+                            <div class="relative">
+                                <img alt="Auto blanco vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/697b42dc-8a60-458f-ffd3-e02503cf2a40.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$10.900.000</p>
+                                <p class="text-gray-600">Barquisimeto, Lara</p>
+                                <p class="font-semibold mt-1">Peugeot Partner</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>2307 km</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Diesel</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Manual</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-road"></i>
+                                        <span>121681 km</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Peugeot Partner...">
+                                    Contactar ahora
+                                </button>
+                                <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                    T
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Táchira" data-search-term="Ford F-150 San Cristóbal">
+                            <div class="relative">
+                                <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$29.990.000</p>
+                                <p class="text-gray-600">San Cristóbal, Táchira</p>
+                                <p class="font-semibold mt-1">Ford F-150</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>23000 km</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Bencina</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Automático</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Ford F-150...">
+                                    Contactar ahora
+                                </button>
+                                <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                    EA
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Bolívar" data-search-term="Skoda YETI Ciudad Bolívar">
+                            <div class="relative">
+                                <img alt="Auto negro vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/bd4709b6-0d90-4826-5324-8102fdb22012.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$9.590.000</p>
+                                <p class="text-gray-600">Ciudad Bolívar, Bolívar</p>
+                                <p class="font-semibold mt-1">Skoda YETI</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>20485 km</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Diesel</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Manual</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-road"></i>
+                                        <span>155000 km</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Skoda YETI...">
+                                    Contactar ahora
+                                </button>
+                                <div class="absolute bottom-3 right-3 bg-white rounded-full p-1 text-gray-600 text-xs font-bold cursor-default select-none">
+                                    N
+                                </div>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Nueva Esparta" data-search-term="Hyundai ACCENT Porlamar">
+                            <div class="relative">
+                                <img alt="Auto gris vista frontal" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://storage.googleapis.com/a1aa/image/7a3a73f5-20a2-4dab-236c-b5c8b413e1c0.jpg" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$15.990.000</p>
+                                <p class="text-gray-600">Porlamar, Nueva Esparta</p>
+                                <p class="font-semibold mt-1">Hyundai ACCENT</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Gas</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Bencina</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Manual</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-road"></i>
+                                        <span>200000 km</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Hyundai ACCENT...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Bolívar" data-search-term="Toyota Hilux 4x4 Puerto Ordaz">
+                            <div class="relative">
+                                <img alt="Camioneta 4x4 robusta" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/6C7A89/FFFFFF?text=Camioneta+4x4" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$35.000.000</p>
+                                <p class="text-gray-600">Puerto Ordaz, Bolívar</p>
+                                <p class="font-semibold mt-1">Toyota Hilux 4x4</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>50000 km</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Diesel</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Automático</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Toyota Hilux 4x4...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                        <article class="bg-white rounded-xl shadow-lg border border-gray-200 w-72 flex-shrink-0 relative hover:shadow-xl transition-all card-hover-effect product-item" data-category="Vehículos" data-location="Falcón" data-search-term="Kawasaki Ninja 400 Punto Fijo">
+                            <div class="relative">
+                                <img alt="Moto deportiva roja" class="rounded-t-xl w-full h-40 object-cover" height="160" src="https://placehold.co/288x160/FF0000/FFFFFF?text=Moto+Deportiva" width="288"/>
+                                <button aria-label="Favorito" class="favorite-btn absolute top-3 left-3 bg-white rounded-full p-2 text-gray-600 hover:text-red-600 transition-colors shadow-md">
+                                    <i class="far fa-heart"></i>
+                                </button>
+                                <button aria-label="Más opciones" class="more-options-btn absolute top-3 right-3 bg-white rounded-full p-2 text-gray-600 hover:text-gray-900 transition-colors shadow-md">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                            </div>
+                            <div class="p-4 text-sm">
+                                <p class="font-bold text-gray-900 text-lg">$8.500.000</p>
+                                <p class="text-gray-600">Punto Fijo, Falcón</p>
+                                <p class="font-semibold mt-1">Kawasaki Ninja 400</p>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 text-gray-500 mt-2 text-xs">
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-tachometer-alt"></i>
+                                        <span>10000 km</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-gas-pump"></i>
+                                        <span>Gasolina</span>
+                                    </div>
+                                    <div class="flex items-center space-x-1">
+                                        <i class="fas fa-cogs"></i>
+                                        <span>Manual</span>
+                                    </div>
+                                </div>
+                                <button aria-label="Contactar ahora" class="contact-btn mt-4 w-full bg-[#ff6a00] text-white rounded-full text-sm py-2 font-semibold hover:bg-[#e05a00] transition-colors shadow-md" type="button" data-message="Contactando por Kawasaki Ninja 400...">
+                                    Contactar ahora
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <button aria-label="Anterior" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button aria-label="Siguiente" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg hover:scale-110 transition-transform z-10" data-target="inmuebles-carousel">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </section>
+
+            <!-- Sell Something Section -->
+            <section class="bg-gray-800 text-white py-12 px-6 rounded-xl shadow-lg text-center mb-12" data-non-product-content="true">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">¿Tienes algo que vender?</h2>
+                <p class="text-lg mb-8">
+                    Publica tus anuncios de forma rápida y gratuita. ¡Miles de compradores te esperan!
+                </p>
+                <a href="#" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="sell-now-btn">
+                    <i class="fas fa-bullhorn mr-2"></i> Publicar anuncio ahora
+                </a>
+            </section>
+
+            <!-- Why Choose BuscaLoYa Section -->
+            <section class="mb-12" data-non-product-content="true">
+                <h2 class="text-2xl font-bold text-center mb-8">¿Por qué elegir BuscaLoYa?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect">
+                        <div class="bg-yellow-100 rounded-full p-4 mb-4">
+                            <i class="fas fa-hand-holding-usd text-yellow-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Gana Dinero Extra</h3>
+                        <p class="text-gray-600">Vende lo que ya no usas y recupera parte de tu inversión de forma sencilla y segura.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect">
+                        <div class="bg-green-100 rounded-full p-4 mb-4">
+                            <i class="fas fa-shield-alt text-green-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Compras Seguras</h3>
+                        <p class="text-gray-600">Nuestra plataforma te ofrece herramientas para comprar con confianza y protección.</p>
+                    </div>
+                    <div class="bg-purple-100 p-6 rounded-xl shadow-md text-center flex flex-col items-center card-hover-effect">
+                        <div class="bg-purple-100 rounded-full p-4 mb-4">
+                            <i class="fas fa-mobile-alt text-purple-600 text-3xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Fácil de Usar</h3>
+                        <p class="text-gray-600">Navega, busca y publica anuncios desde cualquier dispositivo de forma intuitiva.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Testimonials Section -->
+            <section class="mb-12 bg-white p-8 rounded-xl shadow-lg" data-non-product-content="true">
+                <h2 class="text-2xl font-bold text-center mb-8">Lo que dicen nuestros usuarios</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 fade-in">
+                        <div class="flex items-center mb-4">
+                            <img class="w-12 h-12 rounded-full mr-4 object-cover" src="https://placehold.co/128x128/FFD700/000000?text=JD" alt="Foto de perfil de Juan D.">
+                            <div>
+                                <p class="font-semibold text-gray-800">Juan D.</p>
+                                <div class="text-yellow-500 text-sm">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"¡Increíble la facilidad para vender! Pude publicar mi bicicleta en minutos y se vendió al día siguiente. Súper recomendado."</p>
+                    </div>
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 fade-in">
+                        <div class="flex items-center mb-4">
+                            <img class="w-12 h-12 rounded-full mr-4 object-cover" src="https://placehold.co/128x128/00B14F/FFFFFF?text=MA" alt="Foto de perfil de María A.">
+                            <div>
+                                <p class="font-semibold text-gray-800">María A.</p>
+                                <div class="text-yellow-500 text-sm">
+                                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 italic">"Siempre encuentro lo que necesito a buen precio. La opción de envío es muy útil. La atención al cliente también es excelente."</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Newsletter Signup Section -->
+            <section class="bg-yellow-100 p-8 rounded-xl shadow-lg text-center mb-12" data-non-product-content="true">
+                <h2 class="text-2xl font-bold mb-4">¡No te pierdas ninguna oferta!</h2>
+                <p class="text-gray-700 mb-6">Suscríbete a nuestra newsletter para recibir las mejores promociones directamente en tu bandeja de entrada.</p>
+                <form id="buscaloya-newsletter-form" class="flex flex-col sm:flex-row justify-center gap-4 max-w-lg mx-auto">
+                    <input type="email" placeholder="Introduce tu correo electrónico" class="flex-grow py-3 px-6 rounded-full border border-yellow-300 focus:outline-none focus:ring-2 focus:ring-yellow-500 shadow-sm text-gray-900" required />
+                    <button type="submit" class="bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded-full shadow-md hover:bg-yellow-600 transition-all scale-up-hover">
+                        Suscribirse
+                    </button>
+                </form>
+            </section>
+        </div>
+
+        <!-- Financing Section -->
+        <div id="content-financiamiento" class="content-section hidden">
+            <section id="financiamiento-section" class="max-w-7xl mx-auto px-4 py-6 bg-gray-50 rounded-xl shadow-lg mb-12">
+                <h2 class="text-center font-bold text-xl md:text-2xl mb-6 text-blue-700">
+                    Financiamiento BuscaLoYa: Compra Hoy, Paga Después
+                </h2>
+
+                <section class="bg-gray-900 relative max-w-7xl mx-auto mt-6 rounded-xl overflow-hidden shadow-lg py-8">
+                    <div class="text-white text-center font-bold text-2xl mb-4">Únete al club BuscaLoYa y obtén más.</div>
+                    <div id="club-buscaloya-carousel" class="relative flex justify-center items-center h-24">
+                        <div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+                            <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
+                                <div class="w-16 h-16 rounded-full bg-blue-300 flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Acceso a ofertas exclusivas.">
+                                    <i class="fas fa-tags text-blue-800 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-purple-300 flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Pagos flexibles y sin intereses.">
+                                    <i class="fas fa-hand-holding-usd text-purple-800 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-green-300 flex items-center justify-center shadow-[0_0_15px_#A3D55B] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Soporte prioritario 24/7.">
+                                    <i class="fas fa-headset text-green-800 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-orange-300 flex items-center justify-center shadow-[0_0_15px_#F9A14B] hover:scale-105 transition-transform cursor-pointer hidden sm:flex club-benefit-icon" data-message="Beneficio: Recompensas exclusivas para miembros.">
+                                    <i class="fas fa-trophy text-orange-800 text-2xl"></i>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-full flex justify-center items-center space-x-4 sm:space-x-6 px-4">
+                                <div class="w-16 h-16 rounded-full bg-gray-600 flex items-center justify-center shadow-[0_0_15px_#3B3B3B] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Acceso anticipado a ventas.">
+                                    <i class="fas fa-calendar-alt text-gray-200 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-yellow-300 flex items-center justify-center shadow-[0_0_15px_#FFED00] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Puntos dobles en tus compras.">
+                                    <i class="fas fa-coins text-yellow-800 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-blue-300 flex items-center justify-center shadow-[0_0_15px_#7ED6F0] hover:scale-105 transition-transform cursor-pointer club-benefit-icon" data-message="Beneficio: Envío express gratuito.">
+                                    <i class="fas fa-truck text-blue-800 text-2xl"></i>
+                                </div>
+                                <div class="w-16 h-16 rounded-full bg-purple-300 flex items-center justify-center shadow-[0_0_15px_#E9A9F7] hover:scale-105 transition-transform cursor-pointer hidden sm:flex club-benefit-icon" data-message="Beneficio: Acceso a eventos exclusivos.">
+                                    <i class="fas fa-ticket-alt text-purple-800 text-2xl"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-white text-center text-sm pb-4">El club que crece contigo</div>
+                    <div class="flex justify-center space-x-2 pb-6" id="buscaloya-carousel-dots">
+                        <span class="w-2 h-2 rounded-full bg-white cursor-pointer" data-slide-index="0"></span>
+                        <span class="w-2 h-2 rounded-full bg-gray-600 cursor-pointer" data-slide-index="1"></span>
+                    </div>
+                    <button aria-label="Anterior" class="buscaloya-carousel-prev-btn absolute left-4 top-1/2 -translate-y-1/2 text-white text-2xl p-2 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-all">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button aria-label="Siguiente" class="buscaloya-carousel-next-btn absolute right-4 top-1/2 -translate-y-1/2 text-white text-2xl p-2 rounded-full bg-gray-800 bg-opacity-50 hover:bg-opacity-75 transition-all">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </section>
+
+                <section class="max-w-4xl mx-auto px-4 mt-12 text-center">
+                    <p class="text-sm text-gray-600 mb-2">¿Por qué financiar con BuscaLoYa?</p>
+                    <h2 class="font-bold text-2xl leading-tight max-w-md mx-auto mb-8">
+                        Es una alternativa de compra accesible para que te lleves lo que necesitas hoy
+                    </h2>
+                    <div class="mt-8 flex flex-col sm:flex-row justify-center gap-6">
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: El pago lo divides en cuotas y pagas solo el producto">
+                            <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                                <i class="fas fa-credit-card text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-base mb-2">Pago en cuotas</h3>
+                            <p class="text-sm text-gray-600">El pago lo divides en cuotas y pagas solo el producto</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: Compra sin intereses en más de 2.000 comercios">
+                            <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                                <i class="fas fa-percent text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-base mb-2">Sin intereses</h3>
+                            <p class="text-sm text-gray-600">Compra sin intereses en más de 2.000 comercios</p>
+                        </div>
+                        <div class="bg-white rounded-xl p-6 w-full sm:w-1/3 shadow-lg border-b-4 border-yellow-400 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-benefit-card" data-message="Beneficio: Compra seguro y paga hoy, paga con tu tiempo">
+                            <div class="bg-yellow-400 text-black rounded-full p-4 mb-4 w-16 h-16 flex items-center justify-center shadow-md">
+                                <i class="fas fa-shield-alt text-2xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-base mb-2">Conveniente y seguro</h3>
+                            <p class="text-sm text-gray-600">Compra seguro y paga hoy, paga con tu tiempo</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12">
+                    <p class="text-sm text-center text-gray-600 mb-2">Con más de 300 aliados y 3500 comercios en Venezuela</p>
+                    <h3 class="font-bold text-2xl text-center mb-6">Con BuscaLoYa obtén al instante eso que necesitas</h3>
+                    <div class="flex justify-center mb-6">
+                        <button id="buscaloya-view-all-stores-button" class="bg-gray-900 text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" type="button">Ver todas las tiendas</button>
+                    </div>
+                    <div class="relative">
+                        <div id="buscaloya-products-carousel" class="flex overflow-x-auto hide-scrollbar space-x-4 pb-6 px-2 sm:px-0">
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Tecnología...">
+                                <img alt="Smartphone negro sobre fondo azul claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/93036a75-b2f5-432e-d951-f9551191687f.jpg" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Tecnología</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Smartphones de última generación</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Tecnología..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Moda...">
+                                <img alt="Suéter naranja sobre fondo verde claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/2bd03bff-6428-409f-2ab0-656dfc09a77d.jpg" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Moda</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Tendencias en ropa y accesorios</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Moda..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Zapatos...">
+                                <img alt="Zapatilla roja sobre fondo morado claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/418470e8-fa60-459b-5a7f-c3692f37501c.jpg" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Zapatos</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Calzado para cada ocasión</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Zapatos..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos Departamentales...">
+                                <img alt="Lavadora blanca sobre fondo amarillo pálido" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/34026907-735e-4969-aa4c-754e2ea40e56.jpg" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Departamental</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Artículos para el hogar y más</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos Departamentales..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Hogar...">
+                                <img alt="Sillón azul sobre fondo gris claro" class="w-full h-40 object-cover" height="144" src="https://storage.googleapis.com/a1aa/image/b074b007-3b96-436a-1b6a-20f228061b4f.jpg" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Hogar</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Muebles y decoración</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Hogar..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                            <div class="flex-shrink-0 w-40 sm:w-48 rounded-xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all product-category-card" data-message="Navegando a productos de Gaming...">
+                                <img alt="Consola de videojuegos sobre fondo amarillo" class="w-full h-40 object-cover" height="144" src="https://placehold.co/144x144/F0E68C/000000?text=Gaming" width="144"/>
+                                <div class="text-xs font-semibold text-gray-900 bg-yellow-400 px-2 py-1 absolute top-2 left-2 rounded-full">Gaming</div>
+                                <div class="p-3">
+                                    <p class="text-sm font-semibold text-gray-900">Consolas y videojuegos</p>
+                                    <a class="text-xs font-semibold text-blue-600 hover:underline mt-1 block product-category-link" data-message="Ver todos los productos de Gaming..." href="#">Ver todos</a>
+                                </div>
+                            </div>
+                        </div>
+                        <button aria-label="Producto anterior" data-target="buscaloya-products-carousel" class="carousel-prev-btn absolute left-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button aria-label="Siguiente producto" data-target="buscaloya-products-carousel" class="carousel-next-btn absolute right-0 top-1/2 -translate-y-1/2 bg-yellow-400 text-gray-900 rounded-full w-10 h-10 flex items-center justify-center z-10 shadow-md hover:scale-110 transition-transform">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto w-full flex flex-col items-center">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <button class="buscaloya-tab-button bg-gray-900 text-white text-sm rounded-full px-4 py-1 shadow-md hover:bg-gray-800 transition-colors" type="button" data-tab="principal">Principal</button>
+                            <button class="buscaloya-tab-button text-sm text-gray-400 border border-gray-300 rounded-full px-4 py-1 hover:border-gray-900 hover:text-gray-900 transition-colors" type="button" data-tab="credito">Crédito</button>
+                        </div>
+                        <div id="buscaloya-tab-content-principal" class="buscaloya-tab-content text-center slide-in-right">
+                            <div class="text-4xl font-bold mb-1">$135.00</div>
+                            <div class="text-sm text-gray-400 line-through mb-2">De $180.00</div>
+                            <p class="text-sm text-gray-600">Para tus compras en 3 cuotas online y escaneando el QR</p>
+                            <div class="mt-6">
+                                <button class="border border-gray-900 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-900 hover:text-white transition-colors shadow-md financing-tab-button" type="button" data-message="Explorando opciones de pago principal...">Explora</button>
+                            </div>
+                        </div>
+                        <div id="buscaloya-tab-content-credito" class="buscaloya-tab-content text-center hidden slide-in-right">
+                            <div class="text-4xl font-bold mb-1">$500.00</div>
+                            <div class="text-sm text-gray-400 line-through mb-2">De $750.00</div>
+                            <p class="text-sm text-gray-600">Obtén un cupo de crédito mayor para compras más grandes</p>
+                            <div class="mt-6">
+                                <button class="border border-gray-900 rounded-full px-6 py-2 text-sm font-semibold hover:bg-gray-900 hover:text-white transition-colors shadow-md financing-tab-button" type="button" data-message="Solicitando cupo de crédito...">Solicitar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 max-w-md mx-auto w-full flex flex-col justify-center items-center">
+                        <div class="grid grid-cols-4 gap-4 opacity-70">
+                            <img alt="Logo de la marca Crocs" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/c537f144-cfb4-4cd7-b432-37b0fb58866d.jpg" width="64"/>
+                            <img alt="Logo de la marca EPA" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/77740bab-508c-4168-4353-8a98fe4a83a9.jpg" width="64"/>
+                            <img alt="Logo de la marca Aldo" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/73f4fb7c-3283-400d-de15-bcb1dd760e7b.jpg" width="64"/>
+                            <img alt="Logo de la marca Cubitt" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/22644bb5-b2e2-480f-01c0-e03deadc23dd.jpg" width="64"/>
+                            <img alt="Logo de la marca Gama" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/fe89b4d4-8733-4336-a584-392fa3ff668c.jpg" width="64"/>
+                            <img alt="Logo de la marca Lili Pink" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/dbbf2e8c-dc60-43f9-b25d-3eaffeee4fc5.jpg" width="64"/>
+                            <img alt="Logo de la marca Casio" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/a0208351-eba6-494f-31ed-26485fce79b2.jpg" width="64"/>
+                            <img alt="Logo de la marca Balu" class="object-contain h-8 sm:h-10" height="32" src="https://storage.googleapis.com/a1aa/image/5128aa9f-5a2e-4b2a-9523-41de8eabf18f.jpg" width="64"/>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-6 text-center">Compra online o en tienda, tú eliges</p>
+                        <p class="text-sm text-gray-600 text-center mt-1">Compra online o en tus tiendas, y paga en +3500 comercios a nivel nacional y adquiere tu comodidad</p>
+                    </div>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-xl shadow-lg p-6 flex flex-col items-center text-center hover:shadow-xl transition-all card-hover-effect financing-card-link" data-message="Explorando línea de crédito para el día a día...">
+                        <img alt="Pescado, huevos, smartphone con app BuscaLoYa, cepillo de dientes y papel higiénico flotando sobre fondo blanco" class="mb-4 w-40 h-40 object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/ee50218d-c2a4-4fb7-0f27-ab4e13c38f8a.jpg" width="144"/>
+                        <h4 class="font-semibold text-lg mb-2">Línea Cotidiana para el día a día</h4>
+                        <p class="text-sm text-gray-600 max-w-xs">Compra en supermercados y farmacias con facilidad + cuotas sin intereses en 14 días</p>
+                    </div>
+                    <div class="bg-gray-900 rounded-xl shadow-lg p-6 flex flex-col items-center text-center text-white relative overflow-hidden hover:shadow-xl transition-all card-hover-effect">
+                        <img alt="Tarjetas de crédito con detalles de cuotas sobre fondo negro con líneas curvas moradas y amarillas" class="mb-4 w-full max-w-xs object-contain" height="144" src="https://storage.googleapis.com/a1aa/image/141e66b0-4a85-4849-fd29-843b5cd8c484.jpg" width="240"/>
+                        <h4 class="font-semibold text-lg mb-2">Más cuotas para metas más grandes</h4>
+                        <p class="text-sm max-w-xs">Ahora con 6, 9, 12 y hasta 15 cuotas sin intereses en comercios online o en la tienda de tu cupo.</p>
+                        <button class="border border-white rounded-full px-6 py-2 text-sm font-semibold mt-6 hover:bg-white hover:text-gray-900 transition-colors shadow-md financing-more-installments-btn" type="button">Explora</button>
+                    </div>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12">
+                    <p class="text-sm text-center text-gray-600 mb-4">Estas tiendas ya forman parte de nuestros aliados</p>
+                    <div class="flex flex-wrap justify-center gap-6 mb-6">
+                        <img alt="Logo de la marca Gina rosa sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Gina..." height="48" src="https://storage.googleapis.com/a1aa/image/bf345a51-6c55-4143-5971-1906566d71e3.jpg" width="96"/>
+                        <img alt="Logo de la marca Jafra negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Jafra..." height="48" src="https://storage.googleapis.com/a1aa/image/3471eb15-a893-4232-6ed8-e0946f46a695.jpg" width="96"/>
+                        <img alt="Logo de la marca Opera negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Opera..." height="48" src="https://storage.googleapis.com/a1aa/image/d7063e74-b1ab-4295-6133-71888b96ed0b.jpg" width="96"/>
+                        <img alt="Logo de la marca Dad Foto negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Dad Foto..." height="48" src="https://storage.googleapis.com/a1aa/image/8c1f7551-e5ca-4515-aea0-b9f9baf39591.jpg" width="96"/>
+                        <img alt="Logo de la marca Gift rojo sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Gift..." height="48" src="https://storage.googleapis.com/a1aa/image/7d4c8a69-22a0-48a3-0cd7-cf2efe75d2c7.jpg" width="96"/>
+                        <img alt="Logo de la marca Push&Co negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Push&Co..." height="48" src="https://storage.googleapis.com/a1aa/image/1186f303-4a6a-442f-214b-b45d009fbac6.jpg" width="96"/>
+                        <img alt="Logo de la marca Ecom World negro sobre fondo blanco" class="h-12 object-contain hover:scale-105 transition-transform brand-logo-link" data-message="Abriendo enlace de Ecom World..." height="48" src="https://storage.googleapis.com/a1aa/image/422b6014-87f0-4609-8d5b-a82a6b4769cc.jpg" width="96"/>
+                    </div>
+                    <button class="bg-gray-900 text-white text-sm rounded-full px-5 py-2 hover:bg-gray-800 transition-colors shadow-md" id="view-all-financing-stores-btn" type="button">Ver todas las tiendas</button>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12">
+                    <div class="bg-yellow-400 rounded-xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+                        <div class="font-bold text-gray-900 text-xl sm:text-2xl max-w-lg leading-tight text-center sm:text-left">
+                            Descarga nuestra app, activa tu cuenta y comienza a usar BuscaLoYa
+                        </div>
+                        <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
+                            <a aria-label="Descargar en la App Store" href="#" class="hover:scale-105 transition-transform app-download-link" data-message="Descargando la app desde App Store...">
+                                <img alt="Botón de descarga de App Store" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/e277ffbc-b8d2-4f4d-0b25-475c03f4a780.jpg" width="96"/>
+                            </a>
+                            <a aria-label="Descargar en Google Play" href="#" class="hover:scale-105 transition-transform app-download-link" data-message="Descargando la app desde Google Play...">
+                                <img alt="Botón de descarga de Google Play" class="h-10 object-contain" height="32" src="https://storage.googleapis.com/a1aa/image/fee6b263-eacb-493d-efc4-a6d0eb0c3c20.jpg" width="96"/>
+                            </a>
+                        </div>
+                        <img alt="Icono de BuscaLoYa en la app" class="hidden sm:block w-20 h-20" height="64" src="https://storage.googleapis.com/a1aa/image/1e39728c-5c8f-4c72-6c6b-e8ad19bca4b8.jpg" width="64"/>
+                    </div>
+                </section>
+
+                <section class="max-w-4xl mx-auto px-4 mt-12 text-center bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="font-bold text-xl mb-4">Mantente al día con BuscaLoYa</h3>
+                    <p class="text-sm text-gray-600 mb-6">Suscríbete a nuestro boletín para recibir las últimas noticias y ofertas.</p>
+                    <form id="buscaloya-newsletter-form-financiamiento" class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                        <input type="email" placeholder="Tu correo electrónico" class="w-full sm:w-2/3 p-3 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-sm" required>
+                        <button type="submit" class="bg-gray-900 text-white text-sm rounded-full px-6 py-3 hover:bg-gray-800 transition-colors shadow-md w-full sm:w-auto">Suscribirse</button>
+                    </form>
+                </section>
+
+                <section class="max-w-6xl mx-auto px-4 mt-12 text-center">
+                    <h3 class="font-bold text-2xl mb-6">BuscaLoYa en los medios</h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-6 max-w-4xl mx-auto text-sm text-gray-400">
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Bloomberg...">Bloomberg</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EL MUNDO...">EL MUNDO</span>
+                        <span class="text-purple-600 font-semibold hover:text-purple-800 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Yahoo! Finance...">yahoo! finance</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de PYMNTS...">PYMNTS</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EN BANCOS...">EN BANCOS</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de El Estímulo...">-el estímulo-</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de EL UNIVERSAL...">EL UNIVERSAL</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de eldiario.es...">eldiario.</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Hispano Post...">Hispano Post</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de Últimas Noticias...">Últimas Noticias</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de TalCual...">TalCual</span>
+                        <span class="hover:text-gray-600 transition-colors cursor-pointer media-link" data-message="Abriendo enlace de CONTRAPUNTO...">CONTRAPUNTO</span>
+                    </div>
+                    <a class="text-sm text-blue-600 mt-4 inline-block hover:underline hover:text-blue-700 transition-colors" href="#" id="online-systems-link">sistemas en línea</a>
+                </section>
+            </section>
+        </div>
+
+        <div id="content-worldcoin" class="content-section hidden worldcoin-section">
+            <section id="hero-worldcoin" class="max-w-[1200px] mx-auto px-4 py-16 flex flex-col md:flex-row md:items-center md:justify-between space-y-10 md:space-y-0">
+                <div class="md:w-1/2 space-y-6 text-center md:text-left">
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight max-w-md mx-auto md:mx-0 text-gray-900">
+                        Compra, vende y envía dinero con tus <span class="text-yellow-500">Worldcoins</span> a todo el mundo.
+                    </h1>
+                    <p class="text-base sm:text-lg text-gray-600 max-w-lg mx-auto md:mx-0">
+                        Envía dinero a tus amigos y familia con nuestro rápido sistema de cambio. Tu mejor aliado de cambio, compramos tus Worldcoins al mejor precio ❤️.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="main-btn bg-gradient-to-r from-yellow-500 to-yellow-600 text-white text-lg font-semibold px-8 py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" id="sell-worldcoins-btn">
+                            Vender Ahora
+                        </a>
+                        <a class="text-base text-gray-600 underline hover:text-gray-900 transition-colors duration-200" href="#how-to-buy" id="how-it-works-link">
+                            Ver cómo funciona
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/3 w-full mt-10 md:mt-0 bg-white border border-gray-200 rounded-xl p-8 shadow-xl text-center flex flex-col items-center justify-center">
+                    <div class="flex justify-center items-center space-x-3 mb-5">
+                        <img alt="Icono de Worldcoin" class="w-8 h-8 rounded-full" src="https://placehold.co/32x32/1E90FF/FFFFFF?text=WLD" onerror="this.onerror=null;this.src='https://placehold.co/32x32/1E90FF/FFFFFF?text=WLD';"/>
+                        <span class="font-bold text-xl text-gray-900">Worldcoin</span>
+                    </div>
+                    <p class="text-5xl font-extrabold mb-3 text-gray-900">1.145 $USD</p>
+                    <p class="text-gray-600 mb-8 text-sm">Precio estimado</p>
+                    <button class="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 text-white font-semibold py-4 rounded-full hover:from-yellow-600 hover:to-yellow-700 transition-all duration-300 shadow-lg transform hover:scale-105" id="buy-worldcoin-btn">
+                        Comprar Worldcoin
+                    </button>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-10 border-t border-b border-gray-200 bg-gray-100">
+                <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600 text-sm">
+                    <img alt="Logo Visa" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/2560px-Visa_Inc._logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Visa';"/>
+                    <img alt="Logo Mastercard" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard_logo.svg/2560px-Mastercard_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Mastercard';"/>
+                    <img alt="Logo American Express" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/American_Express_logo.svg/2560px-American_Express_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Amex';"/>
+                    <img alt="Logo Diners Club" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Diners_Club_International_logo.svg/2560px-Diners_Club_International_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=Diners';"/>
+                    <img alt="Logo Apple Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Apple_Pay_logo.svg/2560px-Apple_Pay_logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=ApplePay';"/>
+                    <img alt="Logo Google Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Google_Pay_Logo.svg/2560px-Google_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=GooglePay';"/>
+                    <img alt="Logo Samsung Pay" class="h-6 opacity-80 hover:opacity-100 transition-opacity duration-200 payment-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Samsung_Pay_Logo.svg/2560px-Samsung_Pay_Logo.svg.png" width="60" onerror="this.onerror=null;this.src='https://placehold.co/60x24/FFFFFF/000000?text=SamsungPay';"/>
+                </div>
+            </section>
+
+            <section id="about" class="max-w-[1200px] mx-auto px-4 py-16 bg-white rounded-lg my-12 shadow-inner">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div class="md:order-2">
+                        <img src="https://rapicambios.github.io/public/assets/img/hero/orb.avif" alt="Plataforma de Worldcoin" class="rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300"/>
+                    </div>
+                    <div class="md:order-1 space-y-6">
+                        <h2 class="text-3xl font-extrabold text-gray-900 leading-tight">
+                            ¿Quiénes somos?
+                        </h2>
+                        <p class="text-gray-600 text-lg leading-relaxed">
+                            Rapicambios X Fastwldtradex es una empresa de servicios financieros especializada en la intermediación de criptomonedas y en envíos de dinero electrónicos vía transferencia bancaria a cuentas en el exterior o a personas, mediante giros instantáneos a todo el mundo y en todo Chile.
+                        </p>
+                        <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-6 py-3 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md" id="contact-us-worldcoin-btn">
+                            Contáctanos
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="how-to-buy" class="max-w-[1200px] mx-auto px-4 py-16 bg-gray-100">
+                <h2 class="text-center text-3xl font-extrabold mb-12 text-gray-900">
+                    Cómo comprar Worldcoins con Worldcoin
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 1: Crea una cuenta.">
+                        <div class="text-yellow-500 text-3xl font-bold mb-2">1</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Crea una cuenta</h3>
+                        <p class="text-gray-600 text-base">
+                            Regístrate con tu correo electrónico y verifica tu identidad para comenzar de forma segura.
+                        </p>
+                    </div>
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 2: Elige Worldcoin.">
+                        <div class="text-purple-600 text-3xl font-bold mb-2">2</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Elige Worldcoin</h3>
+                        <p class="text-gray-600 text-base">
+                            Selecciona Worldcoin como la criptomoneda que deseas comprar y la cantidad deseada.
+                        </p>
+                    </div>
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 3: Realiza el pago.">
+                        <div class="text-green-600 text-3xl font-bold mb-2">3</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Realiza el pago</h3>
+                        <p class="text-gray-600 text-base">
+                            Usa tu tarjeta de crédito, débito o Apple Pay para completar la compra de forma rápida.
+                        </p>
+                    </div>
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 4: Recibe tus Worldcoins.">
+                        <div class="text-yellow-400 text-3xl font-bold mb-2">4</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Recibe tus Worldcoins</h3>
+                        <p class="text-gray-600 text-base">
+                            Tus Worldcoins se enviarán a tu billetera digital de forma segura y eficiente.
+                        </p>
+                    </div>
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 5: Disfruta y gestiona.">
+                        <div class="text-indigo-600 text-3xl font-bold mb-2">5</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Disfruta y gestiona</h3>
+                        <p class="text-gray-600 text-base">
+                            Administra tus activos y realiza más compras o ventas fácilmente en nuestra plataforma.
+                        </p>
+                    </div>
+                    <div class="how-to-buy-card rounded-xl p-8 space-y-4 shadow-md hover:shadow-lg transition-shadow duration-200 worldcoin-how-to-buy-card" data-message="Paso 6: Soporte 24/7.">
+                        <div class="text-red-600 text-3xl font-bold mb-2">6</div>
+                        <h3 class="font-semibold text-xl text-gray-900">Soporte 24/7</h3>
+                        <p class="text-gray-600 text-base">
+                            Nuestro equipo de soporte está disponible para ayudarte en cada paso del proceso.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-12 border-t border-b border-gray-200 bg-gray-100">
+                <h3 class="text-center text-xl font-semibold mb-8 text-gray-900">
+                    Criptomonedas compatibles con Worldcoin
+                </h3>
+                <div class="flex flex-wrap justify-center items-center gap-8 text-gray-600 text-sm">
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Bitcoin">
+                        <img alt="Icono Bitcoin" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Bitcoin.svg/2560px-Bitcoin.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/FF9900/FFFFFF?text=BTC';"/>
+                        <span>Bitcoin</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Ethereum">
+                        <img alt="Icono Ethereum" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Ethereum-icon-purple.svg/2560px-Ethereum-icon-purple.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/627EEA/FFFFFF?text=ETH';"/>
+                        <span>Ethereum</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Tether USDT">
+                        <img alt="Icono Tether USDT" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Tether_USDT_logo.svg/2560px-Tether_USDT_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/50AF95/FFFFFF?text=USDT';"/>
+                        <span>Tether</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Worldcoin">
+                        <img alt="Icono Worldcoin" class="w-10 h-10 crypto-logo" src="https://placehold.co/40x40/1E90FF/FFFFFF?text=WLD" onerror="this.onerror=null;this.src='https://placehold.co/40x40/1E90FF/FFFFFF?text=WLD';"/>
+                        <span>Worldcoin</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Binance Coin BNB">
+                        <img alt="Icono Binance Coin BNB" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Binance_coin_logo.svg/2560px-Binance_coin_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/F3BA2F/FFFFFF?text=BNB';"/>
+                        <span>Binance Coin</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-2 crypto-compatible-item" data-message="Cardano ADA">
+                        <img alt="Icono Cardano ADA" class="w-10 h-10 crypto-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Cardano_logo.svg/2560px-Cardano_logo.svg.png" onerror="this.onerror=null;this.src='https://placehold.co/40x40/0033AD/FFFFFF?text=ADA';"/>
+                        <span>Cardano</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="services" class="max-w-[1200px] mx-auto px-4 py-16 bg-white rounded-lg my-12 shadow-inner">
+                <h3 class="text-center text-3xl font-extrabold mb-12 text-gray-900">
+                    Envía dinero a estos países
+                </h3>
+                <p class="text-center text-gray-600 text-lg max-w-3xl mx-auto mb-12">
+                    Envía dinero a tus familiares y amigos o compra la moneda que necesitas de forma fácil y rápida desde donde estés, a más de 180 países de destino con el respaldo y seguridad de Fastwldtradex.
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Venezuela">
+                        <img alt="Bandera de Venezuela" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://rapicambios.github.io/public/assets/img/logo/icons8-venezuela-100.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=VE';"/>
+                        <span class="font-semibold text-gray-900 text-lg">Venezuela</span>
+                    </div>
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Chile">
+                        <img alt="Bandera de Chile" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://rapicambios.github.io/public/assets/img/logo/icons8-chile-100.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=CL';"/>
+                        <span class="font-semibold text-gray-900 text-lg">Chile</span>
+                    </div>
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Perú">
+                        <img alt="Bandera de Perú" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://rapicambios.github.io/public/assets/img/logo/icons8-peru-100.png onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=PE';"/>
+                        <span class="font-semibold text-gray-900 text-lg">Perú</span>
+                    </div>
+                    <div class="country-card p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 country-item" data-message="Bolivia">
+                        <img alt="Bandera de Bolivia" class="w-16 h-16 rounded-full border border-gray-200 shadow-sm" src="https://rapicambios.github.io/public/assets/img/logo/icons8-bolivia-100.png" onerror="this.onerror=null;this.src='https://placehold.co/64x64/FFFFFF/000000?text=BO';"/>
+                        <span class="font-semibold text-gray-900 text-lg">Bolivia</span>
+                    </div>
+                </div>
+                <div class="text-center mt-12">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-8 py-4 rounded-full hover:bg-yellow-600 transition-colors duration-300 shadow-md" id="view-all-countries-btn">
+                        Ver todos los países
+                    </a>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-16 text-center bg-gray-100 rounded-lg my-12 shadow-md">
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6">
+                    ¿Por qué somos los mejores?
+                </h2>
+                <p class="text-gray-600 text-lg max-w-3xl mx-auto mb-12">
+                    Hazte cliente. Nuestros procesos son simples y transparentes, con nosotros encontrarás toda la ayuda financiera que necesitas para todas tus operaciones en criptomonedas.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Clientes felices">
+                        <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
+                            <i class="fas fa-smile text-3xl"></i>
+                        </div>
+                        <p class="text-4xl font-bold why-best-text">37,589<span class="text-yellow-500">+</span></p>
+                        <span class="why-best-label text-sm font-medium">Clientes felices</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Intercambios finalizados">
+                        <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
+                            <i class="fas fa-check-circle text-3xl"></i>
+                        </div>
+                        <p class="text-4xl font-bold why-best-text">45,436<span class="text-yellow-500">+</span></p>
+                        <span class="why-best-label text-sm font-medium">Intercambios finalizados</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Países disponibles">
+                        <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
+                            <i class="fas fa-globe text-3xl"></i>
+                        </div>
+                        <p class="text-4xl font-bold why-best-text">180<span class="text-yellow-500">+</span></p>
+                        <span class="why-best-label text-sm font-medium">Países disponibles</span>
+                    </div>
+                    <div class="flex flex-col items-center space-y-3 why-best-item" data-message="Nuevos clientes">
+                        <div class="why-best-icon-bg rounded-full p-4 shadow-inner">
+                            <i class="fas fa-users text-3xl"></i>
+                        </div>
+                        <p class="text-4xl font-bold why-best-text">3,555<span class="text-yellow-500">+</span></p>
+                        <span class="why-best-label text-sm font-medium">Nuevos clientes</span>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-yellow-500 text-white text-base font-semibold px-8 py-4 rounded-full hover:bg-yellow-600 transition-all duration-300 shadow-md" id="start-now-worldcoin-btn">
+                        ¡Comienza ahora!
+                    </a>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-16 bg-gray-100">
+                <img alt="Concepto de activos digitales y blockchain" class="w-full rounded-xl mb-10 shadow-lg" height="300" src="https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3" onerror="this.onerror=null;this.src='https://placehold.co/1200x300/A7FFEB/000000?text=Activos+Digitales+y+Web3';"/>
+                <h3 class="text-center text-3xl font-extrabold mb-4 text-gray-900">
+                    Mira lo que dicen nuestros clientes
+                </h3>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-12">
+                    Miles de usuarios satisfechos confían en Worldcoin para comprar y vender sus criptomonedas de forma segura y rápida.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Ana G.">
+                        <img alt="Foto de perfil de Ana G." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                        <p class="text-gray-600 text-base leading-relaxed">
+                            "Worldcoin hizo que comprar Worldcoin fuera muy fácil y rápido. ¡Muy recomendable!"
+                        </p>
+                        <span class="font-semibold text-gray-900 text-sm">Ana G.</span>
+                    </div>
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Carlos M.">
+                        <img alt="Foto de perfil de Carlos M." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                        <p class="text-gray-600 text-base leading-relaxed">
+                            "La plataforma es segura y el soporte siempre está disponible. Me encanta usar Worldcoin."
+                        </p>
+                        <span class="font-semibold text-gray-900 text-sm">Carlos M.</span>
+                    </div>
+                    <div class="testimonial-card p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 testimonial-item" data-message="Testimonio de Lucía R.">
+                        <img alt="Foto de perfil de Lucía R." class="rounded-full w-28 h-28 object-cover border-4 border-gray-200 shadow-md" height="100" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" width="100"/>
+                        <p class="text-gray-600 text-base leading-relaxed">
+                            "Muy fácil de usar y con muchas opciones de pago. Perfecto para principiantes."
+                        </p>
+                        <span class="font-semibold text-gray-900 text-sm">Lucía R.</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-16 bg-white rounded-lg my-12 shadow-inner">
+                <h3 class="text-center text-3xl font-extrabold mb-12 text-gray-900">
+                    Preguntas frecuentes sobre Worldcoin
+                </h3>
+                <div class="space-y-6 max-w-4xl mx-auto">
+                    <details class="faq-item rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 group">
+                        <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                            <span>¿Qué servicio brindamos?</span>
+                            <i class="fas fa-chevron-down text-gray-600 group-open:rotate-180 transition-transform duration-200"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600 text-base leading-relaxed">
+                            Gracias a sus años de experiencia, Fastwldtradex ofrece el mejor servicio y asesoría completa en cambio de divisas, y comercio exterior, con una atención personalizada.
+                        </p>
+                    </details>
+                    <details class="faq-item rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 group">
+                        <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                            <span>¿Cómo saber el monto que recibiré?</span>
+                            <i class="fas fa-chevron-down text-gray-600 group-open:rotate-180 transition-transform duration-200"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600 text-base leading-relaxed">
+                            Compramos y vendemos una gran variedad de divisas internacionales. La activa participación que tenemos en el Mercado Cambiario y el sistema de cotización en tiempo real con el que contamos, nos permite valorar mucho más su moneda, otorgando la mejor tasa de cambio del mercado.
+                        </p>
+                    </details>
+                    <details class="faq-item rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 group">
+                        <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                            <span>¿En cuánto tiempo recibo mi dinero?</span>
+                            <i class="fas fa-chevron-down text-gray-600 group-open:rotate-180 transition-transform duration-200"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600 text-base leading-relaxed">
+                            En un plazo mínimo de 5 a 10 minutos. Nuestros plazos máximos de envío tienen un lapso de hasta 2 horas como tiempo límite.
+                        </p>
+                    </details>
+                    <details class="faq-item rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 group">
+                        <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                            <span>¿Es seguro comprar con Worldcoin?</span>
+                            <i class="fas fa-chevron-down text-gray-600 group-open:rotate-180 transition-transform duration-200"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600 text-base leading-relaxed">
+                            Sí, utilizamos tecnología avanzada para proteger tus datos y transacciones, garantizando la máxima seguridad.
+                        </p>
+                    </details>
+                    <details class="faq-item rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 group">
+                        <summary class="font-semibold text-lg cursor-pointer flex justify-between items-center text-gray-900">
+                            <span>¿Qué tarifas aplican?</span>
+                            <i class="fas fa-chevron-down text-gray-600 group-open:rotate-180 transition-transform duration-200"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600 text-base leading-relaxed">
+                            Las tarifas varían según el método de pago y la criptomoneda. Consulta nuestra sección de tarifas para más detalles.
+                        </p>
+                    </details>
+                </div>
+            </section>
+
+            <section class="max-w-[1200px] mx-auto px-4 py-16 bg-gray-100 rounded-lg my-12 shadow-md">
+                <h3 class="text-center text-3xl font-extrabold mb-12 text-gray-900">
+                    ¿Necesitas ayuda antes de comprar Worldcoins?
+                </h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200 help-item" data-message="Información sobre Web3.">
+                        <img alt="Concepto de Web3" class="rounded-lg w-40 h-40 object-cover shadow-md" height="150" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/E0F2F7/000000?text=Web3+Concept';"/>
+                        <h4 class="font-semibold text-xl text-gray-900">ALL ABOUT WEB3</h4>
+                        <p class="text-gray-600 text-base text-center leading-relaxed">
+                            Aprende todo sobre Web3 y cómo las criptomonedas están cambiando el mundo.
+                        </p>
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200 help-button" data-message="Redirigiendo a información sobre Web3...">
+                            Leer más
+                        </button>
+                    </div>
+                    <div class="help-card rounded-xl p-8 flex flex-col items-center space-y-5 shadow-lg hover:shadow-xl transition-shadow duration-200 help-item" data-message="Contactar soporte.">
+                        <img alt="Soporte 24/7" class="rounded-lg w-40 h-40 object-cover shadow-md" height="150" src="https://rapicambios.github.io/public/assets/img/logo/logoup.svg" onerror="this.onerror=null;this.src='https://placehold.co/150x150/E8F5E9/000000?text=Soporte+24/7';"/>
+                        <h4 class="font-semibold text-xl text-gray-900">WE'VE GOT YOUR BACK</h4>
+                        <p class="text-gray-600 text-base text-center leading-relaxed">
+                            Nuestro equipo de soporte está listo para ayudarte en cada paso.
+                        </p>
+                        <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold px-6 py-3 rounded-full shadow-md transition-colors duration-200 help-button" data-message="Contactando al soporte...">
+                            Contactar soporte
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="cta-section bg-gradient-to-r from-yellow-500 to-yellow-600 text-white py-16 rounded-xl my-12 shadow-2xl">
+                <div class="max-w-[1200px] mx-auto px-4 text-center">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-6 leading-tight">
+                        Ofrecemos tipos de cambio muy atractivos, libres de impuestos en todas las transacciones.
+                    </h2>
+                    <p class="text-lg sm:text-xl mb-12">
+                        ¿Qué esperas para comenzar tu primer comercio?
+                    </p>
+                    <a href="https://api.whatsapp.com/send/?phone=56958648299&text=Hola!%20Quiero%20ponerme%20en%20contacto%20con%20un%20agente%20Rapi%20Cambios%20quiero%20convertir%20mis%20tokens%20a%20dinero%20real%20ID:AXSREFRAPICAMBIOSORG%20" class="inline-block bg-white text-yellow-500 text-xl font-bold px-10 py-5 rounded-full hover:bg-gray-100 transition-colors duration-300 shadow-lg transform hover:scale-105" id="sell-worldcoins-cta-btn">
+                        ¡Vender Worldcoins Ahora!
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <div id="content-prepaid-services" class="content-section hidden prepaid-services-section">
+            <section class="max-w-7xl mx-auto px-4 py-12 bg-white rounded-xl shadow-lg mb-12 hero-card">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div class="md:w-1/2 text-center md:text-left space-y-6">
+                        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 leading-tight">
+                            Recarga tu vida con <span class="text-yellow-500">Servicios Prepago</span>
+                        </h1>
+                        <p class="text-lg text-gray-700">
+                            Tarjetas de regalo, recargas telefónicas y mucho más, todo en un solo lugar.
+                        </p>
+                        <button class="bg-yellow-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-yellow-600 transition-all scale-up-hover" id="explore-prepaid-services-btn">
+                            Explorar Servicios
+                        </button>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center relative">
+                        <img src="https://img.plasbit.com/card-black.webp" alt="Paquete de tarjetas de regalo" class="w-full max-w-sm rounded-xl shadow-xl transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                        <img src="https://img.plasbit.com/final_credit_cards/PlasBit+onlyfans+black+front.webp" alt="Recarga telefónica" class="w-full max-w-sm rounded-xl shadow-xl absolute top-4 left-4 transform -rotate-6 hover:rotate-0 transition-transform duration-300">
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-8 mb-12">
+                <h2 class="text-2xl font-bold text-center mb-8">Servicios Populares</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Netflix">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/netflix-eu.webp" alt="Logo Netflix" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Netflix</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Spotify">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/spotify-usa.webp" alt="Logo Spotify" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Spotify</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Uber">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/uber-and-uber-eats-eu.webp" alt="Logo Uber" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Uber</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Google Play">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/google-play-netherlands.webp" alt="Logo Google Play" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Google Play</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="Apple App Store">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/itunes-netherlands.webp" alt="Logo Apple App Store" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">Apple App Store</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    <div class="brand-card bg-white p-4 rounded-xl shadow-md text-center flex flex-col items-center hover:shadow-lg transition-all popular-service-item" data-message="PlayStation">
+                        <img src="https://cdn.bitrefill.com/primg/w360h216/playstation-store-netherlands.webp" alt="Logo PlayStation" class="h-16 object-contain mb-2">
+                        <p class="font-semibold text-gray-900">PlayStation</p>
+                        <div class="stars text-yellow-500 text-sm">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-8 mb-12">
+                <h2 class="text-2xl font-bold text-center mb-6">Explora por categorías</h2>
+                <div class="overflow-x-auto hide-scrollbar pb-4">
+                    <div class="flex space-x-4 py-2">
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Streaming...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+                            <span class="text-xs font-semibold">Streaming</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Juegos...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-8C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/></svg>
+                            <span class="text-xs font-semibold">Juegos</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Recargas Móviles...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                            <span class="text-xs font-semibold">Recargas Móviles</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Compras Online...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2S15.9 22 17 22s2-.9 2-2-.9-2-2-2zm-8.7-18L3 5.3v11.4h18V5.3L14.7 0H8.3zM12 14c-1.1 0-2-.9-2-2V8c0-1.1.9-2 2-2s2 .9 2 2v4c0 1.1-.9 2-2 2z"/></svg>
+                            <span class="text-xs font-semibold">Compras Online</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Tarjetas de Regalo...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 9h-4V7h16v2zm0 4H4v-2h16v2zm0 4H4v-2h16v2zM22 3H2c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h20c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                            <span class="text-xs font-semibold">Tarjetas de Regalo</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Viajes...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4h-2V2h-2v2H8V2H6v2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V8h16v10z"/></svg>
+                            <span class="text-xs font-semibold">Viajes</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Comida...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+                            <span class="text-xs font-semibold">Comida</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-category-item" data-message="Navegando a Utilidades...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 5v14H5V5h14m0-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                            <span class="text-xs font-semibold">Utilidades</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Entretenimiento...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 16V4c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2zm-11-4H9V8h2v4zm4 0h-2V8h2v4z"/></svg>
+                            <span class="text-xs font-semibold">Entretenimiento</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Salud y Bienestar...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4.97 0-9 4.03-9 9 0 3.53 2.04 6.57 5 8.02V21h2v-2.02c2.96-1.45 5-4.49 5-8.02 0-4.97-4.03-9-9-9zm0 16c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5z"/></svg>
+                            <span class="text-xs font-semibold">Salud y Bienestar</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Criptomonedas...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z"/></svg>
+                            <span class="text-xs font-semibold">Criptomonedas</span>
+                        </div>
+                        <div class="category-item flex-shrink-0 w-28 h-28 rounded-xl shadow-md flex flex-col items-center justify-center text-center p-2 hover:shadow-lg transition-all cursor-pointer prepaid-category-item" data-message="Navegando a Moda...">
+                            <svg class="h-8 w-8 text-yellow-500 mb-2" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 6h-4V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2h-4v2h4V4zm6 14H4V8h16v10z"/></svg>
+                            <span class="text-xs font-semibold">Moda</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="max-w-7xl mx-auto px-4 py-12 bg-yellow-100 rounded-xl shadow-lg text-center cta-prepaid-services">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                    ¡La forma más fácil de comprar y recargar!
+                </h2>
+                <p class="text-lg mb-8 text-gray-700">
+                    Accede a un mundo de posibilidades con tus servicios prepago favoritos.
+                </p>
+                <a href="#" class="bg-gray-900 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-gray-800 transition-all scale-up-hover" id="view-all-prepaid-services-btn">
+                    <i class="fas fa-wallet mr-2"></i> Ver Todos los Servicios
+                </a>
+            </section>
+        </div>
+
+        <!-- My Account Section (New) -->
+        <div id="content-my-account" class="content-section hidden">
+            <section class="max-w-xl mx-auto py-12 px-6 bg-white rounded-xl shadow-lg mb-8" id="login-register-section">
+                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800" id="auth-title">Inicia Sesión</h2>
+                <div id="auth-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mb-4">
+                    <!-- Auth messages will be displayed here -->
+                </div>
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <label for="login-email" class="block text-gray-700 text-sm font-semibold mb-2">Correo Electrónico</label>
+                        <input type="email" id="login-email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="tu@ejemplo.com" required>
+                    </div>
+                    <div>
+                        <label for="login-password" class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+                        <input type="password" id="login-password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="********" required>
+                    </div>
+                    <button type="submit" class="w-full bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-full shadow-md hover:bg-yellow-600 transition-colors">
+                        Iniciar Sesión
+                    </button>
+                    <p class="text-center text-gray-600 text-sm mt-4">
+                        ¿No tienes cuenta? <a href="#" id="show-register-form" class="text-blue-600 hover:underline">Regístrate aquí</a>
+                    </p>
+                </form>
+
+                <form id="register-form" class="space-y-4 hidden">
+                    <div>
+                        <label for="register-email" class="block text-gray-700 text-sm font-semibold mb-2">Correo Electrónico</label>
+                        <input type="email" id="register-email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="tu@ejemplo.com" required>
+                    </div>
+                    <div>
+                        <label for="register-password" class="block text-gray-700 text-sm font-semibold mb-2">Contraseña</label>
+                        <input type="password" id="register-password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Mínimo 6 caracteres" required>
+                    </div>
+                    <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-green-600 transition-colors">
+                        Registrarse
+                    </button>
+                    <p class="text-center text-gray-600 text-sm mt-4">
+                        ¿Ya tienes cuenta? <a href="#" id="show-login-form" class="text-blue-600 hover:underline">Inicia Sesión aquí</a>
+                    </p>
+                </form>
+            </section>
+
+            <section class="max-w-5xl mx-auto py-12 px-6 bg-white rounded-xl shadow-lg hidden" id="user-dashboard-section">
+                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Bienvenido, <span id="user-email-display"></span>!</h2>
+                <div class="text-center text-gray-600 mb-4">
+                    <p>Publicaciones restantes: <span id="posts-remaining-display" class="font-semibold text-yellow-600"></span></p>
+                    <p>ID de Usuario: <span id="user-id-display" class="font-mono text-xs bg-gray-100 p-1 rounded"></span></p>
+                </div>
+
+                <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
+                    <button id="show-publish-form-btn" class="bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-full shadow-md hover:bg-yellow-600 transition-colors">
+                        <i class="fas fa-plus mr-2"></i> Publicar Nuevo Artículo
+                    </button>
+                    <button id="logout-btn" class="bg-red-500 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-red-600 transition-colors">
+                        <i class="fas fa-sign-out-alt mr-2"></i> Cerrar Sesión
+                    </button>
+                </div>
+
+                <h3 class="text-xl font-bold mb-4 text-gray-800">Mis Publicaciones</h3>
+                <div id="user-products-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- User's products will be loaded here -->
+                    <p id="no-user-products-message" class="text-gray-600 text-center col-span-full">No tienes publicaciones aún. ¡Anímate a crear una!</p>
+                </div>
+
+                <div class="mt-12 text-center">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">Mejora tu Plan</h3>
+                    <p class="text-gray-600 mb-4">¿Necesitas más publicaciones o funciones avanzadas? ¡Suscríbete a un plan premium!</p>
+                    <button id="subscribe-btn" class="bg-purple-600 text-white font-bold py-3 px-8 rounded-full shadow-md hover:bg-purple-700 transition-colors">
+                        <i class="fas fa-crown mr-2"></i> Ver Planes de Suscripción
+                    </button>
+                </div>
+            </section>
+
+            <section class="max-w-3xl mx-auto py-12 px-6 bg-white rounded-xl shadow-lg hidden" id="publish-product-section">
+                <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Publicar Nuevo Artículo</h2>
+                <div id="publish-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl mb-4">
+                    <!-- Publish messages will be displayed here -->
+                </div>
+                <form id="publish-product-form" class="space-y-4">
+                    <div>
+                        <label for="product-title" class="block text-gray-700 text-sm font-semibold mb-2">Título del Artículo</label>
+                        <input type="text" id="product-title" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Ej: Smartphone Samsung Galaxy S23" required>
+                    </div>
+                    <div>
+                        <label for="product-description" class="block text-gray-700 text-sm font-semibold mb-2">Descripción</label>
+                        <textarea id="product-description" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Describe tu artículo en detalle..." required></textarea>
+                    </div>
+                    <div>
+                        <label for="product-price" class="block text-gray-700 text-sm font-semibold mb-2">Precio ($USD)</label>
+                        <input type="number" id="product-price" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Ej: 450.00" step="0.01" required>
+                    </div>
+                    <div>
+                        <label for="product-category" class="block text-gray-700 text-sm font-semibold mb-2">Categoría</label>
+                        <select id="product-category" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Selecciona una categoría</option>
+                            <option value="Electrónica">Electrónica</option>
+                            <option value="Vehículos">Vehículos</option>
+                            <option value="Inmuebles">Inmuebles</option>
+                            <option value="Hogar">Hogar</option>
+                            <option value="Servicios">Servicios</option>
+                            <option value="Moda">Moda</option>
+                            <option value="Juegos y Juguetes">Juegos y Juguetes</option>
+                            <option value="Libros">Libros</option>
+                            <option value="Deportes y Fitness">Deportes y Fitness</option>
+                            <option value="Herramientas">Herramientas</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="product-location" class="block text-gray-700 text-sm font-semibold mb-2">Ubicación (Estado)</label>
+                        <select id="product-location" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" required>
+                            <option value="">Selecciona una ubicación</option>
+                            <option value="Amazonas">Amazonas</option>
+                            <option value="Anzoátegui">Anzoátegui</option>
+                            <option value="Apure">Apure</option>
+                            <option value="Aragua">Aragua</option>
+                            <option value="Barinas">Barinas</option>
+                            <option value="Bolívar">Bolívar</option>
+                            <option value="Carabobo">Carabobo</option>
+                            <option value="Cojedes">Cojedes</option>
+                            <option value="Delta Amacuro">Delta Amacuro</option>
+                            <option value="Distrito Capital">Distrito Capital</option>
+                            <option value="Falcón">Falcón</option>
+                            <option value="Guárico">Guárico</option>
+                            <option value="La Guaira">La Guaira</option>
+                            <option value="Lara">Lara</option>
+                            <option value="Mérida">Mérida</option>
+                            <option value="Miranda">Miranda</option>
+                            <option value="Monagas">Monagas</option>
+                            <option value="Nueva Esparta">Nueva Esparta</option>
+                            <option value="Portuguesa">Portuguesa</option>
+                            <option value="Sucre">Sucre</option>
+                            <option value="Táchira">Táchira</option>
+                            <option value="Trujillo">Trujillo</option>
+                            <option value="Yaracuy">Yaracuy</option>
+                            <option value="Zulia">Zulia</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="product-images" class="block text-gray-700 text-sm font-semibold mb-2">Imágenes del Artículo (máx. 3)</label>
+                        <input type="file" id="product-images" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500" accept="image/*" multiple>
+                        <p class="text-xs text-gray-500 mt-1">Puedes subir hasta 3 imágenes.</p>
+                        <div id="image-preview" class="flex flex-wrap gap-2 mt-2"></div>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-6 rounded-full shadow-md hover:bg-blue-700 transition-colors">
+                        Publicar Artículo
+                    </button>
+                    <button type="button" id="cancel-publish-btn" class="w-full bg-gray-300 text-gray-800 font-bold py-3 px-6 rounded-full shadow-md hover:bg-gray-400 transition-colors mt-2">
+                        Cancelar
+                    </button>
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-10 px-4 rounded-t-xl shadow-inner">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="col-span-1">
+                <a href="#" class="flex items-center space-x-2 mb-4 transition-opacity hover:opacity-80" id="footer-home-link">
+                    <img alt="Logo de BuscaLoYa" class="w-10 h-10 rounded-full" height="40" src="./image-removebg-preview (2).png" width="40"/>
+                    <span class="text-3xl font-bold text-white">BuscaLoYa</span>
+                </a>
+                <p class="text-sm">Tu mercado online de confianza para comprar y vender de todo.</p>
+                <div class="flex space-x-4 mt-4 text-gray-400">
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Facebook" data-message="Abriendo Facebook..."><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Twitter" data-message="Abriendo Twitter..."><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="Instagram" data-message="Abriendo Instagram..."><i class="fab fa-instagram fa-lg"></i></a>
+                    <a href="#" class="hover:text-white transition-colors social-link" aria-label="LinkedIn" data-message="Abriendo LinkedIn..."><i class="fab fa-linkedin-in fa-lg"></i></a>
+                </div>
+            </div>
+            <div>
+                <h3 class="font-semibold text-white mb-3">Navegación</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Inicio...">Inicio</a></li>
+                    <li><a href="#buscaloya-section" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a BuscaLoYa...">BuscaLoYa</a></li>
+                    <li><a href="#financiamiento-section" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Financiamiento...">Financiamiento</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-nav-link" data-message="Navegando a Publicar anuncio...">Publicar anuncio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-white mb-3">Soporte</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Centro de Ayuda...">Centro de Ayuda</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Preguntas Frecuentes...">Preguntas Frecuentes</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando página de Contacto...">Contacto</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-support-link" data-message="Cargando Mapa del sitio...">Mapa del sitio</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-semibold text-white mb-3">Legal</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Términos y Condiciones...">Términos y Condiciones</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Política de Privacidad...">Política de Privacidad</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Política de Cookies...">Política de Cookies</a></li>
+                    <li><a href="#" class="hover:text-yellow-500 transition-colors footer-legal-link" data-message="Cargando Aviso Legal...">Aviso Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-500 text-xs">
+            © 2025 BuscaLoYa. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <button aria-label="Soporte de chat" class="fixed bottom-6 right-6 bg-blue-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50" id="chat-support-btn">
+        <i class="fas fa-comment-alt text-xl"></i>
+    </button>
+    <button id="scroll-to-top-btn" aria-label="Volver arriba" class="fixed bottom-24 right-6 bg-gray-800 text-white rounded-full w-12 h-12 flex items-center justify-center shadow-xl hover:scale-110 transition-transform z-50 hidden">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- Cookie Banner -->
+    <div class="fixed bottom-20 left-4 rounded-lg shadow-lg p-4 max-w-xs z-50" id="cookie-banner">
+        <div class="flex items-center space-x-3">
+            <i class="fas fa-cookie-bite text-yellow-400 text-xl"></i>
+            <div class="text-xs text-gray-700">
+                ¿Quieres cookies?<br/>Usamos cookies para mejorar tu experiencia y mostrarte anuncios relevantes. Puedes cambiar tu configuración en cualquier momento.
+            </div>
+        </div>
+        <div class="mt-3 flex justify-end space-x-2">
+            <button class="text-xs px-3 py-1 border border-gray-300 rounded text-gray-600 hover:bg-gray-100 transition-colors" id="view-cookies-btn">
+                Ver más sobre cookies
+            </button>
+            <button class="text-xs px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors" id="accept-cookies-btn">
+                Aceptar
+            </button>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs - IMPORTANT: These will be loaded via app.js for better control -->
+    <!-- <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, where, getDocs, doc, updateDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
+    </script> -->
+
+    <!-- Link to external JavaScript file -->
+    <script src="app.js" defer></script>
+
+</body>
+</html>
