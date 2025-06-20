@@ -1,2211 +1,854 @@
-<html lang="es">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <!--====== Title ======-->
   <title>
-   Pizzas Love
+    Estudio Guacamaya Agencia | Diseño y Desarrollo Web | Marketing Digital - Diseño
+    Para Blogs O Comercios Venezuela| Caracas Venezuela | San juan de los morros|
+    Valencia Venezuela
   </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <!-- Usando la fuente Inter para un aspecto moderno y limpio -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <style>
-   /* Estilos personalizados para un mejor control visual */
-    body {
-        font-family: 'Inter', sans-serif;
-        color: #1a202c; /* Color de texto base, similar al gris oscuro del diseño */
-    }
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Solicite su presupuesto, un solo valor, sin cobro mensual, el sitio es suyo usted lo administra. Diseño Web específico,  Intranet o proyecto Especial Integrado con sus sistemas somos su soluciòn" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="shortcut icon" href="images/favicon.png" />
+  <meta name="google-site-verification" content="" />
+  <meta name="keywords"
+    content="Diseñador Web, disenadores web, diseñadores web. Diseñador paginas web, diseñador web, Diseño Web, Diseño Sitios Web, Sitio web Venezuela, Páginas Web, Tiendas Online, Pago en Línea Webpay, Sitios web en Venezuela, Sitios web en Venezuela, Diseño Web Venezuela, Diseño Web Venezuela, Diseño Web Tierra del fuego, Diseño Web Empresas, Tienda Virtual, Diseño Web Pyme, Diseño Web Venezuela, Diseño Web Vebezuela diseño web, páginas web, diseño páginas web, diseño de sitios web, paginas web modernas, Diseño tienda virtual, e-commerce, diseño web móvil, diseño sitio web, sitio web administrable, posicionamiento web. SEO, SEM, Programaciòn. Desarrollo a la medida" />
+  <meta name="revisit-after" content="1 day">
+  <meta name="robots" content="index, follow, archive" />
+  <meta name="geo.placename" content="Venezuela" />
+  <meta name="geo.position" content="-33.412547,-70.581325" />
+  <meta name="geo.position" content="-53.1667, -70.9333" />
+  <meta name="geo.position" content="-39.8142200,-73.2458900" />
+  <meta name="geo.position" content="-41.4667,-72.9333" />
+  <meta name="geo.region" content="CL" />
+  <meta name="author" content="####" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta itemprop="name" content="#####">
+  <meta itemprop="description"
+    content="Diseño Paginas Web en Venezuela, 5 Años experiencia, 2000 sitios web desarrollados, Agencia de diseño de páginas web en Venezuela, Diseño Páginas Web Venezuela, Marketing Web, Posicionamiento Web.">
+  <meta itemprop="image" content="####">
+  <meta property="og:title" content="Diseño Web Venezuela">
+  <meta property="og:description"
+    content="Diseño Paginas Web en Venezuela, 24 Años experiencia, 1668 sitios web desarrollados, Agencia de diseño de páginas web en Venezuela, Diseño Páginas Web Venezuela, Marketing Web, Posicionamiento Web.">
+  <meta property="og:image" content="#">
+  <meta property="og:url" content="#####" />
+  <meta property="og:type" content="website">
+  <meta name="instagram:card" content="summary" />
+  <meta name="instagram:site" content="@S####" />
+  <meta name="instagram:creator" content="@S#####" />
+  <meta name="instagram:image" content="######" />
+  <meta name="instagram:title" content="Diseño Web Visual Venezuela" />
 
-    /* Ocultar elementos inicialmente y permitir la transición */
-    .hidden-on-scroll {
-        display: none;
-        opacity: 0;
-        transform: translateY(-100%);
-    }
+  <link rel="shortcut icon" href="assets/images/logo.svg" type="image/png" />
 
-    /* Mostrar elementos con transición */
-    .show-on-scroll {
-        display: flex; /* O block, dependiendo del elemento */
-        opacity: 1;
-        transform: translateY(0);
-        transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    }
+  <!--====== Favicon Icon ======-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:300,400|Lato:300,400,700,900" rel="stylesheet"
+    type="text/css" />
 
-    /* Scrollbar invisible para la barra de pestañas */
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-    .scrollbar-hide {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-    }
+  <!--====== Font Awesome CSS ======-->
 
-    /* Estilos para el banner de descuento */
-    .discount-banner {
-        background-size: cover;
-        background-position: center;
-        border-radius: 0.75rem; /* rounded-xl */
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
-        height: 150px; /* Altura específica para el banner */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-        font-weight: bold;
-        font-size: 1.5rem; /* text-2xl */
-    }
+  <!--====== Bootstrap CSS ======-->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
 
-    /* Animaciones sutiles para los elementos de producto */
-    .product-card {
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-    }
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -4px rgba(0, 0, 0, 0.1);
-    }
+  <!--====== Default CSS ======-->
+  <link rel="stylesheet" href="assets/css/default.css" />
 
-    /* Estilos para el slider */
-    .slider-container {
-        position: relative;
-        width: 100%;
-        overflow: hidden;
-        border-radius: 0.75rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
+  <!--====== Style CSS ======-->
+  <link rel="stylesheet" href="assets/css/style.css" />
 
-    .slider-wrapper {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
 
-    .slider-item {
-        min-width: 100%;
-        box-sizing: border-box;
-        height: 150px; /* Altura de las imágenes del slider */
-        background-size: cover;
-        background-position: center;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: bold;
-        font-size: 1.5rem;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.5); /* Sombra para el texto */
-    }
+</head>
 
-    .slider-dots {
-        position: absolute;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-    }
+<body>
 
-    .dot {
-        width: 10px;
-        height: 10px;
-        background-color: rgba(255, 255, 255, 0.5);
-        border-radius: 50%;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
+  <!--====== PRELOADER PART START ======-->
 
-    .dot.active {
-        background-color: white;
-    }
+  <div class="preloader">
+    <div class="preloader">
+      <div class="spinner">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
 
-    /* Estilos para el borde de la pestaña activa en el menú de navegación */
-    .border-b-3 {
-        border-bottom-width: 3px;
-    }
+  <!--====== PRELOADER PART ENDS ======-->
 
-    /* Ajuste para mobile para asegurar visibilidad */
-    @media (max-width: 640px) {
-        .header-info {
-            position: relative; /* Cambiado de absolute a relative en mobile */
-            margin-top: -3rem; /* Ajuste para subir el bloque de info */
-            border-top-left-radius: 1.5rem; /* rounded-t-3xl */
-            border-top-right-radius: 1.5rem; /* rounded-t-3xl */
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-        }
-        .main-content {
-            padding-top: 1rem; /* Reducir el padding superior para mobile */
-        }
-    }
-  </style>
- </head>
- <body class="bg-gray-50">
-  <!-- Header principal con imagen de fondo y elementos superpuestos -->
-  <header class="relative h-[250px] sm:h-[300px] lg:h-[350px] overflow-hidden">
-   <img alt="Imagen de fondo con múltiples hamburguesas apiladas y una pared de ladrillos detrás" class="w-full h-full object-cover" height="350" src="https://storage.googleapis.com/a1aa/image/51eaa911-562d-4bc6-d0cf-d859d97d1590.jpg" width="1920"/>
-   <div class="absolute inset-0 bg-black opacity-30">
-   </div>
-   <!-- Botón de iniciar sesión en la esquina superior derecha del header -->
-   <div class="absolute top-4 right-4">
-    <button class="flex items-center gap-2 bg-white text-red-600 text-sm font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-red-600 hover:text-white transition transform hover:scale-105 duration-300 ease-in-out">
-     <i class="fas fa-user-circle">
-     </i>
-     Iniciar Sesión
-    </button>
-   </div>
-   <!-- Sección principal de información del restaurante superpuesta al header -->
-   <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 bg-white bg-opacity-95 rounded-t-3xl shadow-xl -mb-12 z-10 mx-auto max-w-7xl header-info">
-    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-     <div class="flex items-center gap-4">
-      <!-- Logotipo circular de Pizzas Love con icono de pizza y texto -->
-      <img alt="Logotipo circular de Pizzas Love con icono de pizza y texto" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full shadow-lg border-4 border-white" height="80" src="https://storage.googleapis.com/a1aa/image/8057d519-66c8-4799-b542-8cdf3c950b65.jpg" width="80"/>
+  <!--====== HEADER PART START ======-->
+
+  <section class="header_area">
+    <div class="header_navbar">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <nav class="navbar navbar-expand-lg">
+              <a class="navbar-brand" href="./index.html">
+                <img src="./assets/images/logo.svg" alt="Logo" />
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+                <span class="toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse sub-menu-bar mt-10" id="navbarSupportedContent">
+                <ul id="nav" class="navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="page-scroll " href="index.html"><i class="padicon">
+                        <div class="padicon2"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <polyline points="5 12 3 12 12 3 21 12 19 12"></polyline>
+                            <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7"></path>
+                            <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6"></path>
+                          </svg></div>
+                      </i> Inicio</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="page-scroll" href="#servicios"><i class="padicon">
+                        <div class="padicon2"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-tools" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M3 21h4l13 -13a1.5 1.5 0 0 0 -4 -4l-13 13v4"></path>
+                            <line x1="14.5" y1="5.5" x2="18.5" y2="9.5"></line>
+                            <polyline points="12 8 7 3 3 7 8 12"></polyline>
+                            <line x1="7" y1="8" x2="5.5" y2="9.5"></line>
+                            <polyline points="16 12 21 17 17 21 12 16"></polyline>
+                            <line x1="16" y1="17" x2="14.5" y2="18.5"></line>
+                          </svg></div>
+                      </i>Servicios</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="page-scroll" href="#about"><i class="padicon">
+                        <div class="padicon2"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-info-circle" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                            <polyline points="11 12 12 12 12 16 13 16"></polyline>
+                          </svg></div>
+                      </i>Nosotros</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="page-scroll" href="#product_features"><i class="padicon">
+                        <div class="padicon2"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M17 5.5H20C21.1046 5.5 22 6.39543 22 7.5V19.5C22 20.6046 21.1046 21.5 20 21.5H4C2.89543 21.5 2 20.6046 2 19.5V7.5C2 6.39543 2.89543 5.5 4 5.5H7C7 3.84315 8.34315 2.5 10 2.5H14C15.6569 2.5 17 3.84315 17 5.5ZM14 4.5H10C9.44772 4.5 9 4.94772 9 5.5H15C15 4.94772 14.5523 4.5 14 4.5ZM20 7.5H4V9.5H20V7.5ZM4 19.5V11.5H7V13.5H11V11.5H13V13.5H17V11.5H20V19.5H4Z"
+                              fill="currentColor" />
+                          </svg></div>
+                      </i>Proyectos</a>
+                  </li>
+
+                  <li class="nav-item">
+                    <a class="page-scroll" href="./blog-de-marketing-y-publicidad.html"><i class="padicon">
+                        <div class="padicon2"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-external-link" width="24" height="24"
+                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path d="M11 7h-5a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-5"></path>
+                            <line x1="10" y1="14" x2="20" y2="4"></line>
+                            <polyline points="15 4 20 4 20 9"></polyline>
+                          </svg></div>
+                      </i>Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="page-scroll" href="./contacto.html"><i class="padicon">
+                        <div class="padicon2"><svg xmlns="http://www.w3.org/2000/svg"
+                            class="icon icon-tabler icon-tabler-robot" width="24" height="24" viewBox="0 0 24 24"
+                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <path
+                              d="M7 7h10a2 2 0 0 1 2 2v1l1 1v3l-1 1v3a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-3l-1 -1v-3l1 -1v-1a2 2 0 0 1 2 -2z">
+                            </path>
+                            <path d="M10 16h4"></path>
+                            <circle cx="8.5" cy="11.5" r=".5" fill="currentColor"></circle>
+                            <circle cx="15.5" cy="11.5" r=".5" fill="currentColor"></circle>
+                            <path d="M9 7l-1 -4"></path>
+                            <path d="M15 7l1 -4"></path>
+                          </svg></div>
+                      </i>Contacto</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- navbar collapse -->
+            </nav>
+            <!-- navbar -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- header navbar -->
+
+    <div id="home" class="header_hero d-lg-flex align-items-center">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <div class="header_hero_content mt-45">
+              <h2 class="header_title">
+                Te ayudamos a escalar tu <span>negocio</span> al siguiente
+                nivel
+              </h2>
+              <p>
+                Un gran equipo unido que vela por el crecimiento de tu empresa
+              </p>
+              <form action="./contacto.html">
+                <a href="./contacto.html" class="main-btn mt-30">Conocer mas<svg xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-arrow-down" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="18" y1="13" x2="12" y2="19"></line>
+                    <line x1="6" y1="13" x2="12" y2="19"></line>
+                  </svg></a>
+              </form>
+            </div>
+            <!-- header hero content -->
+          </div>
+        </div>
+        <!-- row -->
+      </div>
+      <!-- container -->
+      <div class="header_shape bg_cover d-none d-lg-block"
+        style="background-image: url(assets/images/header_shape.png)"></div>
+      <!-- header shape -->
+      <div class="header_image d-flex align-items-center">
+        <div class="image">
+          <img class="img-fluid" src="./assets/images/kit-robo-advisor-working-on-holographic-screen.gif" alt="header image" />
+          <!--img src="assets/images/dots.svg" alt="dots" class="dots" /-->
+        </div>
+        <!-- image -->
+      </div>
+      <!-- header image -->
+    </div>
+    <!-- header hero -->
+  </section>
+
+  <!--====== HEADER PART ENDS ======-->
+  <!-- ========================= feature style-3 start ========================= -->
+  <section id="servicios" class="services_area pt-50">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-12">
+          <div class="section_title text-center">
+            <h2 class="mb-20">Consigue nuevos clientes desde internet y haz crecer tu negocio</h2>
+            <p class="tittle">Transformamos tus ideas, en ventas.
+            </p>
+            <a href="./contacto.html" class="main-btn mt-40 mb-40">¡Aumenta tus ventas ya!</a>
+          </div>
+          <!-- section title -->
+        </div>
+      </div>
+      <!-- row -->
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/geomarketing.svg" alt="diseño-web" loading="lazy">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Geomarketing</a>
+
+                <p class="paragraph-36">Ubicación - Ubicación - Ubicación</p>
+                <p class="text-left mb-30">
+                  Planifica abrir tu punto de venta con nuestro análisis de datos que garantiza que la Ubicación sea la
+                  correcta, no te condenes al fracaso!
+                </p>
+                <p class="text-left mb-30">
+                  Mas de cien millones de datos a tu disposición, no dudes en usarlos. </p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/desarrolloweb.svg" alt="diseño-web" loading="lazy">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Desarrollo Web</a>
+
+                <p class="paragraph-36">Diferénciate de tus competidores con tu pagina</p>
+                <p class="text-left mb-30">
+                  La página web de una marca es un sistema de venta, donde se puede fracasar o triunfar gloriosamente.
+                  nos aseguramos de fidelizar a los clientes.
+                </p>
+                <p class="text-left mb-30">
+                  ¿Quieres vender más en tu página web? Te ayudamos a conseguir tus metas.4</p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/campaña.svg" alt="diseño-web" loading="lazy">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Campañas de Publicidad</a>
+
+                <p class="paragraph-36">Campañas diseñadas para vender</p>
+                <p class="text-left mb-30">
+                  Nosotros nos encargamos de enseñar tu marca a potenciales clientes que estén interesados en comprar a
+                  tu competencia.
+                </p>
+                <p class="text-left mb-30">
+                  ¿Te atreves a duplicar las ventas de tu negocio en cuestión de semanas? </p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/seo.svg" alt="diseño-web" loading="lazy">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Posicionamiento SEO</a>
+
+                <p class="paragraph-36">Posiciona tu web en el número 1 de los buscadores</p>
+                <p class="text-left mb-30">
+                  ¿Quieres vender más estando en las Primeras posiciones de GOOGLE? ¿Quieres ganar más gracias a los
+                  buscadores?
+                </p>
+                <p class="text-left mb-30">
+                  Nosotros tenemos la solución para que seas el número uno e incrementar tus ventas x 10. </p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/branding.svg" alt="branding">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Branding</a>
+
+                <p class="paragraph-36">¡Damos valor a tu negocio!</p>
+                <p class="text-left mb-30">
+                  Solo nos importa que tu marca sea Motor de tu generación de venta, que logre ayudar a vender más y mas
+                  productos y servicios.
+                </p>
+                <p class="text-left mb-30">
+                  ¡Creamos una marca que te ayuda a vender! </p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_services text-center mt-30 wow fadeIn" data-wow-duration="0.5s" data-wow-delay="0.5s"
+            style="
+                visibility: visible;
+                animation-duration: 0.5s;
+                animation-delay: 0.5s;
+                animation-name: fadeIn;
+              ">
+            <a href="#">
+              <img src="./assets/images/services2/social2.svg" alt="diseño-web" loading="lazy">
+            </a>
+            <div class="services_content">
+              <h4 class="">
+
+                <a href="#" class="nopadding">Social Media Marketing</a>
+
+                <p class="paragraph-36">La mejor estrategia te traerá resultados exitosos</p>
+                <p class="text-left mb-30">
+                  Es verdad que, si no estás en RRSS, no existes. Pero lo más importante es saber utilizar estos canales
+                  de comunicación para multiplicar tus ventas.
+                </p>
+                
+                <p class="text-left mb-30">
+                  Estar en las Redes Sociales no te sale rentable <br> ¡Tienes que vender en tus perfiles sociales! </p>
+              </h4>
+            </div>
+          </div>
+          <!-- single services -->
+        </div>
+
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </section>
+  <!-- ========================= feature style-3 end ========================= -->
+
+  <!--====== FEATURES PART START ======-->
+
+  <section id="features" class="features_area pt-50 mb-50">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-9">
+          <div class="section_title text-center pb-25   ">
+            <h4 class="title">Dale a tu negocio la página web que se merece</h4>
+            <p>
+              No importa lo grande o pequeño que sea tu negocio o idea. En
+              Estudio gucamamaya seguimos tres sencillos pasos que nos ayudan a conocer
+              mejor a nuestros clientes:
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- row -->
+      <div class="row text-center">
+        <div class="col-lg-4 col-sm-6">    
+          <div class="single_features mt-30">
+            <a class="nopaddingleft" href="https://www.instagram.com/estudioguacamayavisual/"><img class="border-services"
+                src="./assets/images/brain.svg" alt="" /></a>
+            <h5 class="title">1. Análisis y Brainstorming</h5>
+            <p>
+              Analizamos tus necesidades e implementamos nuevas ideas
+              rompedoras y disruptivas.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_features mt-30 ">
+            <a class="nopaddingleft" href="https://www.instagram.com/estudioguacamayavisual/"><img class="border-services"
+                src="./assets/images/target.svg" alt="" /></a>
+            <h5 class="title">2. Ejecución</h5>
+            <p>
+              Ejecutamos el plan según lo acordado. Establecemos fechas y
+              periodos.
+            </p>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="single_features mt-30">
+            <a class="nopaddingleft" href="https://www.instagram.com/estudioguacamayavisual/"><img class="border-services"
+                src="./assets/images/cohete.svg" alt="" /></a>
+            <h5 class="title">3. Crecimiento y escalada</h5>
+            <p>
+              Recogemos todos los datos de interés y optimizamos procesos.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </section>
+
+  <!--====== FEATURES PART ENDS ======-->
+
+  <!--====== ABOUT PART START ======-->
+
+  <section id="about" class="about_area  pt-50">
+    <div class="about_shape d-none d-lg-block">
+      <img src="#" alt="shape" />
+    </div>
+    <!-- about shape -->
+    <div class="about_image d-flex align-items-center align-items-center justify-content-end">
+      <div class="image">
+        <img src="./assets/images/kit-online-marketplace-in-browser-window.gif" alt="about" />
+      </div>
+    </div>
+    <!-- about image -->
+    <div class="container">
+      <div class="row justify-content-end">
+        <div class="col-lg-6">
+          <div class="about_content">
+            <div class="section_title pb-50">
+              <h4 class="title">Sobre nosotros</h4>
+              <p>
+                Somos un grupo de estrategas, investigadores, desarrolladores, expertos en marketing digital,
+                diseñadores…¡y mucho más! Pero sobre todo somos vendedores y apasionados de la Venta. Hacemos lo que
+                hacemos porque nos encanta y porque sabemos hacerlo. Nos apasiona enfrentarnos a nuevos desafíos y hacer
+                que las cosas sucedan. Y en esto, somos los mejores.
+
+              </p>
+            </div>
+            <a href="/contacto.html" class="main-btn">¡Aumenta tus ventas ya!</a>
+          </div>
+          <!-- about content -->
+        </div>
+      </div>
+      <!-- row -->
+    </div>
+    <!-- container -->
+  </section>
+
+  <!--====== ABOUT PART ENDS ======-->
+
+  <!--====== PRODUCT FEATURES PART START ======-->
+
+  <section id="product_features" class="product_features_area mt-50">
+    <div class="section_title text-center">
       <div>
-       <h1 class="text-2xl sm:text-3xl font-bold text-gray-900">
-        Pizzas Love
-       </h1>
-       <div class="flex items-center gap-3 text-sm text-gray-600 mt-1">
-        <div class="flex items-center gap-1">
-         <i class="fas fa-clock text-red-500">
-         </i>
-         <span>
-          35 min
-         </span>
-        </div>
-        <div class="flex items-center gap-1">
-         <i class="fas fa-map-marker-alt text-red-500">
-         </i>
-         <span>
-          Centro
-         </span>
-        </div>
-       </div>
+        <h2 class="mb-10">Casos de éxito</h2>
+        <h6 class="tittle pb-70 ">Los resultados hablan por sí solos. </h6>
       </div>
-     </div>
-     <!-- Botones de Oferta y Favorito y menú de dirección -->
-     <div class="flex flex-col sm:flex-row items-end sm:items-center gap-4 mt-4 sm:mt-0">
-      <div class="flex items-center gap-4 text-sm text-gray-600">
-       <button class="flex items-center gap-1 border border-red-500 text-red-500 rounded-full px-4 py-2 hover:bg-red-500 hover:text-white transition transform hover:scale-105 duration-300 ease-in-out shadow-md">
-        <i class="fas fa-bolt">
-        </i>
-        Oferta
-       </button>
-       <button class="flex items-center gap-1 border border-red-500 text-red-500 rounded-full px-4 py-2 hover:bg-red-500 hover:text-white transition transform hover:scale-105 duration-300 ease-in-out shadow-md">
-        <i class="fas fa-heart">
-        </i>
-        Favorito
-       </button>
-      </div>
-      <div class="relative inline-block text-left">
-       <button aria-expanded="true" aria-haspopup="true" class="inline-flex justify-center w-full rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100 transition shadow-sm" id="menu-button">
-        Ingresa tu Dirección
-        <i class="fas fa-chevron-down ml-2 -mr-1 text-gray-400">
-        </i>
-       </button>
-       <div class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-        <div class="py-1" role="none">
-         <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-0">
-          Opción 1
-         </a>
-         <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">
-          Opción 2
-         </a>
-        </div>
-       </div>
-      </div>
-     </div>
     </div>
-    <div class="flex items-center gap-2 text-sm text-gray-600 mt-4 justify-center sm:justify-start">
-     <i class="fas fa-check-circle text-green-500">
-     </i>
-     <span>
-      Repartiendo y listo para recibir en los
-     </span>
-     <button class="text-red-500 font-semibold underline ml-1 hover:text-red-600 transition">
-      Puntos Love
-     </button>
-    </div>
-   </div>
-  </header>
-  <!-- Menú de navegación fijo que aparece al hacer scroll -->
-  <nav id="sticky-navbar" class="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-50 hidden-on-scroll">
-   <div class="flex items-center gap-4 ml-4">
-    <img alt="Logotipo circular de Pizzas Love en la barra de navegación" class="w-10 h-10 rounded-full" src="https://storage.googleapis.com/a1aa/image/8057d519-66c8-4799-b542-8cdf3c950b65.jpg" width="40" height="40"/>
-    <span class="text-lg font-bold text-gray-900">
-     Pizzas Love
-    </span>
-   </div>
-   <button class="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition ease-in-out duration-300 mr-4">
-    <i class="fas fa-shopping-cart">
-    </i>
-    <span class="ml-2 text-sm font-semibold">
-     0
-    </span>
-   </button>
-  </nav>
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 main-content">
-   <!-- Slider de Promociones (moved to top for "Promociones" section content) -->
-   <section id="promociones" class="mt-8">
-    <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     Ofertas Especiales
-    </h2>
-    <div class="slider-container">
-     <div class="slider-wrapper" id="slider-wrapper">
-      <div class="slider-item" style="background-image: url('https://storage.googleapis.com/a1aa/image/f3b1cbd9-e1eb-4424-3a6d-c9d4cab891d0.jpg');">
-       <p class="text-3xl sm:text-4xl">
-        25% <span class="block text-2xl sm:text-3xl mt-2">
-         Lunes a jueves
-        </span>
-       </p>
-      </div>
-      <div class="slider-item" style="background-image: url('https://placehold.co/1200x150/FF7F50/ffffff?text=Oferta+2+-+Envio+Gratis');">
-       <p class="text-3xl sm:text-4xl">
-        ¡Envío Gratis!
-       </p>
-      </div>
-      <div class="slider-item" style="background-image: url('https://placehold.co/1200x150/6A5ACD/ffffff?text=Oferta+3+-+Combo+Familiar');">
-       <p class="text-3xl sm:text-4xl">
-        Combo Familiar - ¡Ahorra!
-       </p>
-      </div>
-      <div class="slider-item" style="background-image: url('https://placehold.co/1200x150/3CB371/ffffff?text=Oferta+4+-+Postre+Gratis');">
-       <p class="text-3xl sm:text-4xl">
-        Postre Gratis con tu Pedido
-       </p>
-      </div>
-     </div>
-     <div class="slider-dots" id="slider-dots">
-     </div>
-    </div>
-   </section>
-   <!-- Pestañas de categorías con scroll suave -->
-   <section class="mt-12 border-b border-gray-200 sticky top-0 bg-gray-50 z-20 pt-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pb-2">
-    <nav class="flex overflow-x-auto whitespace-nowrap gap-8 text-base font-semibold text-gray-600 scrollbar-hide">
-     <button class="category-btn pb-3 flex items-center gap-2 text-yellow-500 border-b-3 border-yellow-500" data-target="pizzas">
-      <i class="fas fa-pizza-slice">
-      </i>
-      PIZZAS
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="hamburguesas">
-      HAMBURGUESAS
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="snacks">
-      SNACKS
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="postres">
-      POSTRES
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="bebidas">
-      BEBIDAS
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="cervezas">
-      CERVEZAS
-     </button>
-     <button class="category-btn pb-3 hover:text-red-600 border-b-3 border-transparent hover:border-red-600 transition duration-200" data-target="promociones">
-      <i class="fas fa-star">
-      </i>
-      Promociones
-     </button>
-    </nav>
-   </section>
-   <!-- Sección PIZZAS (New Main Section) -->
-   <section id="pizzas" class="mt-10">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     PIZZAS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Pizza Pepperoni -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Pepperoni
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       La clásica con mucho pepperoni y extra queso mozzarella.
-      </p>
-      <img alt="Pizza de Pepperoni" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Pepperoni" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $10.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Margherita -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Margherita
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Tomate fresco, mozzarella de búfala y albahaca. Simplemente perfecta.
-      </p>
-      <img alt="Pizza Margherita" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Margherita" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $9.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Hawaiana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Hawaiana
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Jamón de calidad, piña jugosa y queso fundido. Un clásico amado.
-      </p>
-      <img alt="Pizza Hawaiana" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Hawaiana" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $11.500
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Vegetariana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Vegetariana
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Variedad de vegetales frescos de temporada sobre una cama de queso.
-      </p>
-      <img alt="Pizza Vegetariana" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Vegetariana" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $10.500
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Cuatro Quesos -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Cuatro Quesos
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Una mezcla irresistible de mozzarella, provolone, gorgonzola y parmesano.
-      </p>
-      <img alt="Pizza Cuatro Quesos" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Cuatro+Quesos" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $12.000
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Barbacoa -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Barbacoa
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Pollo a la barbacoa, cebolla morada y cilantro. ¡Explosión de sabor!
-      </p>
-      <img alt="Pizza Barbacoa" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Barbacoa" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $12.500
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Mexicana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Mexicana
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Carne molida, jalapeños, cebolla y salsa picante. ¡Para los amantes del picante!
-      </p>
-      <img alt="Pizza Mexicana" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Mexicana" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $11.800
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Pizza Capricciosa -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Capricciosa
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Jamón, champiñones, alcachofas y aceitunas negras. Un clásico italiano.
-      </p>
-      <img alt="Pizza Capricciosa" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://placehold.co/200x140/f7dc6f/000000?text=Pizza+Capricciosa" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $12.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-    </div>
-   </section>
-   <!-- Sección Destacados (moved below Pizzas) -->
-   <section id="hamburguesas" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     HAMBURGUESAS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Basic Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Basic Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Basic Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/d4db5373-35ab-46b2-b61f-ba3a31bbf06a.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        10% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Onion Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Onion Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Onion Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/39263262-bab7-44c0-cf92-d3ba50634ddf.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        10% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Classic Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Classic Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Classic Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/6d35de92-8c2e-48c8-388a-a91a2388ff9e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $9.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $10.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        9% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Tasty Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Tasty Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Tasty Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/11082e9f-930c-4ef1-ead9-9128bbc87a83.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $9.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $10.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        9% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- BBQ Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       BBQ Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="BBQ Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/0136f6f4-9472-4aa0-89b1-b859ecb3ec8c.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $12.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $13.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Avocado Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Avocado Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Avocado Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/103c3f53-5ac5-4300-b767-b62da6edbde9.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $10.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $11.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Cheddar Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cheddar Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Cheddar Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/c4b03637-8278-42bf-d045-d7f1f4be1873.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $10.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $11.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Bacon Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Bacon Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Bacon Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/bba9b18a-d9eb-4171-99e2-b9f84d71add0.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Italian Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Italian Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Italian Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/a4460d90-d873-471c-1b72-f4b137b7898e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $10.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $11.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Cheese Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cheese Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Cheese Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/89efadf7-ac22-4e51-785b-b8c56f5748ef.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Ranch Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Ranch Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Ranch Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/7db61011-8a73-4544-1b66-fa4060095a7a.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Roof Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b199164f-4158-4c3e-f3e0-c7f210eb38e3.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Shrimp Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Shrimp Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Shrimp Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- American Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       American Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="American Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/f1df66a7-8500-4961-f938-2df5335169ef.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $11.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $12.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        8% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Deluxe Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Deluxe Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Deluxe Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/c874454e-e066-4282-e420-2800fe25f561.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $13.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $14.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Doble Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Doble Roof Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       350 gramos de proteína
-      </p>
-      <img alt="Doble Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e70df619-31e6-4fbd-c452-1a18ad3ab2dc.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $13.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $14.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Triple Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Triple Roof Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       525 gramos de proteína
-      </p>
-      <img alt="Triple Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/ff6443bd-b3a5-4fbd-16a4-9d5b2a1831ca.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $16.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $17.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        6% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Cuádruple Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cuádruple Roof Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       700 gramos de proteína
-      </p>
-      <img alt="Cuádruple Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b8fca58e-b0f3-4c05-1b4c-cb11bf5ad370.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $19.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $20.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        5% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- 2x1 Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       2x1 Roof Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       450 gramos de proteína
-      </p>
-      <img alt="Dos Roof Burgers con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/415d88e1-5480-4511-ba51-4eef549b0b3e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $12.590
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $13.590
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- 40% OFF Tasty Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       40% OFF Tasty Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="Tasty Burger con papas fritas en un plato blanco con etiqueta de 40% de descuento" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/07ae63ab-67a5-4fdf-5fc6-88f6bd1cea1e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $6.594
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $11.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        45% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- 30% OFF BBQ Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       30% OFF BBQ Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
-      </p>
-      <img alt="BBQ Burger con papas fritas en un plato blanco con etiqueta de 30% de descuento" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/ade718dd-e433-42c4-a883-5b3ff7fb3610.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $9.793
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $13.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        30% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- 2 Cheddar Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       2 Cheddar Burger + Papas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       450 gramos de proteína
-      </p>
-      <img alt="Dos Cheddar Burgers con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/a626f0b0-bef6-495e-2887-2b01e0c0f00d.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $15.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $17.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-    </div>
-   </section>
-   <!-- Sección SNACKS -->
-   <section id="snacks" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     SNACKS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Camarones Apanados -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Camarones Apanados
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       5 camarones con salsa, con sabor a la costa de mar
-      </p>
-      <img alt="Camarones apanados con salsa para mojar en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/9661095f-4efd-4b69-9582-aaa792c7bd6c.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $6.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $7.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        13% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Aros de Cebolla -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Aros de Cebolla
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       10 aros de cebolla con salsa BBQ / tártara
-      </p>
-      <img alt="Aros de cebolla con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/afb367a8-567e-4880-972f-d371b993a342.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Mozzarella Sticks -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Mozzarella Sticks
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 palitos con salsa BBQ / tártara
-      </p>
-      <img alt="Palitos de mozzarella con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/15bb5c2f-56fc-46ca-4f5b-79608eab9a5d.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Nuggets de pollo -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Nuggets de pollo
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 nuggets con salsa BBQ / tártara
-      </p>
-      <img alt="Nuggets de pollo con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/55b57428-fed5-4044-f68a-1d477ca11ebf.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Rústicas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Rústicas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas rústicas
-      </p>
-      <img alt="Papas rústicas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/675b4f42-31a9-4657-d077-182ee563916e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $6.490
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $7.490
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        13% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Cheese Meat Balls -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cheese Meat Balls
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 albóndigas con salsa BBQ / tártara
-      </p>
-      <img alt="Albóndigas de queso con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/fd0e7c38-ec06-4844-5e7e-0ab084828cb6.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        10% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Chorrillana Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Chorrillana Veggie
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas con cebolla y huevo
-      </p>
-      <img alt="Chorrillana vegetariana con papas fritas, cebollas y huevo en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/d6413343-ec7c-4099-4d25-8007b2701d78.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $13.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $14.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Americanas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Americanas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas americanas
-      </p>
-      <img alt="Papas fritas americanas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/dc34cabf-e7fd-408a-3358-a0deab439332.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Cheddar -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Cheddar
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas cheddar
-      </p>
-      <img alt="Papas fritas con queso cheddar en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b91244b0-bf2d-445c-3be2-113ba60e6d00.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Veggie
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas veggie
-      </p>
-      <img alt="Papas fritas vegetarianas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/11c04611-b6cd-4c67-d556-91c0742024ef.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Fritas Tradicionales -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Fritas Tradicionales
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas fritas tradicionales
-      </p>
-      <img alt="Papas fritas tradicionales en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/f7598bcb-9997-47b7-3919-b3ab1ca8ad55.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.490
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.490
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Chorrillana Mechada (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Chorrillana Mechada
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-    </div>
-   </section>
-   <!-- Sección SNACKS -->
-   <section id="snacks" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     SNACKS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Camarones Apanados -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Camarones Apanados
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       5 camarones con salsa, con sabor a la costa de mar
-      </p>
-      <img alt="Camarones apanados con salsa para mojar en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/9661095f-4efd-4b69-9582-aaa792c7bd6c.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $6.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $7.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        13% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Aros de Cebolla -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Aros de Cebolla
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       10 aros de cebolla con salsa BBQ / tártara
-      </p>
-      <img alt="Aros de cebolla con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/afb367a8-567e-4880-972f-d371b993a342.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Mozzarella Sticks -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Mozzarella Sticks
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 palitos con salsa BBQ / tártara
-      </p>
-      <img alt="Palitos de mozzarella con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/15bb5c2f-56fc-46ca-4f5b-79608eab9a5d.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Nuggets de pollo -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Nuggets de pollo
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 nuggets con salsa BBQ / tártara
-      </p>
-      <img alt="Nuggets de pollo con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/55b57428-fed5-4044-f68a-1d477ca11ebf.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $5.890
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $6.890
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        14% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Rústicas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Rústicas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas rústicas
-      </p>
-      <img alt="Papas rústicas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/675b4f42-31a9-4657-d077-182ee563916e.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $6.490
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $7.490
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        13% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Cheese Meat Balls -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cheese Meat Balls
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       6 albóndigas con salsa BBQ / tártara
-      </p>
-      <img alt="Albóndigas de queso con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/fd0e7c38-ec06-4844-5e7e-0ab084828cb6.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        10% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Chorrillana Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Chorrillana Veggie
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas con cebolla y huevo
-      </p>
-      <img alt="Chorrillana vegetariana con papas fritas, cebollas y huevo en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/d6413343-ec7c-4099-4d25-8007b2701d78.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $13.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $14.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        7% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Americanas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Americanas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas americanas
-      </p>
-      <img alt="Papas fritas americanas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/dc34cabf-e7fd-408a-3358-a0deab439332.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Cheddar -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Cheddar
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas cheddar
-      </p>
-      <img alt="Papas fritas con queso cheddar en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b91244b0-bf2d-445c-3be2-113ba60e6d00.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Veggie
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas veggie
-      </p>
-      <img alt="Papas fritas vegetarianas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/11c04611-b6cd-4c67-d556-91c0742024ef.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $7.990
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $8.990
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Papas Fritas Tradicionales -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Fritas Tradicionales
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas fritas tradicionales
-      </p>
-      <img alt="Papas fritas tradicionales en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/f7598bcb-9997-47b7-3919-b3ab1ca8ad55.jpg" width="200"/>
-      <div class="flex items-center gap-2 mt-auto">
-       <span class="text-xl font-bold text-gray-900">
-        $8.490
-       </span>
-       <span class="text-sm line-through text-gray-400">
-        $9.490
-       </span>
-       <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-        11% OFF
-       </span>
-      </div>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Chorrillana Mechada (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Chorrillana Mechada
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-    </div>
-   </section>
-   <!-- Sección POSTRES -->
-   <section id="postres" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     POSTRES
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-     <!-- Panqueques rellenos con manjar -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer">
-      <img alt="Panqueques rellenos con manjar en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/5aaabb00-bd46-4c10-aa20-af01e5674d8f.jpg" width="120"/>
-      <div class="flex flex-col justify-between">
-       <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-1">
-         Panqueques rellenos con manjar
-        </h4>
-        <p class="text-sm text-gray-600 mb-2">
-         4 unidades de panqueques rellenos con manjar, cubiertos con azúcar flor
-        </p>
-       </div>
-       <div class="flex items-center gap-2">
-        <span class="text-xl font-bold text-gray-900">
-         $3.990
-        </span>
-        <span class="text-sm line-through text-gray-400">
-         $4.990
-        </span>
-        <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-         20% OFF
-        </span>
-       </div>
-       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-        Agregar
-       </button>
-      </div>
-     </div>
-     <!-- Churros con Manjar y chocolate -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer">
-      <img alt="Churros con manjar y chocolate en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/ff299b77-0124-40d9-2055-47ad996af4e7.jpg" width="120"/>
-      <div class="flex flex-col justify-between">
-       <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-1">
-         Churros con Manjar y chocolate
-        </h4>
-        <p class="text-sm text-gray-600 mb-2">
-         6 unidades de churros con manjar y chocolate, cubiertos con azúcar flor
-        </p>
-       </div>
-       <div class="flex items-center gap-2">
-        <span class="text-xl font-bold text-gray-900">
-         $3.990
-        </span>
-        <span class="text-sm line-through text-gray-400">
-         $4.990
-        </span>
-        <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-         20% OFF
-        </span>
-       </div>
-       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-        Agregar
-       </button>
-      </div>
-     </div>
-     <!-- Churros con azúcar flor -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer">
-      <img alt="Churros con azúcar glas en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/0723d0db-71ab-4062-9970-290437f138f8.jpg" width="120"/>
-      <div class="flex flex-col justify-between">
-       <div>
-        <h4 class="text-lg font-semibold text-gray-900 mb-1">
-         Churros con azúcar flor
-        </h4>
-        <p class="text-sm text-gray-600 mb-2">
-         6 unidades de churros con azúcar flor, cubiertos con azúcar flor
-        </p>
-       </div>
-       <div class="flex items-center gap-2">
-        <span class="text-xl font-bold text-gray-900">
-         $3.990
-        </span>
-        <span class="text-sm line-through text-gray-400">
-         $4.990
-        </span>
-        <span class="text-xs bg-red-500 text-white rounded-full px-2.5 py-1 font-medium">
-         20% OFF
-        </span>
-       </div>
-       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-        Agregar
-       </button>
-      </div>
-     </div>
-    </div>
-   </section>
-   <!-- Sección BEBIDAS -->
-   <section id="bebidas" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     BEBIDAS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Agua Mineral Sin Gas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Agua Mineral Sin Gas
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       500 ml
-      </p>
-      <img alt="Botella de Agua Mineral Sin Gas" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/94815b87-a0be-43d9-fe34-c61f4be0f3b2.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- CocaCola Light -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       CocaCola Light
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de CocaCola Light" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/6f510bff-cc4d-4799-3058-f7c6188392ed.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Fanta Normal -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Fanta Normal
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Fanta Normal" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/162ab2eb-0996-4dfe-2d14-820e93848693.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Fanta Zero -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Fanta Zero
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Fanta Zero" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/4c1c6820-bbb3-46b0-d0ff-8ae0c528d0fd.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Sprite Normal -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Sprite Normal
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Sprite Normal" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/2cf1cde9-d253-4db6-e604-7edbbb811ff2.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Sprite Zero -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Sprite Zero
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Sprite Zero" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/0b164dc0-2d1b-435a-642e-4fb15c390dd2.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Schweppes Tonica -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Schweppes Tonica
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Schweppes Tónica" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e090d0b7-0188-4d36-250b-06a0233c74da.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Schweppes Ginger Ale -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Schweppes Ginger Ale
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       355 ml
-      </p>
-      <img alt="Lata de Schweppes Ginger Ale" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/0753e853-cb67-4152-ad1c-0e3d6b622773.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $2.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- CocaCola Zero (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       CocaCola Zero
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <img alt="Lata de CocaCola Zero" class="rounded-lg w-full h-36 object-contain mb-4 opacity-50 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/cd990c72-a83c-49de-dc59-c3c1269d4dbd.jpg" width="200"/>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Quatro Zero (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Quatro Zero
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <img alt="Lata de Quatro Zero" class="rounded-lg w-full h-36 object-contain mb-4 opacity-50 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/1527272c-da98-4404-cccb-b08524ea7753.jpg" width="200"/>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Schweppes Zero Ginger Ale (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Schweppes Zero Ginger Ale
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <img alt="Lata de Schweppes Zero Ginger Ale" class="rounded-lg w-full h-36 object-contain mb-4 opacity-50 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/78c38cb3-4c2b-4b14-5919-15048520cf2d.jpg" width="200"/>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-    </div>
-   </section>
-   <!-- Sección CERVEZAS -->
-   <section id="cervezas" class="mt-12">
-    <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
-     CERVEZAS
-    </h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-     <!-- Austral Calafate -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Austral Calafate
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 330 ml
-      </p>
-      <img alt="Botella de cerveza Austral Calafate" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/a3a7fef1-2316-435f-d61d-9b89444cee9c.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $3.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Austral Calafate 500 cc -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Austral Calafate 500 cc
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 500 ml
-      </p>
-      <img alt="Botella de cerveza Austral Calafate 500 cc" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/77f33415-5ae2-4c18-2835-9ae0ceb6f12e.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $5.200
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Kunstmann Torobayo -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Kunstmann Torobayo
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Cerveza rubia de estilo ale, de sabor intenso y aroma a caramelo y frutas
-      </p>
-      <img alt="Botella de cerveza Kunstmann Torobayo" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/2b307567-4811-46d7-865d-5225f7bba224.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $3.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Mahou Tostada Sin Alcohol -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Mahou Tostada Sin Alcohol
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Cerveza tostada sin alcohol, con sabor suave y refrescante
-      </p>
-      <img alt="Botella de cerveza Mahou Tostada Sin Alcohol" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e384e51d-62b5-4cd6-2176-b2bdc62a144b.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $3.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Mahou 5 Estrellas Sin Gluten 330 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer">
-      <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Mahou 5 Estrellas Sin Gluten 330
-      </h4>
-      <p class="text-sm text-gray-600 mb-3">
-       Cerveza sin gluten, con sabor suave y refrescante
-      </p>
-      <img alt="Botella de cerveza Mahou 5 Estrellas Sin Gluten 330" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/cb47483b-eb3e-44ec-5676-619e23c02fd2.jpg" width="200"/>
-      <span class="text-xl font-bold text-gray-900 mt-auto">
-       $3.990
-      </span>
-      <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out">
-       Agregar
-      </button>
-     </div>
-     <!-- Kunstmann Artesanal (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Kunstmann Artesanal
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Kunstmann Torobayo 500cc (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Kunstmann Torobayo 500cc
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Mestra Amber 330cc (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Mestra Amber 330cc
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Peroni Lager Italiana 330cc (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Peroni Lager Italiana 330cc
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-     <!-- Salzburg Kriek 330cc (No disponible) -->
-     <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
-      <h4 class="text-lg font-semibold mb-1">
-       Salzburg Kriek 330cc
-      </h4>
-      <p class="text-sm mb-3">
-       No Disponible
-      </p>
-      <i class="fas fa-ban text-5xl text-gray-400 opacity-75">
-      </i>
-     </div>
-    </div>
-   </section>
-   <!-- Botón flotante del carrito -->
-   <button id="cart-button" class="fixed bottom-6 right-6 bg-red-600 text-white p-4 rounded-full shadow-lg flex items-center gap-2 hidden-on-scroll transform hover:scale-110 transition duration-300 ease-in-out z-50">
-    <i class="fas fa-shopping-cart text-xl">
-    </i>
-    <span class="text-lg font-semibold">
-     $0.00
-    </span>
-   </button>
-  </main>
-  <!-- Footer -->
-  <footer class="mt-16 border-t border-gray-200 pt-8 pb-12 text-sm text-gray-600 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-   <div class="flex flex-col md:flex-row md:justify-between gap-10 items-center md:items-start">
-    <!-- Columna de contacto y WhatsApp -->
-    <div class="flex flex-col gap-4 max-w-xs text-center md:text-left">
-     <div class="flex items-center gap-2 justify-center md:justify-start text-base">
-      <i class="fas fa-question-circle text-red-500 text-lg">
-      </i>
-      <span class="font-medium text-gray-700">
-       ¿Necesitas ayuda?
-      </span>
-     </div>
-     <div class="flex items-center gap-2 justify-center md:justify-start text-base">
-      <i class="fas fa-envelope text-red-500 text-lg">
-      </i>
-      <a class="hover:underline text-red-500 hover:text-red-600 transition font-medium" href="mailto:contacto@agil.cl">
-       contacto@agil.cl
+    <div class="div-block-42"><a class="nopaddingleft" href="https://estudioguacamaya.github.io/casaclean/"
+        class="link-block-5 w-inline-block"><img src="./assets/images/casaclean.svg" loading="lazy" alt=""
+          class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">Casa Clean</h1>
+        <p class="text-center ">Web / Marketing-digital / RRSS / Branding</p>
+      </a><a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" class="link-block-5 w-inline-block"><img
+          src="https://assets.website-files.com/623af905501f63496c520c25/623c97b79250e44ffdc10d4a_bos.png"
+          loading="lazy" alt="" class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">Bertín Osborne Selección</h1>
+        <p class="text-center ">Branding / Marketing-digital / RRSS</p>
+      </a><a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" class="link-block-5 w-inline-block"><img
+          src="https://assets.website-files.com/623af905501f63496c520c25/623c97b79250e443ecc10d48_cabigrow.png"
+          loading="lazy" id="w-node-_75c0bc71-b2b5-8d57-6989-7195a268f91f-ba520c28" alt="" class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">cabigrow</h1>
+        <p class="text-center ">SEO / Marketing-digital / RRSS / Branding/</p>
+      </a><a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" class="link-block-5 w-inline-block"><img
+          src="https://assets.website-files.com/623af905501f63496c520c25/623c97b79250e40024c10d4c_fm.png" loading="lazy"
+          alt="" class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">food med</h1>
+        <p class="text-center ">Branding / Marketing-digital / RRSS / SEO /</p>
+      </a><a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" class="link-block-5 w-inline-block"><img
+          src="https://assets.website-files.com/623af905501f63496c520c25/623c97b79250e42cdec10d42_bagdad.png"
+          loading="lazy" alt="" class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">Bagdad</h1>
+        <p class="text-center ">Marketing-digital / SEO / E-Mail Marketing / RRSS/ </p>
+      </a><a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" class="link-block-5 w-inline-block"><img
+          src="https://assets.website-files.com/623af905501f63496c520c25/623c97b79250e44cf5c10d44_training.png"
+          loading="lazy" alt="" class="proyecto-imagen-grid">
+        <h1 class="heading-proyectos-grid mt-4">Training boutique</h1>
+        <p class="text-center ">Marketing-digital / SEO / E-Mail Marketing / RRSS/</p>
       </a>
-     </div>
-     <div class="flex flex-col gap-1.5 mt-2">
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56993136712">
-        +56 9 9313 6712 - Pizzas Love Portalón
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56993171462">
-        +56 9 9317 1462 - Pizzas Love Chillán
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56993171463">
-        +56 9 9317 1463 - Pizzas Love Ñuñoa
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56993171467">
-        +56 9 9317 1467 - Pizzas Love Villa Francia
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442971">
-        +56 9 2244 2971 - Pizzas Love Quilpué
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442971">
-        +56 9 2244 2971 - Pizzas Love Viña
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442972">
-        +56 9 2244 2972 - Pizzas Love Talca
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442973">
-        +56 9 2244 2973 - Pizzas Love Rancagua
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442974">
-        +56 9 2244 2974 - Pizzas Love Valparaíso
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442975">
-        +56 9 2244 2975 - Pizzas Love Concepción
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442976">
-        +56 9 2244 2976 - Pizzas Love Valdivia
-       </a>
-      </div>
-      <div class="flex items-center gap-2 justify-center md:justify-start text-sm">
-       <i class="fab fa-whatsapp text-green-500 text-lg">
-       </i>
-       <a class="hover:underline hover:text-green-600 transition text-gray-600" href="tel:+56922442977">
-        +56 9 2244 2977 - Pizzas Love Coelemu
-       </a>
-      </div>
-     </div>
+
     </div>
-    <!-- Columna central con logo y redes sociales -->
-    <div class="flex flex-col items-center gap-6 md:mt-8">
-     <img alt="Logotipo de Pizzas Love en el pie de página" class="w-36 h-auto" height="40" src="https://storage.googleapis.com/a1aa/image/b7fcbaf1-d5d1-4692-48c7-c692fdd3a835.jpg" width="120"/>
-     <div class="flex gap-8 text-gray-700">
-      <a aria-label="Facebook" class="hover:text-red-600 transition transform hover:scale-125" href="#">
-       <i class="fab fa-facebook-f text-3xl">
-       </i>
-      </a>
-      <a aria-label="Instagram" class="hover:text-red-600 transition transform hover:scale-125" href="#">
-       <i class="fab fa-instagram text-3xl">
-       </i>
-      </a>
-     </div>
+    <div class="section_title text-center">
+      <a href="./proyectos.html" class="main-btn mt-30 mb-35">Ver proyectos...</a>
     </div>
-    <!-- Columna de "Powered by" -->
-    <div class="flex flex-col gap-4 text-center md:text-right max-w-xs">
-     <p class="text-gray-700 font-semibold text-base">
-      Powered by
-     </p>
-     <img alt="Logotipo de la empresa AGIL" class="mx-auto md:mx-0 w-40 h-auto" height="40" src="https://storage.googleapis.com/a1aa/image/2df9ef8d-d3b4-42cb-0ddc-c875884b7c1f.jpg" width="120"/>
+  </section>
+
+  <!--====== PRODUCT FEATURES PART ENDS ======-->
+
+
+
+  <!--====== FOOTER PART START ======-->
+
+  <footer class="footer footer-style-4 footer-dark mt-50">
+    <div class="container">
+      <div class="widget-wrapper">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-6">
+            <div class="footer-widget">
+              <div class="logo">
+                <a class="navbar-brand nopaddingleft" href="./index.html">
+                  <img src="./assets/images/logo2.svg" alt="Logo" />
+                </a>
+              </div>
+              <p class="desc">
+                Somos un equipo de profesionales impulsados por la creatividad
+                y con una mentalidad desafiante. Construimos marcas a través
+                de experiencias digitales, diseñamos y desarrollamos tu
+                negocio en la web.
+              </p>
+              <ul class="socials">
+                <li>
+                  <a href="https://www.facebook.com/profile.php?id=100089186302743" class="p-0"> <i><svg width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.19795 21.5H13.198V13.4901H16.8021L17.198 9.50977H13.198V7.5C13.198 6.94772 13.6457 6.5 14.198 6.5H17.198V2.5H14.198C11.4365 2.5 9.19795 4.73858 9.19795 7.5V9.50977H7.19795L6.80206 13.4901H9.19795V21.5Z"
+                          fill="#ffffff" />
+                      </svg></i>
+                  </a>
+                </li>
+                <li>
+                  <a href="https://linktr.ee/estudioguacamaya" class="p-0"><svg xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-brand-linktree" width="24" height="24" viewBox="0 0 24 24"
+                      stroke-width="2" stroke="#fff" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M9 3l-7 12h3v5h5v-5h-2l4 -7z"></path>
+                      <path d="M15 3l7 12h-3v5h-5v-5h2l-4 -7z"></path>
+                    </svg></a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/estudioguacamayavisual/" class="p-0">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7ZM9 12C9 13.6569 10.3431 15 12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12Z"
+                        fill="#ffffff" />
+                      <path
+                        d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z"
+                        fill="#ffffff" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5 1C2.79086 1 1 2.79086 1 5V19C1 21.2091 2.79086 23 5 23H19C21.2091 23 23 21.2091 23 19V5C23 2.79086 21.2091 1 19 1H5ZM19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z"
+                        fill="#ffffff" />
+                    </svg>
+                  </a>
+                </li>
+                <li>
+                  <a class="p-0" href="#">
+                    <?xml version="1.0"?>
+                    <?xml version="1.0"?><svg xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink" height="30.693px" id="Layer_1"
+                      style="enable-background:new 0 0 56.693 56.693;" version="1.1" viewBox="0 0 56.693 56.693"
+                      width="56.693px" xml:space="preserve" fill="#ffffff">
+
+                      <g>
+                        <path class="st0"
+                          d="M46.3802,10.7138c-4.6512-4.6565-10.8365-7.222-17.4266-7.2247c-13.5785,0-24.63,11.0506-24.6353,24.6333   c-0.0019,4.342,1.1325,8.58,3.2884,12.3159l-3.495,12.7657l13.0595-3.4257c3.5982,1.9626,7.6495,2.9971,11.7726,2.9985h0.01   c0.0008,0-0.0006,0,0.0002,0c13.5771,0,24.6293-11.0517,24.635-24.6347C53.5914,21.5595,51.0313,15.3701,46.3802,10.7138z    M28.9537,48.6163h-0.0083c-3.674-0.0014-7.2777-0.9886-10.4215-2.8541l-0.7476-0.4437l-7.7497,2.0328l2.0686-7.5558   l-0.4869-0.7748c-2.0496-3.26-3.1321-7.028-3.1305-10.8969c0.0044-11.2894,9.19-20.474,20.4842-20.474   c5.469,0.0017,10.6101,2.1344,14.476,6.0047c3.8658,3.8703,5.9936,9.0148,5.9914,14.4859   C49.4248,39.4307,40.2395,48.6163,28.9537,48.6163z" />
+                        <path class="st0"
+                          d="M40.1851,33.281c-0.6155-0.3081-3.6419-1.797-4.2061-2.0026c-0.5642-0.2054-0.9746-0.3081-1.3849,0.3081   c-0.4103,0.6161-1.59,2.0027-1.9491,2.4136c-0.359,0.4106-0.7182,0.4623-1.3336,0.1539c-0.6155-0.3081-2.5989-0.958-4.95-3.0551   c-1.83-1.6323-3.0653-3.6479-3.4245-4.2643c-0.359-0.6161-0.0382-0.9492,0.27-1.2562c0.2769-0.2759,0.6156-0.7189,0.9234-1.0784   c0.3077-0.3593,0.4103-0.6163,0.6155-1.0268c0.2052-0.4109,0.1027-0.7704-0.0513-1.0784   c-0.1539-0.3081-1.3849-3.3379-1.8978-4.5706c-0.4998-1.2001-1.0072-1.0375-1.3851-1.0566   c-0.3585-0.0179-0.7694-0.0216-1.1797-0.0216s-1.0773,0.1541-1.6414,0.7702c-0.5642,0.6163-2.1545,2.1056-2.1545,5.1351   c0,3.0299,2.2057,5.9569,2.5135,6.3676c0.3077,0.411,4.3405,6.6282,10.5153,9.2945c1.4686,0.6343,2.6152,1.013,3.5091,1.2966   c1.4746,0.4686,2.8165,0.4024,3.8771,0.2439c1.1827-0.1767,3.6419-1.489,4.1548-2.9267c0.513-1.438,0.513-2.6706,0.359-2.9272   C41.211,33.7433,40.8006,33.5892,40.1851,33.281z" />
+                      </g>
+                    </svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+            <div class="footer-widget">
+              <h6>Servicios</h6>
+              <ul class="links">
+                <li><a class="nopaddingleft" href="index.html">Inicio</a></li>
+                <li>
+                  <a class="nopaddingleft" href="./index.html#about">Nosotros</a>
+                </li>
+                <li>
+                  <a class="nopaddingleft" href="./index.html#servicios">Servicios</a>
+                </li>
+                <li><a class="nopaddingleft" href="./proyectos.html">Proyectos</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+            <div class="footer-widget">
+              <h6>Empresa</h6>
+              <ul class="links">
+
+                <li>
+                  <a class="nopaddingleft" href="./blog-de-marketing-y-publicidad.html">Blog</a>
+                </li>
+                <li>
+                  <a class="nopaddingleft" href="./contacto.html">Contacto</a>
+                </li>
+                <li>
+                  <a class="nopaddingleft" href="./preguntas-frecuentes.html">Preguntas frecuentes</a>
+                </li>
+                <li>
+                  <a class="nopaddingleft" href="./report-problem.html">Soporte</a>
+                </li>
+                <li>
+                  <a href="/index-en.html">
+                    <defs>
+                      <linearGradient x1="7.16667" y1="86" x2="164.83333" y2="86" gradientUnits="userSpaceOnUse"
+                        id="color-1_5RtaKEr09Jy6_gr1">
+                        <stop offset="0" stop-color="#ffffff" stop-opacity="0"></stop>
+                        <stop offset="0.018" stop-color="#ffffff" stop-opacity="0.035"></stop>
+                        <stop offset="0.213" stop-color="#ffffff" stop-opacity="0.4"></stop>
+                        <stop offset="0.442" stop-color="#ffffff" stop-opacity="0"></stop>
+                        <stop offset="0.57" stop-color="#ffffff" stop-opacity="0"></stop>
+                        <stop offset="0.824" stop-color="#ffffff" stop-opacity="0.25"></stop>
+                        <stop offset="1" stop-color="#ffffff" stop-opacity="0.001"></stop>
+                        <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+                      </linearGradient>
+                      <linearGradient x1="7.16667" y1="86" x2="164.83333" y2="86" gradientUnits="userSpaceOnUse"
+                        id="color-2_5RtaKEr09Jy6_gr2">
+                        <stop offset="0.004" stop-color="#000000" stop-opacity="0.6"></stop>
+                        <stop offset="0.052" stop-color="#00040e" stop-opacity="0.442"></stop>
+                        <stop offset="0.129" stop-color="#00091e" stop-opacity="0.192"></stop>
+                        <stop offset="0.188" stop-color="#000b24" stop-opacity="0"></stop>
+                        <stop offset="0.405" stop-color="#000b24" stop-opacity="0"></stop>
+                        <stop offset="0.531" stop-color="#000000" stop-opacity="0.34"></stop>
+                        <stop offset="0.598" stop-color="#000103" stop-opacity="0.34"></stop>
+                        <stop offset="0.644" stop-color="#000205" stop-opacity="0.258"></stop>
+                        <stop offset="0.66" stop-color="#00040c" stop-opacity="0.228"></stop>
+                        <stop offset="0.672" stop-color="#000717" stop-opacity="0.207"></stop>
+                        <stop offset="0.676" stop-color="#00091d" stop-opacity="0.2"></stop>
+                        <stop offset="0.681" stop-color="#0c091d" stop-opacity="0.184"></stop>
+                        <stop offset="0.688" stop-color="#17091d" stop-opacity="0.157"></stop>
+                        <stop offset="0.699" stop-color="#1e091d" stop-opacity="0.119"></stop>
+                        <stop offset="0.73" stop-color="#20091d" stop-opacity="0.015"></stop>
+                        <stop offset="0.78" stop-color="#65040d" stop-opacity="0.008"></stop>
+                        <stop offset="0.817" stop-color="#900104" stop-opacity="0.003"></stop>
+                        <stop offset="0.835" stop-color="#a10000" stop-opacity="0"></stop>
+                        <stop offset="0.876" stop-color="#930000" stop-opacity="0.123"></stop>
+                        <stop offset="1" stop-color="#6d0000" stop-opacity="0.6"></stop>
+                      </linearGradient>
+                      <linearGradient x1="86" y1="13.91408" x2="86" y2="157.86375" gradientUnits="userSpaceOnUse"
+                        id="color-3_5RtaKEr09Jy6_gr3">
+                        <stop offset="0.151" stop-color="#000000" stop-opacity="0.2"></stop>
+                        <stop offset="0.301" stop-color="#000612" stop-opacity="0.109"></stop>
+                        <stop offset="0.482" stop-color="#000b24" stop-opacity="0"></stop>
+                        <stop offset="0.839" stop-color="#000000" stop-opacity="0.2"></stop>
+                      </linearGradient>
+                    </defs>
+                    <g fill="none" fill-rule="none" stroke="none" stroke-width="1" stroke-linecap="butt"
+                      stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0"
+                      font-family="none" font-weight="none" font-size="none" text-anchor="none"
+                      style="mix-blend-mode: normal">
+                      <path d="M0,172v-172h172v172z" fill="none" fill-rule="nonzero"></path>
+                      <g>
+                        <path
+                          d="M164.83333,41.20833v89.94167c-17.55833,6.09167 -35.11667,6.09167 -52.675,3.94167v-89.94167c-0.71667,0 0.71667,0 0,0c16.125,1.79167 34.4,2.15 52.675,-3.94167z"
+                          fill="#ed2939" fill-rule="nonzero"></path>
+                        <path
+                          d="M7.16667,40.85c35.11667,-11.825 70.23333,0 104.99167,3.94167c0,30.1 0,59.84167 0,89.94167c-35.11667,-3.94167 -70.23333,-16.125 -104.99167,-3.94167c0,-29.74167 0,-59.84167 0,-89.94167z"
+                          fill="#eeeeee" fill-rule="evenodd"></path>
+                        <path
+                          d="M112.15833,135.09167v0c-0.71667,0 -1.43333,0 -2.15,-0.35833c0.71667,0 1.43333,0 2.15,0.35833z"
+                          fill="#eeeeee" fill-rule="evenodd"></path>
+                        <path
+                          d="M7.16667,40.85c17.55833,-6.09167 35.11667,-6.09167 52.675,-3.94167c0,30.1 0,59.84167 0,89.94167c-17.55833,-2.15 -35.11667,-2.15 -52.675,3.94167c0,-29.74167 0,-59.84167 0,-89.94167z"
+                          fill="#002395" fill-rule="nonzero"></path>
+                        <path
+                          d="M7.16667,40.85c52.675,-17.91667 104.99167,17.91667 157.66667,0c0,30.1 0,59.84167 0,89.94167c-52.675,17.91667 -104.99167,-17.91667 -157.66667,0c0,-29.74167 0,-59.84167 0,-89.94167z"
+                          fill="url(#color-1_5RtaKEr09Jy6_gr1)" fill-rule="nonzero" opacity="0.5"></path>
+                        <path
+                          d="M7.16667,40.85c52.675,-17.91667 104.99167,17.91667 157.66667,0c0,30.1 0,59.84167 0,89.94167c-52.675,17.91667 -104.99167,-17.91667 -157.66667,0c0,-29.74167 0,-59.84167 0,-89.94167z"
+                          fill="url(#color-2_5RtaKEr09Jy6_gr2)" fill-rule="nonzero" opacity="0.6"></path>
+                        <path
+                          d="M7.16667,40.85c52.675,-17.91667 104.99167,17.91667 157.66667,0c0,30.1 0,59.84167 0,89.94167c-52.675,17.91667 -104.99167,-17.91667 -157.66667,0c0,-29.74167 0,-59.84167 0,-89.94167z"
+                          fill="url(#color-3_5RtaKEr09Jy6_gr3)" fill-rule="nonzero" opacity="0.2"></path>
+                      </g>
+                    </g></svg>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+            <div class="footer-widget">
+              <!--<h6>Recursos</h6>-->
+              <ul class="links">
+                <li>
+                  <!-- <a class="nopaddingleft" href="/terms.html">Terminos y condiciones</a>-->
+                </li>
+                <li>
+                  <!--   <a class="nopaddingleft" href="/lost.html">Pagos</a>-->
+                </li>
+                <li>
+                  <!--   <a class="nopaddingleft" href="/report-problem.html">Reportar un problema</a>-->
+                </li>
+
+              </ul>
+            </div>
+          </div>
+          <div class="col-xl-3 col-lg-3 col-md-6"></div>
+        </div>
+      </div>
+      <div class="copyright-wrapper">
+        <p>
+          Diseñado y desarollado por
+          <a class="nopaddingleft" href="www.google.com" rel="nofollow" target="_blank"></a>
+          <a class="nopaddingleft" href="https://linktr.ee/estudioguacamaya" rel="nofollow" target="_blank">© Estudio
+            Guacamaya</a>
+        </p>
+      </div>
     </div>
-   </div>
-   <p class="mt-12 text-center text-gray-500 text-sm">
-    v3.0.20
-   </p>
   </footer>
-  <script>
-   // JavaScript para mostrar/ocultar la barra de navegación fija y el botón del carrito
-    window.onscroll = function() {
-        const navbar = document.getElementById("sticky-navbar");
-        const cartButton = document.getElementById("cart-button");
-        const scrollThreshold = 200;
+  <!--====== FOOTER PART ENDS ======-->
 
-        if (window.pageYOffset > scrollThreshold) {
-            navbar.classList.add("show-on-scroll");
-            navbar.classList.remove("hidden-on-scroll");
-            cartButton.classList.add("show-on-scroll");
-            cartButton.classList.remove("hidden-on-scroll");
-        } else {
-            navbar.classList.add("hidden-on-scroll");
-            navbar.classList.remove("show-on-scroll");
-            cartButton.classList.add("hidden-on-scroll");
-            cartButton.classList.remove("show-on-scroll");
-        }
-    };
+  <!--====== BACK TOP TOP PART START ======-->
 
-    // Script para el menú desplegable de "Ingresa tu Dirección"
-    document.getElementById('menu-button').addEventListener('click', function() {
-        const dropdown = this.nextElementSibling;
-        dropdown.classList.toggle('hidden');
-    });
+  <a href="#" class="scroll-top" style="display: flex;"> <i><svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+        width="50" height="50" viewBox="0 0 172 172" style=" fill:#000000;">
+        <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+          stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+          font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+          <path d="M0,172v-172h172v172z" fill="none"></path>
+          <g fill="#0081E1">
+            <path
+              d="M86,6.88c-43.62952,0 -79.12,35.49392 -79.12,79.12c0,43.62608 35.49048,79.12 79.12,79.12c43.62952,0 79.12,-35.49392 79.12,-79.12c0,-43.62608 -35.49048,-79.12 -79.12,-79.12zM122.83208,78.11208c-0.6708,0.6708 -1.55144,1.00792 -2.43208,1.00792c-0.88064,0 -1.76128,-0.33712 -2.43208,-1.00792l-28.52792,-28.52792v81.13584c0,1.89888 -1.53768,3.44 -3.44,3.44c-1.90232,0 -3.44,-1.54112 -3.44,-3.44v-81.13584l-28.52792,28.52792c-1.34504,1.34504 -3.51912,1.34504 -4.86416,0c-1.34504,-1.34504 -1.34504,-3.51912 0,-4.86416l34.39656,-34.39656c0.31648,-0.31992 0.69832,-0.57104 1.12144,-0.74648c0.83936,-0.34744 1.7888,-0.34744 2.62816,0c0.42312,0.17544 0.80152,0.42656 1.12144,0.74648l34.39656,34.39656c1.34504,1.34504 1.34504,3.51912 0,4.86416z">
+            </path>
+          </g>
+        </g>
+      </svg></i> </a>
 
-    // Cerrar el desplegable si se hace clic fuera
-    window.addEventListener('click', function(e) {
-        const menuButton = document.getElementById('menu-button');
-        const dropdown = menuButton.nextElementSibling;
-        if (!menuButton.contains(e.target) && !dropdown.contains(e.target)) {
-            dropdown.classList.add('hidden');
-        }
-    });
 
-    // Lógica del Slider
-    const sliderWrapper = document.getElementById('slider-wrapper');
-    const sliderDotsContainer = document.getElementById('slider-dots');
-    const sliderItems = document.querySelectorAll('.slider-item');
-    let currentIndex = 0;
 
-    function createDots() {
-        sliderDotsContainer.innerHTML = ''; // Clear existing dots
-        sliderItems.forEach((_, index) => {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            if (index === 0) {
-                dot.classList.add('active');
-            }
-            dot.addEventListener('click', () => {
-                moveToSlide(index);
-            });
-            sliderDotsContainer.appendChild(dot);
-        });
-    }
 
-    function updateDots() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-        });
-    }
+  <!--====== BACK TOP TOP PART ENDS ======-->
 
-    function moveToSlide(index) {
-        currentIndex = index;
-        const offset = -currentIndex * 100;
-        sliderWrapper.style.transform = `translateX(${offset}%)`;
-        updateDots();
-    }
+  <script src="assets/js/vendor/jquery-1.12.4.min.js"></script>
+  <script src="assets/js/vendor/modernizr-3.7.1.min.js"></script>
 
-    // Auto-slide functionality
-    let autoSlideInterval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % sliderItems.length;
-        moveToSlide(currentIndex);
-    }, 5000); // Cambia de imagen cada 5 segundos
+  <!--====== Bootstrap js ======-->
+  <script src="assets/js/popper.min.js"></script>
 
-    // Reiniciar el intervalo si el usuario interactúa manualmente
-    sliderWrapper.addEventListener('mouseover', () => {
-        clearInterval(autoSlideInterval);
-    });
-    sliderWrapper.addEventListener('mouseout', () => {
-        autoSlideInterval = setInterval(() => {
-            currentIndex = (currentIndex + 1) % sliderItems.length;
-            moveToSlide(currentIndex);
-        }, 5000);
-    });
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/wow.min.js"></script>
 
-    createDots(); // Crear los puntos al cargar
 
-    // JavaScript para el scroll suave de las categorías y activar la pestaña
-    document.querySelectorAll('.category-btn').forEach(button => {
-        button.addEventListener('click', function() {
-            const targetId = this.dataset.target;
-            const targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                const stickyNavbarHeight = document.getElementById('sticky-navbar').offsetHeight;
-                // Obtener la posición del elemento, ajustando por la altura del navbar fijo y un margen adicional
-                const adjustedOffset = targetElement.getBoundingClientRect().top + window.pageYOffset - stickyNavbarHeight - 20;
+  <!--====== Scrolling Nav js ======-->
+  <script src="assets/js/jquery.easing.min.js"></script>
+  <script src="assets/js/scrolling-nav.js"></script>
 
-                window.scrollTo({
-                    top: adjustedOffset,
-                    behavior: 'smooth'
-                });
 
-                // Actualizar la clase activa de la pestaña
-                document.querySelectorAll('.category-btn').forEach(btn => {
-                    btn.classList.remove('text-yellow-500', 'border-yellow-500');
-                    btn.classList.add('hover:text-red-600', 'border-transparent', 'hover:border-red-600');
-                });
-                this.classList.add('text-yellow-500', 'border-yellow-500');
-                this.classList.remove('hover:text-red-600', 'border-transparent', 'hover:border-red-600');
-            }
-        });
-    });
-  </script>
- </body>
+  <!--====== Main js ======-->
+  <script src="assets/js/main.js"></script>
+
+
+</body>
+
 </html>
