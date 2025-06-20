@@ -206,23 +206,71 @@
         text-decoration: none;
         cursor: pointer;
     }
+    /* Estilos para los controles de cantidad mejorados */
+    .quantity-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem; /* Espacio adicional para las notas */
+    }
+
+    .quantity-button {
+        background-color: #ef4444; /* red-500 */
+        color: white;
+        font-size: 1.25rem; /* text-xl */
+        font-weight: bold;
+        width: 40px;
+        height: 40px;
+        border-radius: 9999px; /* rounded-full */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .quantity-button:hover {
+        background-color: #dc2626; /* red-600 */
+        transform: scale(1.05);
+    }
+
+    .quantity-input-field {
+        width: 60px; /* Ancho fijo para el campo de cantidad */
+        text-align: center;
+        padding: 0.5rem;
+        margin: 0 0.5rem;
+        border: 1px solid #d1d5db; /* gray-300 */
+        border-radius: 0.375rem; /* rounded-md */
+        font-size: 1rem;
+        -moz-appearance: textfield; /* Hide Firefox stepper arrows */
+    }
+    /* Hide Chrome, Safari, Edge, Opera stepper arrows */
+    .quantity-input-field::-webkit-outer-spin-button,
+    .quantity-input-field::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
   </style>
  </head>
  <body class="bg-gray-50">
   <!-- Header principal con imagen de fondo y elementos superpuestos -->
   <header class="relative h-[250px] sm:h-[300px] lg:h-[350px] overflow-hidden">
-   <img alt="Imagen de fondo con múltiples hamburguesas apiladas y una pared de ladrillos detrás" class="w-full h-full object-cover" height="350" src="https://storage.googleapis.com/a1aa/image/51eaa911-562d-4bc6-d0cf-d859d97d1590.jpg" width="1920"/>
+   <img alt="Imagen de fondo con m\u00FAltiples hamburguesas apiladas y una pared de ladrillos detr\u00E1s" class="w-full h-full object-cover" height="350" src="https://storage.googleapis.com/a1aa/image/51eaa911-562d-4bc6-d0cf-d859d97d1590.jpg" width="1920"/>
    <div class="absolute inset-0 bg-black opacity-30">
    </div>
-   <!-- Botón de iniciar sesión en la esquina superior derecha del header -->
+   <!-- Bot\u00F3n de iniciar sesi\u00F3n en la esquina superior derecha del header -->
    <div class="absolute top-4 right-4">
     <button class="flex items-center gap-2 bg-white text-red-600 text-sm font-semibold px-4 py-2 rounded-full shadow-lg hover:bg-red-600 hover:text-white transition transform hover:scale-105 duration-300 ease-in-out">
      <i class="fas fa-user-circle">
      </i>
-     Iniciar Sesión
+     Iniciar Sesi\u00F3n
     </button>
    </div>
-   <!-- Sección principal de información del restaurante superpuesta al header -->
+   <!-- Secci\u00F3n principal de informaci\u00F3n del restaurante superpuesta al header -->
    <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6 lg:p-8 bg-white bg-opacity-95 rounded-t-3xl shadow-xl -mb-12 sm:mb-0 z-10 mx-auto max-w-7xl header-info">
     <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
      <div class="flex items-center gap-4">
@@ -247,7 +295,7 @@
           San Juan de los Morros
          </span>
         </div>
-        <!-- Botón de estado del local (Abierto/Cerrado) -->
+        <!-- Bot\u00F3n de estado del local (Abierto/Cerrado) -->
         <span id="store-status" class="status-button px-3 py-1 rounded-full text-white text-xs font-semibold transition-colors duration-300 ease-in-out">
          <!-- El texto y el color se establecen con JavaScript -->
         </span>
@@ -269,8 +317,8 @@
        </button>
       </div>
       <div class="relative inline-block text-left">
-       <!-- El span ahora es un enlace que lleva a la dirección de Google Maps -->
-       <a class="inline-flex justify-center w-full rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-100 transition" href="https://maps.app.goo.gl/UZD7aPgaLW9ne2DF7" target="_blank" rel="noopener noreferrer">
+       <!-- El span ahora es un enlace que lleva a la direcci\u00F3n de Google Maps -->
+       <a class="inline-flex justify-center w-full rounded-full border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-700 shadow-sm hover:bg-gray-100 transition" href="https://maps.app.goo.gl/UZD7aPgaLW9ne2DF7" rel="noopener noreferrer" target="_blank">
         Retirar en el Local (Pick Up)
        </a>
       </div>
@@ -288,25 +336,25 @@
     </div>
    </div>
   </header>
-  <!-- Menú de navegación fijo que aparece al hacer scroll -->
+  <!-- Men\u00FA de navegaci\u00F3n fijo que aparece al hacer scroll -->
   <nav id="sticky-navbar" class="fixed top-0 left-0 right-0 bg-white shadow-md p-4 flex items-center justify-between z-50 hidden-on-scroll">
    <div class="flex items-center gap-4 ml-4">
-    <img alt="Logotipo circular de Pizzas Love en la barra de navegación" class="w-10 h-10 rounded-full" src="./logo.png" width="40" height="40"/>
+    <img alt="Logotipo circular de Pizzas Love en la barra de navegaci\u00F3n" class="w-10 h-10 rounded-full" height="40" src="./logo.png" width="40"/>
     <span class="text-lg font-bold text-gray-900">
      Pizzas Love
     </span>
    </div>
-   <button id="nav-cart-button" class="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition ease-in-out duration-300 mr-4">
+   <button class="bg-red-600 text-white p-3 rounded-full shadow-lg hover:bg-red-700 transition ease-in-out duration-300 mr-4" id="nav-cart-button">
     <i class="fas fa-shopping-cart">
     </i>
-    <span id="nav-cart-count" class="ml-2 text-sm font-semibold">
+    <span class="ml-2 text-sm font-semibold" id="nav-cart-count">
      0
     </span>
    </button>
   </nav>
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 main-content">
    <!-- Slider de Promociones -->
-   <section id="promociones" class="mt-8">
+   <section class="mt-8" id="promociones">
     <h2 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      Ofertas Especiales
     </h2>
@@ -314,22 +362,22 @@
      <div class="slider-wrapper" id="slider-wrapper">
       <div class="slider-item" style="background-image: url('./pizzaslove3.png.jpg');">
        <p class="text-3xl sm:text-4xl">
-        ¡Feliz Día del Padre!
+        \u00a1Feliz D\u00EDa del Padre!
        </p>
       </div>
       <div class="slider-item" style="background-image: url('./pizzaslove2.png.jpg');">
        <p class="text-3xl sm:text-4xl">
-        Detalle Especial para Papá
+        Detalle Especial para Pap\u00E1
        </p>
       </div>
-      <div class="slider-item" style="background-image: url('./pizzaslove1.png');">
+      <div class="slider-item" style="background-image: url('https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg');">
        <p class="text-3xl sm:text-4xl">
-        ¡Envío Gratis!
+        \u00a1Env\u00EDo Gratis!
        </p>
       </div>
       <div class="slider-item" style="background-image: url('https://placehold.co/1200x150/6A5ACD/ffffff?text=Oferta+3+-+Combo+Familiar');">
        <p class="text-3xl sm:text-4xl">
-        Combo Familiar - ¡Ahorra!
+        Combo Familiar - \u00a1Ahorra!
        </p>
       </div>
      </div>
@@ -337,25 +385,33 @@
      </div>
     </div>
    </section>
-   <!-- Nueva Sección de COMBOS -->
-   <section id="combos" class="mt-12">
+   <!-- Nueva Secci\u00F3n de COMBOS -->
+   <section class="mt-12" id="combos">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      COMBOS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- COMBO #1 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #1" data-price="7.5" data-description="1 Pizza Grande (salsa, jamón, queso, 1 ingrediente adicional) + glup 1 litro">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="1 Pizza Grande (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 1 litro" data-name="Combo #1" data-original-price="7.5" data-price="7.5">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #1
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       1 Pizza Grande (salsa, jamón, queso, 1 ingrediente adicional) + glup 1 litro
+       1 Pizza Grande (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 1 litro
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $7.5
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -363,18 +419,26 @@
       </button>
      </div>
      <!-- COMBO #2 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #2" data-price="8.5" data-description="1 Pizza Grande (salsa, jamón, queso, 2 ingredientes adicionales) + glup 1 LT">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="1 Pizza Grande (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 1 LT" data-name="Combo #2" data-original-price="8.5" data-price="8.5">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #2
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       1 Pizza Grande (salsa, jamón, queso, 2 ingredientes adicionales) + glup 1 LT
+       1 Pizza Grande (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 1 LT
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $8.5
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -382,18 +446,26 @@
       </button>
      </div>
      <!-- COMBO #3 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #3" data-price="12" data-description="2 Pizzas Grandes (salsa, jamón, queso) + glup 2 litros">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizzas Grandes (salsa, jam\u00F3n, queso) + glup 2 litros" data-name="Combo #3" data-original-price="12" data-price="12">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #3
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizzas Grandes (salsa, jamón, queso) + glup 2 litros
+       2 Pizzas Grandes (salsa, jam\u00F3n, queso) + glup 2 litros
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $12
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -401,18 +473,26 @@
       </button>
      </div>
      <!-- COMBO #4 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #4" data-price="14" data-description="2 Pizzas Grandes (salsa, jamón, queso, 1 ingrediente adicional) + glup 2 litros">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizzas Grandes (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 2 litros" data-name="Combo #4" data-original-price="14" data-price="14">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #4
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizzas Grandes (salsa, jamón, queso, 1 ingrediente adicional) + glup 2 litros
+       2 Pizzas Grandes (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 2 litros
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $14
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -420,18 +500,26 @@
       </button>
      </div>
      <!-- COMBO #5 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #5" data-price="16" data-description="2 Pizzas Grandes (salsa, jamón, queso, 2 ingredientes adicionales) + glup 2 litros">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizzas Grandes (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 2 litros" data-name="Combo #5" data-original-price="16" data-price="16">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #5
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizzas Grandes (salsa, jamón, queso, 2 ingredientes adicionales) + glup 2 litros
+       2 Pizzas Grandes (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 2 litros
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $16
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -439,18 +527,26 @@
       </button>
      </div>
      <!-- COMBO #6 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #6" data-price="11" data-description="1 Pizza Familiar (salsa, jamón, queso, 1 ingrediente a elección) + glup 2 litro">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="1 Pizza Familiar (salsa, jam\u00F3n, queso, 1 ingrediente a elecci\u00F3n) + glup 2 litro" data-name="Combo #6" data-original-price="11" data-price="11">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #6
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       1 Pizza Familiar (salsa, jamón, queso, 1 ingrediente a elección) + glup 2 litro
+       1 Pizza Familiar (salsa, jam\u00F3n, queso, 1 ingrediente a elecci\u00F3n) + glup 2 litro
       </p>
-      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove1.png" width="200"/>
+      <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $11
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -458,18 +554,26 @@
       </button>
      </div>
      <!-- COMBO #7 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #7" data-price="18" data-description="2 Pizza Familiares (salsa, jamón, queso) + glup 2 litro">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizza Familiares (salsa, jam\u00F3n, queso) + glup 2 litro" data-name="Combo #7" data-original-price="18" data-price="18">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #7
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizza Familiares (salsa, jamón, queso) + glup 2 litro
+       2 Pizza Familiares (salsa, jam\u00F3n, queso) + glup 2 litro
       </p>
       <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $18
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -477,18 +581,26 @@
       </button>
      </div>
      <!-- COMBO #8 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #8" data-price="20" data-description="2 Pizza Familiares (salsa, jamón, queso, 1 ingrediente adicional) + glup 2 LT">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizza Familiares (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 2 LT" data-name="Combo #8" data-original-price="20" data-price="20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #8
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizza Familiares (salsa, jamón, queso, 1 ingrediente adicional) + glup 2 LT
+       2 Pizza Familiares (salsa, jam\u00F3n, queso, 1 ingrediente adicional) + glup 2 LT
       </p>
       <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $20
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -496,18 +608,26 @@
       </button>
      </div>
      <!-- COMBO #9 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Combo #9" data-price="23" data-description="2 Pizzas familiares (salsa, jamón, queso, 2 ingredientes adicionales) + glup 2 litros">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="2 Pizzas familiares (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 2 litros" data-name="Combo #9" data-original-price="23" data-price="23">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        COMBO #9
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       2 Pizzas familiares (salsa, jamón, queso, 2 ingredientes adicionales) + glup 2 litros
+       2 Pizzas familiares (salsa, jam\u00F3n, queso, 2 ingredientes adicionales) + glup 2 litros
       </p>
       <img alt="Combo de Pizzas Love" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $23
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -516,7 +636,7 @@
      </div>
     </div>
    </section>
-   <!-- Pestañas de categorías con scroll suave -->
+   <!-- Pesta\u00F1as de categor\u00EDas con scroll suave -->
    <section class="mt-12 border-b border-gray-200 sticky top-0 bg-gray-50 z-20 pt-4 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 pb-2">
     <nav class="flex overflow-x-auto whitespace-nowrap gap-8 text-base font-semibold text-gray-600 scrollbar-hide">
      <button class="category-btn pb-3 flex items-center gap-2 text-yellow-500 border-b-3 border-yellow-500" data-target="pizzas">
@@ -551,25 +671,33 @@
      </button>
     </nav>
    </section>
-   <!-- Sección PIZZAS -->
-   <section id="pizzas" class="mt-10">
+   <!-- Secci\u00F3n PIZZAS -->
+   <section class="mt-10" id="pizzas">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      PIZZAS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- Pizza Pepperoni -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Pepperoni" data-price="10.99" data-description="La clásica con mucho pepperoni y extra queso mozzarella.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="La cl\u00E1sica con mucho pepperoni y extra queso mozzarella." data-name="Pizza Pepperoni" data-original-price="10.99" data-price="10.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Pepperoni
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       La clásica con mucho pepperoni y extra queso mozzarella.
+       La cl\u00E1sica con mucho pepperoni y extra queso mozzarella.
       </p>
       <img alt="Pizza de Pepperoni" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $10.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -577,18 +705,26 @@
       </button>
      </div>
      <!-- Pizza Margherita -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Margherita" data-price="9.99" data-description="Tomate fresco, mozzarella de búfala y albahaca. Simplemente perfecta.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Tomate fresco, mozzarella de b\u00FAfala y albahaca. Simplemente perfecta." data-name="Pizza Margherita" data-original-price="9.99" data-price="9.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Margherita
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Tomate fresco, mozzarella de búfala y albahaca. Simplemente perfecta.
+       Tomate fresco, mozzarella de b\u00FAfala y albahaca. Simplemente perfecta.
       </p>
       <img alt="Pizza Margherita" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $9.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -596,18 +732,26 @@
       </button>
      </div>
      <!-- Pizza Hawaiana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Hawaiana" data-price="11.50" data-description="Jamón de calidad, piña jugosa y queso fundido. Un clásico amado.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Jam\u00F3n de calidad, pi\u00F1a jugosa y queso fundido. Un cl\u00E1sico amado." data-name="Pizza Hawaiana" data-original-price="11.50" data-price="11.50">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Hawaiana
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Jamón de calidad, piña jugosa y queso fundido. Un clásico amado.
+       Jam\u00F3n de calidad, pi\u00F1a jugosa y queso fundido. Un cl\u00E1sico amado.
       </p>
       <img alt="Pizza Hawaiana" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $11.500
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -615,7 +759,7 @@
       </button>
      </div>
      <!-- Pizza Vegetariana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Vegetariana" data-price="10.50" data-description="Variedad de vegetales frescos de temporada sobre una cama de queso.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Variedad de vegetales frescos de temporada sobre una cama de queso." data-name="Pizza Vegetariana" data-original-price="10.50" data-price="10.50">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Vegetariana
       </h4>
@@ -626,7 +770,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $10.500
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -634,7 +786,7 @@
       </button>
      </div>
      <!-- Pizza Cuatro Quesos -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Cuatro Quesos" data-price="12.00" data-description="Una mezcla irresistible de mozzarella, provolone, gorgonzola y parmesano.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Una mezcla irresistible de mozzarella, provolone, gorgonzola y parmesano." data-name="Pizza Cuatro Quesos" data-original-price="12.00" data-price="12.00">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Cuatro Quesos
       </h4>
@@ -645,7 +797,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $12.000
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -653,18 +813,26 @@
       </button>
      </div>
      <!-- Pizza Barbacoa -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Barbacoa" data-price="12.50" data-description="Pollo a la barbacoa, cebolla morada y cilantro. ¡Explosión de sabor!">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Pollo a la barbacoa, cebolla morada y cilantro. \u00a1Explosi\u00F3n de sabor!" data-name="Pizza Barbacoa" data-original-price="12.50" data-price="12.50">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Barbacoa
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Pollo a la barbacoa, cebolla morada y cilantro. ¡Explosión de sabor!
+       Pollo a la barbacoa, cebolla morada y cilantro. \u00a1Explosi\u00F3n de sabor!
       </p>
       <img alt="Pizza Barbacoa" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $12.500
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -672,18 +840,26 @@
       </button>
      </div>
      <!-- Pizza Mexicana -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Mexicana" data-price="11.80" data-description="Carne molida, jalapeños, cebolla y salsa picante. ¡Para los amantes del picante!">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Carne molida, jalape\u00F1os, cebolla y salsa picante. \u00a1Para los amantes del picante!" data-name="Pizza Mexicana" data-original-price="11.80" data-price="11.80">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Mexicana
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Carne molida, jalapeños, cebolla y salsa picante. ¡Para los amantes del picante!
+       Carne molida, jalape\u00F1os, cebolla y salsa picante. \u00a1Para los amantes del picante!
       </p>
       <img alt="Pizza Mexicana" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $11.800
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -691,37 +867,53 @@
       </button>
      </div>
      <!-- Pizza Capricciosa -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Capricciosa" data-price="12.20" data-description="Jamón, champiñones, alcachofas y aceitunas negras. Un clásico italiano.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Jam\u00F3n, champi\u00F1ones, alcachofas y aceitunas negras. Un cl\u00E1sico italiano." data-name="Pizza Capricciosa" data-original-price="12.20" data-price="12.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Capricciosa
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Jamón, champiñones, alcachofas y aceitunas negras. Un clásico italiano.
+       Jam\u00F3n, champi\u00F1ones, alcachofas y aceitunas negras. Un cl\u00E1sico italiano.
       </p>
       <img alt="Pizza Capricciosa" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $12.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
        Agregar
       </button>
      </div>
-     <!-- Pizza Carnívora -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Carnívora" data-price="13.50" data-description="Combinación de carnes: pepperoni, jamón, tocino y salchicha.">
+     <!-- Pizza Carn\u00EDvora -->
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Combinaci\u00F3n de carnes: pepperoni, jam\u00F3n, tocino y salchicha." data-name="Pizza Carn\u00EDvora" data-original-price="13.50" data-price="13.50">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Pizza Carnívora
+       Pizza Carn\u00EDvora
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       Combinación de carnes: pepperoni, jamón, tocino y salchicha.
+       Combinaci\u00F3n de carnes: pepperoni, jam\u00F3n, tocino y salchicha.
       </p>
-      <img alt="Pizza Carnívora" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
+      <img alt="Pizza Carn\u00EDvora" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove2.png.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $13.500
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -729,7 +921,7 @@
       </button>
      </div>
      <!-- Pizza Fugazzeta -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Pizza Fugazzeta" data-price="11.00" data-description="Cebolla caramelizada y mucho queso mozzarella. Una delicia argentina.">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cebolla caramelizada y mucho queso mozzarella. Una delicia argentina." data-name="Pizza Fugazzeta" data-original-price="11.00" data-price="11.00">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Pizza Fugazzeta
       </h4>
@@ -740,17 +932,25 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $11.000
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
        Agregar
       </button>
      </div>
-     <!-- Pizza Diávola (No disponible) -->
+     <!-- Pizza Di\u00E1vola (No disponible) -->
      <div class="bg-gray-100 rounded-xl shadow-lg p-4 flex flex-col justify-center items-center text-gray-400 text-center">
       <h4 class="text-lg font-semibold mb-1">
-       Pizza Diávola
+       Pizza Di\u00E1vola
       </h4>
       <p class="text-sm mb-3">
        No Disponible
@@ -760,19 +960,19 @@
      </div>
     </div>
    </section>
-   <!-- Sección HAMBURGUESAS -->
-   <section id="hamburguesas" class="mt-12">
+   <!-- Secci\u00F3n HAMBURGUESAS -->
+   <section class="mt-12" id="hamburguesas">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      HAMBURGUESAS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- Basic Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Basic Burger + Papas" data-price="8.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Basic Burger + Papas" data-original-price="9.99" data-price="8.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Basic Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Basic Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove3.png.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -786,7 +986,15 @@
         10% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -794,12 +1002,12 @@
       </button>
      </div>
      <!-- Onion Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Onion Burger + Papas" data-price="8.59" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Onion Burger + Papas" data-original-price="9.59" data-price="8.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Onion Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Onion Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="./pizzaslove3.png.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -813,7 +1021,15 @@
         10% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -821,12 +1037,12 @@
       </button>
      </div>
      <!-- Classic Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Classic Burger + Papas" data-price="9.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Classic Burger + Papas" data-original-price="10.99" data-price="9.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Classic Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Classic Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/6d35de92-8c2e-48c8-388a-a91a2388ff9e.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -840,7 +1056,15 @@
         9% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -848,12 +1072,12 @@
       </button>
      </div>
      <!-- Tasty Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Tasty Burger + Papas" data-price="9.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Tasty Burger + Papas" data-original-price="10.99" data-price="9.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Tasty Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Tasty Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/11082e9f-930c-4ef1-ead9-9128bbc87a83.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -867,7 +1091,15 @@
         9% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -875,12 +1107,12 @@
       </button>
      </div>
      <!-- BBQ Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="BBQ Burger + Papas" data-price="12.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="BBQ Burger + Papas" data-original-price="13.99" data-price="12.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        BBQ Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="BBQ Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/0136f6f4-9472-4aa0-89b1-b859ecb3ec8c.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -894,7 +1126,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -902,12 +1142,12 @@
       </button>
      </div>
      <!-- Avocado Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Avocado Burger + Papas" data-price="10.59" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Avocado Burger + Papas" data-original-price="11.59" data-price="10.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Avocado Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Avocado Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/103c3f53-5ac5-4300-b767-b62da6edbde9.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -921,7 +1161,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -929,12 +1177,12 @@
       </button>
      </div>
      <!-- Cheddar Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Cheddar Burger + Papas" data-price="10.59" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Cheddar Burger + Papas" data-original-price="11.59" data-price="10.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Cheddar Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Cheddar Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/c4b03637-8278-42bf-d045-d7f1f4be1873.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -948,7 +1196,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -956,12 +1212,12 @@
       </button>
      </div>
      <!-- Bacon Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Bacon Burger + Papas" data-price="11.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Bacon Burger + Papas" data-original-price="12.99" data-price="11.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Bacon Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Bacon Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/bba9b18a-d9eb-4171-99e2-b9f84d71add0.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -975,7 +1231,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -983,12 +1247,12 @@
       </button>
      </div>
      <!-- Italian Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Italian Burger + Papas" data-price="10.99" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Italian Burger + Papas" data-original-price="11.99" data-price="10.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Italian Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Italian Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/a4460d90-d873-471c-1b72-f4b137b7898e.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1002,7 +1266,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1010,12 +1282,12 @@
       </button>
      </div>
      <!-- Cheese Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Cheese Burger + Papas" data-price="11.89" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Cheese Burger + Papas" data-original-price="12.89" data-price="11.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Cheese Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Cheese Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/89efadf7-ac22-4e51-785b-b8c56f5748ef.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1029,7 +1301,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1037,12 +1317,12 @@
       </button>
      </div>
      <!-- Ranch Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Ranch Burger + Papas" data-price="11.89" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Ranch Burger + Papas" data-original-price="12.89" data-price="11.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Ranch Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Ranch Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/7db61011-8a73-4544-1b66-fa4060095a7a.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1056,7 +1336,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1064,12 +1352,12 @@
       </button>
      </div>
      <!-- Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Roof Burger + Papas" data-price="11.89" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Roof Burger + Papas" data-original-price="12.89" data-price="11.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Roof Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b199164f-4158-4c3e-f3e0-c7f210eb38e3.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1083,7 +1371,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1091,12 +1387,12 @@
       </button>
      </div>
      <!-- Shrimp Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Shrimp Burger + Papas" data-price="11.89" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Shrimp Burger + Papas" data-original-price="12.89" data-price="11.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Shrimp Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Shrimp Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/8b8e416b-5fdb-484d-a6df-0bacbbab1df1.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1110,7 +1406,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1118,12 +1422,12 @@
       </button>
      </div>
      <!-- American Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="American Burger + Papas" data-price="11.89" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="American Burger + Papas" data-original-price="12.89" data-price="11.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        American Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="American Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/f1df66a7-8500-4961-f938-2df5335169ef.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1137,7 +1441,15 @@
         8% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1145,12 +1457,12 @@
       </button>
      </div>
      <!-- Deluxe Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Deluxe Burger + Papas" data-price="13.59" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="Deluxe Burger + Papas" data-original-price="14.59" data-price="13.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Deluxe Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Deluxe Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/c874454e-e066-4282-e420-2800fe25f561.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1164,7 +1476,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1172,12 +1492,12 @@
       </button>
      </div>
      <!-- Doble Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Doble Roof Burger + Papas" data-price="13.59" data-description="350 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="350 gramos de prote\u00EDna" data-name="Doble Roof Burger + Papas" data-original-price="14.59" data-price="13.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Doble Roof Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       350 gramos de proteína
+       350 gramos de prote\u00EDna
       </p>
       <img alt="Doble Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e70df619-31e6-4fbd-c452-1a18ad3ab2dc.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1191,7 +1511,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1199,12 +1527,12 @@
       </button>
      </div>
      <!-- Triple Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Triple Roof Burger + Papas" data-price="16.59" data-description="525 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="525 gramos de prote\u00EDna" data-name="Triple Roof Burger + Papas" data-original-price="17.59" data-price="16.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Triple Roof Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       525 gramos de proteína
+       525 gramos de prote\u00EDna
       </p>
       <img alt="Triple Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/ff6443bd-b3a5-4fbd-16a4-9d5b2a1831ca.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1218,22 +1546,30 @@
         6% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
        Agregar
       </button>
      </div>
-     <!-- Cuádruple Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Cuádruple Roof Burger + Papas" data-price="19.59" data-description="700 gramos de proteína">
+     <!-- Cu\u00E1druple Roof Burger + Papas -->
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="700 gramos de prote\u00EDna" data-name="Cu\u00E1druple Roof Burger + Papas" data-original-price="20.59" data-price="19.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Cuádruple Roof Burger + Papas
+       Cu\u00E1druple Roof Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       700 gramos de proteína
+       700 gramos de prote\u00EDna
       </p>
-      <img alt="Cuádruple Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b8fca58e-b0f3-4c05-1b4c-cb11bf5ad370.jpg" width="200"/>
+      <img alt="Cu\u00E1druple Roof Burger con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/b8fca58e-b0f3-4c05-1b4c-cb11bf5ad370.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $19.590
@@ -1245,7 +1581,15 @@
         5% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1253,12 +1597,12 @@
       </button>
      </div>
      <!-- 2x1 Roof Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="2x1 Roof Burger + Papas" data-price="12.59" data-description="450 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="450 gramos de prote\u00EDna" data-name="2x1 Roof Burger + Papas" data-original-price="13.59" data-price="12.59">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        2x1 Roof Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       450 gramos de proteína
+       450 gramos de prote\u00EDna
       </p>
       <img alt="Dos Roof Burgers con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/415d88e1-5480-4511-ba51-4eef549b0b3e.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1272,7 +1616,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1280,12 +1632,12 @@
       </button>
      </div>
      <!-- 40% OFF Tasty Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="40% OFF Tasty Burger + Papas" data-price="6.594" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="40% OFF Tasty Burger + Papas" data-original-price="11.99" data-price="6.594">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        40% OFF Tasty Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="Tasty Burger con papas fritas en un plato blanco con etiqueta de 40% de descuento" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/07ae63ab-67a5-4fdf-5fc6-88f6bd1cea1e.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1299,7 +1651,15 @@
         45% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1307,12 +1667,12 @@
       </button>
      </div>
      <!-- 30% OFF BBQ Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="30% OFF BBQ Burger + Papas" data-price="9.793" data-description="225 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de prote\u00EDna" data-name="30% OFF BBQ Burger + Papas" data-original-price="13.99" data-price="9.793">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        30% OFF BBQ Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de proteína
+       225 gramos de prote\u00EDna
       </p>
       <img alt="BBQ Burger con papas fritas en un plato blanco con etiqueta de 30% de descuento" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/ade718dd-e433-42c4-a883-5b3ff7fb3610.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1326,7 +1686,15 @@
         30% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1334,12 +1702,12 @@
       </button>
      </div>
      <!-- 2 Cheddar Burger + Papas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="2 Cheddar Burger + Papas" data-price="15.99" data-description="450 gramos de proteína">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="450 gramos de prote\u00EDna" data-name="2 Cheddar Burger + Papas" data-original-price="17.99" data-price="15.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        2 Cheddar Burger + Papas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       450 gramos de proteína
+       450 gramos de prote\u00EDna
       </p>
       <img alt="Dos Cheddar Burgers con papas fritas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/a626f0b0-bef6-495e-2887-2b01e0c0f00d.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
@@ -1353,7 +1721,15 @@
         11% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1362,14 +1738,14 @@
      </div>
     </div>
    </section>
-   <!-- Sección SNACKS -->
-   <section id="snacks" class="mt-12">
+   <!-- Secci\u00F3n SNACKS -->
+   <section class="mt-12" id="snacks">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      SNACKS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- Camarones Apanados -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Camarones Apanados" data-price="6.99" data-description="5 camarones con salsa, con sabor a la costa de mar">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="5 camarones con salsa, con sabor a la costa de mar" data-name="Camarones Apanados" data-original-price="7.99" data-price="6.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Camarones Apanados
       </h4>
@@ -1388,7 +1764,15 @@
         13% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1396,14 +1780,14 @@
       </button>
      </div>
      <!-- Aros de Cebolla -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Aros de Cebolla" data-price="5.89" data-description="10 aros de cebolla con salsa BBQ / tártara">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="10 aros de cebolla con salsa BBQ / t\u00E1rtara" data-name="Aros de Cebolla" data-original-price="6.89" data-price="5.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Aros de Cebolla
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       10 aros de cebolla con salsa BBQ / tártara
+       10 aros de cebolla con salsa BBQ / t\u00E1rtara
       </p>
-      <img alt="Aros de cebolla con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/afb367a8-567e-4880-972f-d371b993a342.jpg" width="200"/>
+      <img alt="Aros de cebolla con salsa BBQ y t\u00E1rtara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/afb367a8-567e-4880-972f-d371b993a342.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $5.890
@@ -1415,7 +1799,15 @@
         14% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1423,14 +1815,14 @@
       </button>
      </div>
      <!-- Mozzarella Sticks -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Mozzarella Sticks" data-price="5.99" data-description="6 palitos con salsa BBQ / tártara">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="6 palitos con salsa BBQ / t\u00E1rtara" data-name="Mozzarella Sticks" data-original-price="6.99" data-price="5.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Mozzarella Sticks
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       6 palitos con salsa BBQ / tártara
+       6 palitos con salsa BBQ / t\u00E1rtara
       </p>
-      <img alt="Palitos de mozzarella con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/15bb5c2f-56fc-46ca-4f5b-79608eab9a5d.jpg" width="200"/>
+      <img alt="Palitos de mozzarella con salsa BBQ y t\u00E1rtara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/15bb5c2f-56fc-46ca-4f5b-79608eab9a5d.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $5.990
@@ -1442,7 +1834,15 @@
         14% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1450,14 +1850,14 @@
       </button>
      </div>
      <!-- Nuggets de pollo -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Nuggets de pollo" data-price="5.89" data-description="6 nuggets con salsa BBQ / tártara">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="6 nuggets con salsa BBQ / t\u00E1rtara" data-name="Nuggets de pollo" data-original-price="6.89" data-price="5.89">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Nuggets de pollo
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       6 nuggets con salsa BBQ / tártara
+       6 nuggets con salsa BBQ / t\u00E1rtara
       </p>
-      <img alt="Nuggets de pollo con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/55b57428-fed5-4044-f68a-1d477ca11ebf.jpg" width="200"/>
+      <img alt="Nuggets de pollo con salsa BBQ y t\u00E1rtara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/55b57428-fed5-4044-f68a-1d477ca11ebf.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $5.890
@@ -1469,22 +1869,30 @@
         14% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
        Agregar
       </button>
      </div>
-     <!-- Papas Rústicas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Papas Rústicas" data-price="6.49" data-description="225 gramos de papas rústicas">
+     <!-- Papas R\u00FAsticas -->
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas r\u00FAsticas" data-name="Papas R\u00FAsticas" data-original-price="7.49" data-price="6.49">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
-       Papas Rústicas
+       Papas R\u00FAsticas
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       225 gramos de papas rústicas
+       225 gramos de papas r\u00FAsticas
       </p>
-      <img alt="Papas rústicas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/675b4f42-31a9-4657-d077-182ee563916e.jpg" width="200"/>
+      <img alt="Papas r\u00FAsticas en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/675b4f42-31a9-4657-d077-182ee563916e.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $6.490
@@ -1496,7 +1904,15 @@
         13% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1504,14 +1920,14 @@
       </button>
      </div>
      <!-- Cheese Meat Balls -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Cheese Meat Balls" data-price="8.99" data-description="6 albóndigas con salsa BBQ / tártara">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="6 alb\u00F3ndigas con salsa BBQ / t\u00E1rtara" data-name="Cheese Meat Balls" data-original-price="9.99" data-price="8.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Cheese Meat Balls
       </h4>
       <p class="text-sm text-gray-600 mb-3">
-       6 albóndigas con salsa BBQ / tártara
+       6 alb\u00F3ndigas con salsa BBQ / t\u00E1rtara
       </p>
-      <img alt="Albóndigas de queso con salsa BBQ y tártara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/fd0e7c38-ec06-4844-5e7e-0ab084828cb6.jpg" width="200"/>
+      <img alt="Alb\u00F3ndigas de queso con salsa BBQ y t\u00E1rtara en un plato blanco" class="rounded-lg w-full h-36 object-cover mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/fd0e7c38-ec06-4844-5e7e-0ab084828cb6.jpg" width="200"/>
       <div class="flex items-center gap-2 mt-auto">
        <span class="text-xl font-bold text-gray-900 price-display">
         $8.990
@@ -1523,7 +1939,15 @@
         10% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1531,7 +1955,7 @@
       </button>
      </div>
      <!-- Chorrillana Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Chorrillana Veggie" data-price="13.99" data-description="225 gramos de papas con cebolla y huevo">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas con cebolla y huevo" data-name="Chorrillana Veggie" data-original-price="14.99" data-price="13.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Chorrillana Veggie
       </h4>
@@ -1550,7 +1974,15 @@
         7% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1558,7 +1990,7 @@
       </button>
      </div>
      <!-- Papas Americanas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Papas Americanas" data-price="7.99" data-description="225 gramos de papas americanas">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas americanas" data-name="Papas Americanas" data-original-price="8.99" data-price="7.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Papas Americanas
       </h4>
@@ -1577,7 +2009,15 @@
         11% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1585,7 +2025,7 @@
       </button>
      </div>
      <!-- Papas Cheddar -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Papas Cheddar" data-price="7.99" data-description="225 gramos de papas cheddar">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas cheddar" data-name="Papas Cheddar" data-original-price="8.99" data-price="7.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Papas Cheddar
       </h4>
@@ -1604,7 +2044,15 @@
         11% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1612,7 +2060,7 @@
       </button>
      </div>
      <!-- Papas Veggie -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Papas Veggie" data-price="7.99" data-description="225 gramos de papas veggie">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas veggie" data-name="Papas Veggie" data-original-price="8.99" data-price="7.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Papas Veggie
       </h4>
@@ -1631,7 +2079,15 @@
         11% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1639,7 +2095,7 @@
       </button>
      </div>
      <!-- Papas Fritas Tradicionales -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Papas Fritas Tradicionales" data-price="8.49" data-description="225 gramos de papas fritas tradicionales">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="225 gramos de papas fritas tradicionales" data-name="Papas Fritas Tradicionales" data-original-price="9.49" data-price="8.49">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Papas Fritas Tradicionales
       </h4>
@@ -1658,7 +2114,15 @@
         11% OFF
        </span>
       </div>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1678,14 +2142,14 @@
      </div>
     </div>
    </section>
-   <!-- Sección POSTRES -->
-   <section id="postres" class="mt-12">
+   <!-- Secci\u00F3n POSTRES -->
+   <section class="mt-12" id="postres">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      POSTRES
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
      <!-- Panqueques rellenos con manjar -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-name="Panqueques rellenos con manjar" data-price="3.99" data-description="4 unidades de panqueques rellenos con manjar, cubiertos con azúcar flor">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-description="4 unidades de panqueques rellenos con manjar, cubiertos con az\u00FAcar flor" data-name="Panqueques rellenos con manjar" data-original-price="4.99" data-price="3.99">
       <img alt="Panqueques rellenos con manjar en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/5aaabb00-bd46-4c10-aa20-af01e5674d8f.jpg" width="120"/>
       <div class="flex flex-col justify-between flex-grow">
        <div>
@@ -1693,7 +2157,7 @@
          Panqueques rellenos con manjar
         </h4>
         <p class="text-sm text-gray-600 mb-2">
-         4 unidades de panqueques rellenos con manjar, cubiertos con azúcar flor
+         4 unidades de panqueques rellenos con manjar, cubiertos con az\u00FAcar flor
         </p>
        </div>
        <div class="flex items-center gap-2">
@@ -1707,7 +2171,15 @@
          20% OFF
         </span>
        </div>
-       <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+       <div class="quantity-controls">
+        <button class="quantity-button decrease-quantity">
+         -
+        </button>
+        <input class="quantity-input-field" min="1" type="number" value="1"/>
+        <button class="quantity-button increase-quantity">
+         +
+        </button>
+       </div>
        <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
        </textarea>
        <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1716,7 +2188,7 @@
       </div>
      </div>
      <!-- Churros con Manjar y chocolate -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-name="Churros con Manjar y chocolate" data-price="3.99" data-description="6 unidades de churros con manjar y chocolate, cubiertos con azúcar flor">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-description="6 unidades de churros con manjar y chocolate, cubiertos con az\u00FAcar flor" data-name="Churros con Manjar y chocolate" data-original-price="4.99" data-price="3.99">
       <img alt="Churros con manjar y chocolate en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/ff299b77-0124-40d9-2055-47ad996af4e7.jpg" width="120"/>
       <div class="flex flex-col justify-between flex-grow">
        <div>
@@ -1724,7 +2196,7 @@
          Churros con Manjar y chocolate
         </h4>
         <p class="text-sm text-gray-600 mb-2">
-         6 unidades de churros con manjar y chocolate, cubiertos con azúcar flor
+         6 unidades de churros con manjar y chocolate, cubiertos con az\u00FAcar flor
         </p>
        </div>
        <div class="flex items-center gap-2">
@@ -1738,7 +2210,15 @@
          20% OFF
         </span>
        </div>
-       <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+       <div class="quantity-controls">
+        <button class="quantity-button decrease-quantity">
+         -
+        </button>
+        <input class="quantity-input-field" min="1" type="number" value="1"/>
+        <button class="quantity-button increase-quantity">
+         +
+        </button>
+       </div>
        <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
        </textarea>
        <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1746,16 +2226,16 @@
        </button>
       </div>
      </div>
-     <!-- Churros con azúcar flor -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-name="Churros con azúcar flor" data-price="3.99" data-description="6 unidades de churros con azúcar flor, cubiertos con azúcar flor">
-      <img alt="Churros con azúcar glas en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/0723d0db-71ab-4062-9970-290437f138f8.jpg" width="120"/>
+     <!-- Churros con az\u00FAcar flor -->
+     <div class="bg-white rounded-xl shadow-lg p-4 flex gap-4 product-card cursor-pointer" data-description="6 unidades de churros con az\u00FAcar flor, cubiertos con az\u00FAcar flor" data-name="Churros con az\u00FAcar flor" data-original-price="4.99" data-price="3.99">
+      <img alt="Churros con az\u00FAcar glas en un plato blanco" class="rounded-lg w-32 h-28 object-cover flex-shrink-0 shadow-sm" height="100" src="https://storage.googleapis.com/a1aa/image/0723d0db-71ab-4062-9970-290437f138f8.jpg" width="120"/>
       <div class="flex flex-col justify-between flex-grow">
        <div>
         <h4 class="text-lg font-semibold text-gray-900 mb-1">
-         Churros con azúcar flor
+         Churros con az\u00FAcar flor
         </h4>
         <p class="text-sm text-gray-600 mb-2">
-         6 unidades de churros con azúcar flor, cubiertos con azúcar flor
+         6 unidades de churros con az\u00FAcar flor, cubiertos con az\u00FAcar flor
         </p>
        </div>
        <div class="flex items-center gap-2">
@@ -1769,7 +2249,15 @@
          20% OFF
         </span>
        </div>
-       <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+       <div class="quantity-controls">
+        <button class="quantity-button decrease-quantity">
+         -
+        </button>
+        <input class="quantity-input-field" min="1" type="number" value="1"/>
+        <button class="quantity-button increase-quantity">
+         +
+        </button>
+       </div>
        <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
        </textarea>
        <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1779,14 +2267,14 @@
      </div>
     </div>
    </section>
-   <!-- Sección BEBIDAS -->
-   <section id="bebidas" class="mt-12">
+   <!-- Secci\u00F3n BEBIDAS -->
+   <section class="mt-12" id="bebidas">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      BEBIDAS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- Agua Mineral Sin Gas -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Agua Mineral Sin Gas" data-price="2.20" data-description="500 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="500 ml" data-name="Agua Mineral Sin Gas" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Agua Mineral Sin Gas
       </h4>
@@ -1797,7 +2285,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1805,7 +2301,7 @@
       </button>
      </div>
      <!-- CocaCola Light -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="CocaCola Light" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="CocaCola Light" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        CocaCola Light
       </h4>
@@ -1816,7 +2312,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1824,7 +2328,7 @@
       </button>
      </div>
      <!-- Fanta Normal -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Fanta Normal" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Fanta Normal" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Fanta Normal
       </h4>
@@ -1835,7 +2339,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1843,7 +2355,7 @@
       </button>
      </div>
      <!-- Fanta Zero -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Fanta Zero" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Fanta Zero" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Fanta Zero
       </h4>
@@ -1854,7 +2366,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1862,7 +2382,7 @@
       </button>
      </div>
      <!-- Sprite Normal -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Sprite Normal" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Sprite Normal" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Sprite Normal
       </h4>
@@ -1873,7 +2393,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1881,7 +2409,7 @@
       </button>
      </div>
      <!-- Sprite Zero -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Sprite Zero" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Sprite Zero" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Sprite Zero
       </h4>
@@ -1892,7 +2420,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1900,18 +2436,26 @@
       </button>
      </div>
      <!-- Schweppes Tonica -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Schweppes Tonica" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Schweppes Tonica" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Schweppes Tonica
       </h4>
       <p class="text-sm text-gray-600 mb-3">
        355 ml
       </p>
-      <img alt="Lata de Schweppes Tónica" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e090d0b7-0188-4d36-250b-06a0233c74da.jpg" width="200"/>
+      <img alt="Lata de Schweppes T\u00F3nica" class="rounded-lg w-full h-36 object-contain mb-4 shadow-sm" height="140" src="https://storage.googleapis.com/a1aa/image/e090d0b7-0188-4d36-250b-06a0233c74da.jpg" width="200"/>
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1919,7 +2463,7 @@
       </button>
      </div>
      <!-- Schweppes Ginger Ale -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Schweppes Ginger Ale" data-price="2.20" data-description="355 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="355 ml" data-name="Schweppes Ginger Ale" data-original-price="2.20" data-price="2.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Schweppes Ginger Ale
       </h4>
@@ -1930,7 +2474,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $2.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -1975,14 +2527,14 @@
      </div>
     </div>
    </section>
-   <!-- Sección CERVEZAS -->
-   <section id="cervezas" class="mt-12">
+   <!-- Secci\u00F3n CERVEZAS -->
+   <section class="mt-12" id="cervezas">
     <h3 class="text-xl sm:text-2xl font-bold text-gray-900 mb-6">
      CERVEZAS
     </h3>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
      <!-- Austral Calafate -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Austral Calafate" data-price="3.99" data-description="Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 330 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 330 ml" data-name="Austral Calafate" data-original-price="3.99" data-price="3.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Austral Calafate
       </h4>
@@ -1993,7 +2545,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $3.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -2001,7 +2561,7 @@
       </button>
      </div>
      <!-- Austral Calafate 500 cc -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Austral Calafate 500 cc" data-price="5.20" data-description="Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 500 ml">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cerveza artesanal rubia, con el mejor sabor del sur de Chile en un formato 500 ml" data-name="Austral Calafate 500 cc" data-original-price="5.20" data-price="5.20">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Austral Calafate 500 cc
       </h4>
@@ -2012,7 +2572,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $5.200
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -2020,7 +2588,7 @@
       </button>
      </div>
      <!-- Kunstmann Torobayo -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Kunstmann Torobayo" data-price="3.99" data-description="Cerveza rubia de estilo ale, de sabor intenso y aroma a caramelo y frutas">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cerveza rubia de estilo ale, de sabor intenso y aroma a caramelo y frutas" data-name="Kunstmann Torobayo" data-original-price="3.99" data-price="3.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Kunstmann Torobayo
       </h4>
@@ -2031,7 +2599,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $3.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -2039,7 +2615,7 @@
       </button>
      </div>
      <!-- Mahou Tostada Sin Alcohol -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Mahou Tostada Sin Alcohol" data-price="3.99" data-description="Cerveza tostada sin alcohol, con sabor suave y refrescante">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cerveza tostada sin alcohol, con sabor suave y refrescante" data-name="Mahou Tostada Sin Alcohol" data-original-price="3.99" data-price="3.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Mahou Tostada Sin Alcohol
       </h4>
@@ -2050,7 +2626,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $3.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -2058,7 +2642,7 @@
       </button>
      </div>
      <!-- Mahou 5 Estrellas Sin Gluten 330 -->
-     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-name="Mahou 5 Estrellas Sin Gluten 330" data-price="3.99" data-description="Cerveza sin gluten, con sabor suave y refrescante">
+     <div class="bg-white rounded-xl shadow-lg p-4 flex flex-col items-center text-center product-card cursor-pointer" data-description="Cerveza sin gluten, con sabor suave y refrescante" data-name="Mahou 5 Estrellas Sin Gluten 330" data-original-price="3.99" data-price="3.99">
       <h4 class="text-lg font-semibold text-gray-900 mb-1">
        Mahou 5 Estrellas Sin Gluten 330
       </h4>
@@ -2069,7 +2653,15 @@
       <span class="text-xl font-bold text-gray-900 mt-auto price-display">
        $3.990
       </span>
-      <input class="w-full mt-2 p-2 border border-gray-300 rounded-md text-center quantity-input" min="1" type="number" value="1"/>
+      <div class="quantity-controls">
+       <button class="quantity-button decrease-quantity">
+        -
+       </button>
+       <input class="quantity-input-field" min="1" type="number" value="1"/>
+       <button class="quantity-button increase-quantity">
+        +
+       </button>
+      </div>
       <textarea class="w-full mt-2 p-2 border border-gray-300 rounded-md text-sm notes-input" placeholder="Notas / Ingredientes extra (opcional)">
       </textarea>
       <button class="mt-4 w-full bg-red-600 text-white py-2 rounded-lg font-semibold hover:bg-red-700 transition transform hover:scale-105 duration-300 ease-in-out add-to-cart-btn">
@@ -2135,23 +2727,23 @@
    </section>
    <!-- Botones flotantes (WhatsApp y Carrito) -->
    <div class="floating-buttons fixed bottom-6 right-6 flex flex-col gap-3 z-50">
-    <!-- Botón de WhatsApp flotante -->
+    <!-- Bot\u00F3n de WhatsApp flotante -->
     <a class="bg-green-500 text-white p-4 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition duration-300 ease-in-out" href="https://wa.me/5804120403343" target="_blank">
      <i class="fab fa-whatsapp text-2xl">
      </i>
     </a>
-    <!-- Botón del carrito flotante (existente, ahora con un diseño más consistente) -->
-    <button id="main-cart-button" class="bg-red-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition duration-300 ease-in-out">
+    <!-- Bot\u00F3n del carrito flotante (existente, ahora con un dise\u00F1o m\u00E1s consistente) -->
+    <button class="bg-red-600 text-white p-4 rounded-full shadow-lg flex items-center justify-center transform hover:scale-110 transition duration-300 ease-in-out" id="main-cart-button">
      <i class="fas fa-shopping-cart text-2xl">
      </i>
-     <span id="main-cart-count" class="ml-2 text-sm font-semibold">
+     <span class="ml-2 text-sm font-semibold" id="main-cart-count">
       0
      </span>
     </button>
    </div>
   </main>
   <!-- Modal del Carrito -->
-  <div id="cart-modal" class="modal">
+  <div class="modal" id="cart-modal">
    <div class="modal-content">
     <span class="close-button" id="close-cart-modal">
      &times;
@@ -2159,8 +2751,8 @@
     <h2 class="text-2xl font-bold text-gray-900 mb-6">
      Tu Carrito de Compras
     </h2>
-    <div id="cart-items-container" class="max-h-60 overflow-y-auto pr-2 mb-4">
-     <!-- Items del carrito se renderizarán aquí -->
+    <div class="max-h-60 overflow-y-auto pr-2 mb-4" id="cart-items-container">
+     <!-- Items del carrito se renderizar\u00E1n aqu\u00ED -->
     </div>
     <div class="text-right text-xl font-bold text-gray-900 mb-6">
      Total: $<span id="cart-total">
@@ -2170,22 +2762,22 @@
     <h3 class="text-xl font-semibold text-gray-800 mb-4">
      Datos del Pedido
     </h3>
-    <form id="order-form" class="space-y-4">
+    <form class="space-y-4" id="order-form">
      <div>
       <label class="block text-sm font-medium text-gray-700" for="customer-name">
        Nombre:
       </label>
-      <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" id="customer-name" required type="text"/>
+      <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" id="customer-name" required="" type="text"/>
      </div>
      <div>
       <label class="block text-sm font-medium text-gray-700" for="customer-lastname">
        Apellido:
       </label>
-      <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" id="customer-lastname" required type="text"/>
+      <input class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" id="customer-lastname" required="" type="text"/>
      </div>
      <div>
       <label class="block text-sm font-medium text-gray-700" for="customer-address">
-       Dirección:
+       Direcci\u00F3n:
       </label>
       <textarea class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500" id="customer-address" rows="3">
       </textarea>
@@ -2214,7 +2806,7 @@
       <i class="fas fa-question-circle text-red-500 text-lg">
       </i>
       <span class="font-medium text-gray-700">
-       ¿Necesitas ayuda?
+       \u00bfNecesitas ayuda?
       </span>
      </div>
      <div class="flex items-center gap-2 justify-center md:justify-start text-base">
@@ -2241,7 +2833,7 @@
     </div>
     <!-- Columna central con logo y redes sociales -->
     <div class="flex flex-col items-center gap-6 md:mt-8 mx-auto">
-     <img alt="Logotipo de Pizzas Love en el pie de página" class="w-36 h-auto" height="40" src="./logo.png" width="120"/>
+     <img alt="Logotipo de Pizzas Love en el pie de p\u00E1gina" class="w-36 h-auto" height="40" src="./logo.png" width="120"/>
      <div class="flex gap-8 text-gray-700">
       <a aria-label="Facebook" class="hover:text-red-600 transition transform hover:scale-125" href="#">
        <i class="fab fa-facebook-f text-3xl">
@@ -2256,7 +2848,7 @@
     <!-- Columna de "Powered by" -->
     <div class="flex flex-col gap-4 text-center md:text-right max-w-xs mx-auto md:mx-0">
      <p class="text-gray-700 font-semibold text-base">
-      Diseñado por
+      Dise\u00F1ado por
      </p>
      <img alt="Logotipo de Estudio Guacamaya" class="mx-auto md:mx-0 w-40 h-auto" height="40" src="https://placehold.co/160x40/FF0000/FFFFFF?text=Estudio+Guacamaya" width="160"/>
     </div>
@@ -2272,7 +2864,7 @@
   </footer>
   <script>
    // --- Variables Globales ---
-    const WHATSAPP_PHONE_NUMBER = '5804120403343'; // Número de teléfono de WhatsApp (sin + ni espacios)
+    const WHATSAPP_PHONE_NUMBER = '5804120403343'; // N\u00FAmero de tel\u00E9fono de WhatsApp (sin + ni espacios)
     let cart = []; // Array para almacenar los productos en el carrito
 
     // --- Elementos del DOM ---
@@ -2348,13 +2940,13 @@
         navCartCount.textContent = totalItems;
     }
 
-    // Renderiza los ítems del carrito en el modal
+    // Renderiza los \u00EDtems del carrito en el modal
     function renderCartItems() {
         cartItemsContainer.innerHTML = '';
         let total = 0;
 
         if (cart.length === 0) {
-            cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Tu carrito está vacío.</p>';
+            cartItemsContainer.innerHTML = '<p class="text-gray-500 text-center">Tu carrito est\u00E1 vac\u00EDo.</p>';
         } else {
             cart.forEach((item, index) => {
                 const itemTotal = item.price * item.quantity;
@@ -2370,9 +2962,11 @@
                         <p class="text-sm text-gray-700">Precio unitario: $${item.price.toFixed(2)}</p>
                     </div>
                     <div class="flex items-center gap-2">
+                        <button class="quantity-button decrease-cart-quantity" data-index="${index}">-</button>
                         <input type="number" min="1" value="${item.quantity}" data-index="${index}" class="w-16 p-1 border border-gray-300 rounded-md text-center text-sm cart-quantity-input">
-                        <span class="font-bold text-gray-900">$${itemTotal.toFixed(2)}</span>
-                        <button class="text-red-500 hover:text-red-700 remove-from-cart-btn" data-index="${index}">
+                        <button class="quantity-button increase-cart-quantity" data-index="${index}">+</button>
+                        <span class="font-bold text-gray-900 ml-2">$${itemTotal.toFixed(2)}</span>
+                        <button class="text-red-500 hover:text-red-700 remove-from-cart-btn ml-2" data-index="${index}">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </div>
@@ -2383,13 +2977,13 @@
         cartTotalDisplay.textContent = total.toFixed(2);
     }
 
-    // Añade un producto al carrito
+    // A\u00F1ade un producto al carrito
     function addToCart(event) {
         const productCard = event.target.closest('.product-card');
         const name = productCard.dataset.name;
         const price = parseFloat(productCard.dataset.price);
         const description = productCard.dataset.description;
-        const quantity = parseInt(productCard.querySelector('.quantity-input').value);
+        const quantity = parseInt(productCard.querySelector('.quantity-input-field').value);
         const notes = productCard.querySelector('.notes-input').value.trim();
 
         // Validar que la cantidad sea al menos 1
@@ -2401,18 +2995,23 @@
         const existingItemIndex = cart.findIndex(item => item.name === name);
 
         if (existingItemIndex > -1) {
-            // Si el producto ya está en el carrito, actualiza la cantidad y las notas
+            // Si el producto ya est\u00E1 en el carrito, actualiza la cantidad y las notas
             cart[existingItemIndex].quantity += quantity;
             if (notes) {
                 cart[existingItemIndex].notes = cart[existingItemIndex].notes ? `${cart[existingItemIndex].notes}; ${notes}` : notes;
             }
         } else {
-            // Si el producto no está en el carrito, añádelo
+            // Si el producto no est\u00E1 en el carrito, a\u00F1\u00E1delo
             cart.push({ name, price, description, quantity, notes });
         }
 
         updateCartCount();
-        alert(`${quantity} x ${name} añadido(s) al carrito.`); // Mensaje de confirmación
+        alert(`${quantity} x ${name} a\u00F1adido(s) al carrito.`); // Mensaje de confirmaci\u00F3n
+        // Reset quantity input to 1 after adding to cart
+        productCard.querySelector('.quantity-input-field').value = 1;
+        // Reset price display to original price
+        const originalPrice = parseFloat(productCard.dataset.originalPrice);
+        productCard.querySelector('.price-display').textContent = `$${originalPrice.toFixed(2).replace(/\.00$/, '')}`;
     }
 
     // Remueve un producto del carrito
@@ -2422,14 +3021,11 @@
         updateCartCount();
     }
 
-    // Actualiza la cantidad de un ítem en el carrito desde el modal
-    function updateCartItemQuantity(event) {
-        const index = parseInt(event.target.dataset.index);
-        const newQuantity = parseInt(event.target.value);
-
+    // Actualiza la cantidad de un \u00EDtem en el carrito desde el modal
+    function updateCartItemQuantity(index, newQuantity) {
         if (newQuantity < 1) {
-            alert('La cantidad debe ser al menos 1. Si deseas eliminar el producto, usa el icono de la papelera.');
-            event.target.value = cart[index].quantity; // Revierte el valor a la cantidad anterior
+            alert('La cantidad debe ser al menos 1. Si deseas eliminar el producto, usa el \u00EDcono de la papelera.');
+            renderCartItems(); // Re-render to revert invalid input
             return;
         }
         cart[index].quantity = newQuantity;
@@ -2439,7 +3035,7 @@
 
     // Abre el modal del carrito
     function openCartModal() {
-        renderCartItems(); // Renderiza los ítems cada vez que se abre el modal
+        renderCartItems(); // Renderiza los \u00EDtems cada vez que se abre el modal
         cartModal.style.display = 'flex';
     }
 
@@ -2450,7 +3046,7 @@
 
     // Genera el mensaje de WhatsApp y abre el enlace
     function sendOrderViaWhatsApp(event) {
-        event.preventDefault(); // Evita que el formulario se envíe normalmente
+        event.preventDefault(); // Evita que el formulario se env\u00EDe normalmente
 
         const customerName = document.getElementById('customer-name').value.trim();
         const customerLastName = document.getElementById('customer-lastname').value.trim();
@@ -2458,16 +3054,16 @@
         const extraNotes = document.getElementById('extra-notes').value.trim();
 
         if (cart.length === 0) {
-            alert('Tu carrito está vacío. Agrega productos antes de realizar el pedido.');
+            alert('Tu carrito est\u00E1 vac\u00EDo. Agrega productos antes de realizar el pedido.');
             return;
         }
 
         if (!customerName || !customerLastName || !customerAddress) {
-            alert('Por favor, completa tu Nombre, Apellido y Dirección.');
+            alert('Por favor, completa tu Nombre, Apellido y Direcci\u00F3n.');
             return;
         }
 
-        let orderMessage = `¡Hola! Me gustaría hacer un pedido:\n\n`;
+        let orderMessage = `\u00a1Hola! Me gustar\u00EDa hacer un pedido:\n\n`;
         cart.forEach((item, index) => {
             orderMessage += `${index + 1}. ${item.name} x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
             if (item.notes) {
@@ -2479,26 +3075,76 @@
         orderMessage += `\nTotal: $${totalOrder.toFixed(2)}\n\n`;
         orderMessage += `--- Datos del Cliente ---\n`;
         orderMessage += `Nombre: ${customerName} ${customerLastName}\n`;
-        orderMessage += `Dirección: ${customerAddress}\n`;
+        orderMessage += `Direcci\u00F3n: ${customerAddress}\n`;
         if (extraNotes) {
             orderMessage += `Notas Generales: ${extraNotes}\n`;
         }
-        orderMessage += `\n¡Gracias!`;
+        orderMessage += `\n\u00a1Gracias!`;
 
         // Codificar el mensaje para la URL de WhatsApp
         const encodedMessage = encodeURIComponent(orderMessage);
         const whatsappUrl = `https://wa.me/${WHATSAPP_PHONE_NUMBER}?text=${encodedMessage}`;
 
-        window.open(whatsappUrl, '_blank'); // Abre el enlace de WhatsApp en una nueva pestaña
-        cart = []; // Vaciar el carrito después de enviar el pedido
+        window.open(whatsappUrl, '_blank'); // Abre el enlace de WhatsApp en una nueva pesta\u00F1a
+        cart = []; // Vaciar el carrito despu\u00E9s de enviar el pedido
         updateCartCount();
         closeCartModal(); // Cerrar el modal
-        alert('Tu pedido ha sido enviado a WhatsApp. ¡Gracias!');
+        alert('Tu pedido ha sido enviado a WhatsApp. \u00a1Gracias!');
     }
+
+    // Maneja los cambios de cantidad en los inputs de producto
+    function handleProductQuantityChange(event) {
+        const input = event.target;
+        let quantity = parseInt(input.value);
+        if (isNaN(quantity) || quantity < 1) {
+            quantity = 1; // Default to 1 if invalid
+            input.value = 1;
+        }
+        const productCard = input.closest('.product-card');
+        const originalPrice = parseFloat(productCard.dataset.originalPrice);
+        const priceDisplay = productCard.querySelector('.price-display');
+        priceDisplay.textContent = `$${(originalPrice * quantity).toFixed(2).replace(/\.00$/, '')}`;
+    }
+
+    // Incrementa la cantidad de un producto en la tarjeta
+    function increaseProductQuantity(event) {
+        const productCard = event.target.closest('.product-card');
+        const quantityInput = productCard.querySelector('.quantity-input-field');
+        quantityInput.value = parseInt(quantityInput.value) + 1;
+        handleProductQuantityChange({ target: quantityInput });
+    }
+
+    // Decrementa la cantidad de un producto en la tarjeta
+    function decreaseProductQuantity(event) {
+        const productCard = event.target.closest('.product-card');
+        const quantityInput = productCard.querySelector('.quantity-input-field');
+        if (parseInt(quantityInput.value) > 1) {
+            quantityInput.value = parseInt(quantityInput.value) - 1;
+            handleProductQuantityChange({ target: quantityInput });
+        }
+    }
+
+    // Incrementa la cantidad de un producto en el carrito (modal)
+    function increaseCartQuantity(event) {
+        const index = parseInt(event.target.dataset.index);
+        updateCartItemQuantity(index, cart[index].quantity + 1);
+    }
+
+    // Decrementa la cantidad de un producto en el carrito (modal)
+    function decreaseCartQuantity(event) {
+        const index = parseInt(event.target.dataset.index);
+        if (cart[index].quantity > 1) {
+            updateCartItemQuantity(index, cart[index].quantity - 1);
+        } else {
+            // If quantity is 1 and user tries to decrease, remove item
+            removeFromCart(index);
+        }
+    }
+
 
     // --- Funciones de Utilidad (existente, sin cambios) ---
 
-    // Función para actualizar el estado del local (Abierto/Cerrado/Pronto a cerrar)
+    // Funci\u00F3n para actualizar el estado del local (Abierto/Cerrado/Pronto a cerrar)
     function updateStoreStatus() {
         const now = new Date();
         const hours = now.getHours();
@@ -2508,7 +3154,7 @@
         // Limpiar clases de color anteriores
         statusElement.classList.remove('bg-green-500', 'bg-yellow-500', 'bg-red-500');
 
-        // Lógica para determinar el estado
+        // L\u00F3gica para determinar el estado
         if (hours >= 9 && hours < 23) { // De 9:00 a 22:59
             statusElement.textContent = 'Abierto ahora';
             statusElement.classList.add('bg-green-500');
@@ -2532,6 +3178,13 @@
             button.addEventListener('click', addToCart);
         });
 
+        // Event listeners para los botones de cantidad en las tarjetas de producto
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.querySelector('.increase-quantity').addEventListener('click', increaseProductQuantity);
+            card.querySelector('.decrease-quantity').addEventListener('click', decreaseProductQuantity);
+            card.querySelector('.quantity-input-field').addEventListener('change', handleProductQuantityChange);
+        });
+
         // Event listeners para abrir el modal del carrito
         mainCartButton.addEventListener('click', openCartModal);
         navCartButton.addEventListener('click', openCartModal);
@@ -2549,29 +3202,35 @@
         // Event listener para enviar el pedido por WhatsApp
         orderForm.addEventListener('submit', sendOrderViaWhatsApp);
 
-        // Event listener para cambiar la cantidad en el carrito desde el modal
-        cartItemsContainer.addEventListener('change', (event) => {
-            if (event.target.classList.contains('cart-quantity-input')) {
-                updateCartItemQuantity(event);
-            }
-        });
-
-        // Event listener para eliminar ítems del carrito desde el modal
+        // Event listeners para los botones de cantidad en los \u00EDtems del carrito (modal)
         cartItemsContainer.addEventListener('click', (event) => {
-            if (event.target.closest('.remove-from-cart-btn')) {
+            if (event.target.classList.contains('increase-cart-quantity')) {
+                increaseCartQuantity(event);
+            } else if (event.target.classList.contains('decrease-cart-quantity')) {
+                decreaseCartQuantity(event);
+            } else if (event.target.closest('.remove-from-cart-btn')) {
                 const index = parseInt(event.target.closest('.remove-from-cart-btn').dataset.index);
                 removeFromCart(index);
             }
         });
 
-        // JavaScript para el scroll suave de las categorías y activar la pestaña
+        // Event listener para cambiar la cantidad en el carrito desde el input num\u00E9rico (modal)
+        cartItemsContainer.addEventListener('change', (event) => {
+            if (event.target.classList.contains('cart-quantity-input')) {
+                const index = parseInt(event.target.dataset.index);
+                const newQuantity = parseInt(event.target.value);
+                updateCartItemQuantity(index, newQuantity);
+            }
+        });
+
+        // JavaScript para el scroll suave de las categor\u00EDas y activar la pesta\u00F1a
         document.querySelectorAll('.category-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const targetId = this.dataset.target;
                 const targetElement = document.getElementById(targetId);
                 if (targetElement) {
                     const stickyNavbarHeight = document.getElementById('sticky-navbar').offsetHeight;
-                    // Obtener la posición del elemento, ajustando por la altura del navbar fijo y un margen adicional
+                    // Obtener la posici\u00F3n del elemento, ajustando por la altura del navbar fijo y un margen adicional
                     const adjustedOffset = targetElement.getBoundingClientRect().top + window.pageYOffset - stickyNavbarHeight - 20;
 
                     window.scrollTo({
@@ -2579,7 +3238,7 @@
                         behavior: 'smooth'
                     });
 
-                    // Actualizar la clase activa de la pestaña
+                    // Actualizar la clase activa de la pesta\u00F1a
                     document.querySelectorAll('.category-btn').forEach(btn => {
                         btn.classList.remove('text-yellow-500', 'border-yellow-500');
                         btn.classList.add('hover:text-red-600', 'border-transparent', 'hover:border-red-600');
@@ -2591,7 +3250,7 @@
         });
     });
 
-    // JavaScript para mostrar/ocultar la barra de navegación fija y los botones flotantes
+    // JavaScript para mostrar/ocultar la barra de navegaci\u00F3n fija y los botones flotantes
     window.onscroll = function() {
         const scrollThreshold = 200; // Ajusta este valor si es necesario
         if (window.pageYOffset > scrollThreshold) {
